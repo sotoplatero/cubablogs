@@ -48,7 +48,11 @@ export async function post({ query }) {
 
 		twitter: ( function() {
 			let user = $(selectors.twitter).attr('content')
-			if (!user) return
+			if ( !user ) {
+				let url = $('[href*="twitter.com"]').attr('href')
+				if ( !/\w{1,15}$/.test(url) ) return 
+				user = '@' + url.split('/').pop()
+			}
 			let username = user.replace(/@/,'')
 
 			return {
@@ -62,6 +66,8 @@ export async function post({ query }) {
 			url: $(selectors.github).attr('href'),
 		}
 	}
+
+	if (!data.rss) return { body: { error: 'unknow' } }
 
 	const blogs = await db.add(data)
 

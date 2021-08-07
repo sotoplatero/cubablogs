@@ -25,11 +25,10 @@ const options = {
 }
 
 const message = '+'
-// let sha
+let sha
 
 export const db = {
 
-	sha: '',
 	blogs: [], 
 
 	async all() {
@@ -37,7 +36,7 @@ export const db = {
 		if (this.blogs.length) return this.blogs
 
 	  let {data} = await octokit.repos.getContent(options)
-	  this.sha = data.sha
+	  sha = data.sha
 	  this.blogs = JSON.parse( decode(data.content) )
 
 	  return this.blogs
@@ -63,7 +62,6 @@ export const db = {
 	async save(blogs) {
 
 		const content = encode( JSON.stringify(blogs) );
-		const sha = this.sha
 
 		const { data } = await octokit.repos.createOrUpdateFileContents({
 		  ...options,
