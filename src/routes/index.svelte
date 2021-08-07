@@ -39,12 +39,13 @@
 
 	$: error = !!blogs.find( el => getHostname(el.url) === getHostname(url) ) ? 'exists' : ''
 
-	function validate() {
-		return !url ? 'empty' : ''
-		// body...
-	}
-	async function handleSubmit(){
+	function handleSubmit() {
+		error = !url ? 'empty' : ''
 		if (!!error) return
+		addBlog()
+	}
+
+	async function addBlog(){
 		adding = true
 		const res = await fetch(`/blog/add.json?url=${url}`,{method: 'post'})
 		adding = false
