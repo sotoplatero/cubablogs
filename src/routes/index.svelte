@@ -69,7 +69,7 @@
 
 <div class="text-center py-4 mb-8">
 	<h1 class="flex items-center justify-center text-4xl font-bold text-red-700 ">
-		<img src="/logo.png" alt="Logo Cubablog" class="w-10 h-10">	
+		<img src="/logo.png" alt="Logo Cubablog" class="w-11 h-11">	
 		CubaBlog
 	</h1>
 <!-- 	<button class="flex items-center py-2 px-2 sm:px-4 bg-red-500 text-white font-bold rounded-lg">
@@ -80,16 +80,21 @@
 	</button> -->
 
 	<p class="text-xl text-gray-500">Blogs sobre Cuba y por Cubanos</p>
-	<form on:submit|preventDefault={handleSubmit} class="w-full sm:w-80 mt-4 mx-auto space-y-2">
-		<input type="text" bind:value={url} class="border border-gray-300 p-3 w-full focus:outline-none focus:border-red-500 ring-2 ring-transparent focus:ring-red-500" placeholder="URL del blog" disabled={adding}>
+	<form on:submit|preventDefault={handleSubmit} class="w-full sm:w-1/2 mt-4 mx-auto space-y-2">
+		<div class="flex items-center space-x-2">
+			<input type="text" bind:value={url} class="border-2 border-gray-300 p-3 w-full focus:outline-none focus:border-red-500" placeholder="URL del blog" disabled={adding}>
+			<button class="flex items-center py-3 px-4 bg-red-500 text-white font-bold whitespace-nowrap border-2 border-red-500" disabled={adding}>
+				<svg xmlns="http://www.w3.org/2000/svg" class="{ adding ? 'animate-spin' : ''} h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+				  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd" />
+				</svg>				
+				<span class="ml-2 hidden sm:inline ">Agregar Blog</span>
+			</button>
+		</div>
 		{#if error}
 			<div class="text-yellow-500">
 				{errors[error]}
 			</div>
 		{/if}
-		<button class="py-3 px-6 bg-red-500 text-white font-bold" disabled={adding}>
-			Agregar Blog
-		</button>
 	</form>
 </div>
 

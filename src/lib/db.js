@@ -24,9 +24,6 @@ const options = {
 	path: `cubablogs/db.json`,
 }
 
-const message = '+'
-let sha
-
 export const db = {
 
 	blogs: [], 
@@ -36,7 +33,6 @@ export const db = {
 		if (this.blogs.length) return this.blogs
 
 	  let {data} = await octokit.repos.getContent(options)
-	  sha = data.sha
 	  this.blogs = JSON.parse( decode(data.content) )
 
 	  return this.blogs
@@ -61,13 +57,13 @@ export const db = {
 
 	async save(blogs) {
 
-		const content = encode( JSON.stringify(blogs) );
+		const {data} = await octokit.repos.getContent(options)
 
-		const { data } = await octokit.repos.createOrUpdateFileContents({
+		await octokit.repos.createOrUpdateFileContents({
 		  ...options,
-		  message,
-		  sha,
-		  content,
+		  message: '+',
+		  sha: data.sha,
+		  content: encode( JSON.stringify(blogs) ),
 		});
 
 		this.blogs = blogs
