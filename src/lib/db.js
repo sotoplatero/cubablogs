@@ -30,12 +30,10 @@ export const db = {
 
 	async all() {
 
-		if (this.blogs.length) return this.blogs
-
 	  let {data} = await octokit.repos.getContent(options)
-	  this.blogs = JSON.parse( decode(data.content) )
+	  let blogs = JSON.parse( decode(data.content) )
 
-	  return this.blogs
+	  return blogs
 	},
 
 	async add(blog) {
@@ -65,8 +63,6 @@ export const db = {
 		  sha: data.sha,
 		  content: encode( JSON.stringify(blogs) ),
 		});
-
-		this.blogs = blogs
 
 		return blogs
 

@@ -111,8 +111,8 @@
 					<img src="{(blog.twitter ? blog.twitter.avatar : null) || blog.image}" alt="{blog.title}" class="w-full h-full object-center object-cover transition transform group-hover:scale-105">
 				</div>			
 				<div>
-					<div class="mb-4 mt-2 text-center">
-						<h2 class="text-2xl font-semibold">
+					<div class="mb-4 mt-3 text-center">
+						<h2 class="text-2xl font-semibold transition group-hover:scale-105">
 							{blog.title}
 						</h2>
 						<p class="text-gray-400 truncate text-green-400 text-sm">{blog.url}</p>

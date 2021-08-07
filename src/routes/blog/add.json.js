@@ -1,6 +1,7 @@
 import cheerio from 'cheerio'
 import { getDomain } from 'tldts'
 import {db} from '$lib/db'
+import {notify} from '$lib/bot'
 
 async function clearbit(url) {
 	const domain = getDomain(url)
@@ -70,6 +71,7 @@ export async function post({ query }) {
 	if (!data.rss) return { body: { error: 'unknow' } }
 
 	const blogs = await db.add(data)
+	notify(`Nuevo Blog: ${data.title} ${data.url}`)
 
 	return {
 		body: blogs
