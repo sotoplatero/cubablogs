@@ -57,7 +57,7 @@ export async function post() {
 	// notify(`Nuevo Blog: ${data.title} ${data.url}`)
 
 	return {
-		body: true
+		body: 'ok'
 	};
 }
 
