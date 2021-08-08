@@ -21,7 +21,7 @@
 	}
 </script>
 <script>
-	import { getHostname } from 'tldts'
+	// import { getHostname } from 'tldts'
 
 	let url
 	let exists = 0
@@ -38,17 +38,15 @@
 
 	export let blogs = []
 
-	$: exists = !!blogs.find( el => getHostname(el.url) === getHostname(url) ) ? 'exists' : ''
-	$: empty = !url ? 'empty' : ''
-
 	function handleSubmit() {
+		url = !/^http/.test(url) ? `https://${url}` : url
 		error = ''
-		if (!!empty) {
-			error = empty
+		if (!url) {
+			error = 'empty'
 			return
 		}
-		if (!!exists) {
-			error = exists
+		if (blogs.some( el => getHostname(el.url) === getHostname(url) )) {
+			error = 'exists'
 			return
 		}
 		addBlog()
@@ -75,6 +73,10 @@
 
 	}
 
+	function getHostname(url='https://example.com') {
+		const checkUrl = new URL(url);
+		return checkUrl.hostname
+	}
 </script>
 
 <div class="text-center py-4 mb-8">
@@ -127,7 +129,7 @@
 						<p class="text-gray-400 truncate text-green-400 text-sm">{blog.url}</p>
 					</div>
 					{#if blog.description}
-						<p class="transition text-gray-500 group-hover:text-gray-700 line-clamp-5">
+						<p class="transition text-gray-500 group-hover:text-gray-700 line-clamp-5 text-justify">
 							{blog.description}
 						</p>
 					{/if}
