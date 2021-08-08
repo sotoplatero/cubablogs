@@ -126,9 +126,11 @@
 						</h2>
 						<p class="text-gray-400 truncate text-green-400 text-sm">{blog.url}</p>
 					</div>
-					<p class="transition text-gray-500 group-hover:text-gray-700 line-clamp-5">
-						{blog.description}
-					</p>
+					{#if blog.description}
+						<p class="transition text-gray-500 group-hover:text-gray-700 line-clamp-5">
+							{blog.description}
+						</p>
+					{/if}
 				</div>
 			</a>
 			<div class="flex items-center justify-center space-x-3 mt-4">
