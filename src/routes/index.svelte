@@ -21,7 +21,6 @@
 	}
 </script>
 <script>
-	// import { getHostname } from 'tldts'
 
 	let url
 	let exists = 0
@@ -115,7 +114,7 @@
 		<input type="text" bind:value={search} class="border border-gray-300 p-3 w-full focus:outline-none focus:border-gray-400 text-xl">
 	</div> -->
 	<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 2xl:grid-cols-5 gap-4 sm:gap-10">
-	{#each blogs.reverse() as blog, index}
+	{#each blogs.reverse() as blog (blog.url)}
 		<div >
 			<a href={blog.url} class="group " target="_blank" rel="noopener nofollower">
 				<div class="aspect-w-1 aspect-h-1 overflow-hidden rounded-lg">
@@ -123,7 +122,7 @@
 				</div>			
 				<div>
 					<div class="mb-4 mt-3 text-center">
-						<h2 class="text-2xl font-semibold transition group-hover:scale-105">
+						<h2 class="text-lg sm:text-2xl font-semibold transition group-hover:scale-105">
 							{blog.title}
 						</h2>
 						<p class="text-gray-400 truncate text-green-400 text-sm">{blog.url}</p>
