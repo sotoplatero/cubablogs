@@ -20,10 +20,10 @@ export async function post({ query }) {
 
 	const selectors = {
 		title: 'meta[property="og:title"],meta[name="twitter:title"],meta[property="twitter:title"]',
-		description: 'meta[property="description"],meta[name="description"],meta[itemprop="description"]',
+		description: 'meta[property="description"],meta[name="description"],meta[itemprop="description"],meta[property="og:description"]',
 		author: 'meta[name="author"],meta[property="article:author"],[itemprop*="author" i] [itemprop="name"],[itemprop*="author" i],[rel="author"]',
 		image: 'meta[property="og:image:secure_url"],meta[property="og:image:url"],meta[property="og:image"],meta[name="twitter:image:src"],meta[name="twitter:image"],meta[itemprop="image"]',
-		logo: 'link[rel="apple-touch-icon"][sizes="180x180"],link[rel="icon"][sizes="32x32"],link[rel="apple-touch-icon"]',
+		logo: 'link[rel="icon"][sizes="192x192"],link[rel="apple-touch-icon"][sizes="180x180"],link[rel="icon"][sizes="32x32"],link[rel="apple-touch-icon"]',
 		rss: 'link[type="application/rss+xml"],link[type="application/atom+xml"]',
 		twitter: 'meta[name="twitter:creator"],meta[property="twitter:creator"]',
 		github: 'a[href*="github.com"]',
@@ -33,11 +33,16 @@ export async function post({ query }) {
 		title: $(selectors.title).attr('content') || $('title').text(),
 		description: $(selectors.description).attr('content'),
 		author: $(selectors.author).attr('content'),
+
 		logo: ( function(){
 			let logo = $(selectors.logo).attr('href') 
+			if (!logo) {
+				logo = $('meta[name="msapplication-TileImage"]').attr('content') 
+			} 
 			if (!logo) return
 			return getDomain(logo) ? logo : url + logo
 		})(),
+
 		image: $(selectors.image).attr('content'),
 
 		rss: ( function() {
@@ -51,7 +56,7 @@ export async function post({ query }) {
 			let user = $(selectors.twitter).attr('content')
 			if ( !user ) {
 				let url = $('[href*="twitter.com"]').attr('href')
-				if ( !/\w{1,15}$/.test(url) ) return 
+				if ( !url || !/\w{1,15}$/.test(url) ) return 
 				user = '@' + url.split('/').pop()
 			}
 			let username = user.replace(/@/,'')
