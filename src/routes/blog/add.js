@@ -10,8 +10,8 @@ async function clearbit(url) {
 	return data[0]?.logo
 }
 
-export async function post({ query }) {
-	let url = query.get('url');
+export async function post(request) {
+	let { url } = JSON.parse(request.body)
 	url = !/^http/.test(url) ? `https://${url}` : url
 
 	const response = await fetch(url)
@@ -27,12 +27,14 @@ export async function post({ query }) {
 		rss: 'link[type="application/rss+xml"],link[type="application/atom+xml"]',
 		twitter: 'meta[name="twitter:creator"],meta[property="twitter:creator"]',
 		github: 'a[href*="github.com"]',
+		keywords: 'meta[name="keywords"]',
 	}
 	const data = {
 		url,
 		title: $(selectors.title).attr('content') || $('title').text(),
 		description: $(selectors.description).attr('content'),
 		author: $(selectors.author).attr('content'),
+		keywords: $(selectors.keywords).attr('content')?.replace(/\s+/g,'').split(','),
 
 		logo: ( function(){
 			let logo = $(selectors.logo).attr('href') 
@@ -79,6 +81,6 @@ export async function post({ query }) {
 	notify(`Nuevo Blog: ${data.title} ${data.url}`)
 
 	return {
-		body: blogs
+		body: data
 	};
 }

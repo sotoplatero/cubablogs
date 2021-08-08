@@ -2,83 +2,76 @@ import cheerio from 'cheerio'
 import { getDomain } from 'tldts'
 import {db} from '$lib/db'
 import {notify} from '$lib/bot'
+import Parser from 'rss-parser';
+let parser = new Parser({customFields: {
+    item: [
+	    ['content:encoded','contentEncoded'],
+	    ['media:content','media']
+    ]
+  }});
 
-async function clearbit(url) {
-	const domain = getDomain(url)
-	const response = await fetch(`https://autocomplete.clearbit.com/v1/companies/suggest?query=${domain}`)
-	const data = await response.json()
-	return data[0]?.logo
-}
+export async function post() {
 
-export async function post({ query }) {
-	let url = query.get('url');
-	url = !/^http/.test(url) ? `https://${url}` : url
+	var blogs = await db.all()
+	// console.log(blogs)
+	const startTime = new Date()
+	let executionTime
 
-	const response = await fetch(url)
-	const html = await response.text()
-	const $ = cheerio.load( html )
+	for (let blog of blogs){
+		console.log(blog.rss)
+		try	{
+			if (isToday(blog.updated_at)) continue
 
-	const selectors = {
-		title: 'meta[property="og:title"],meta[name="twitter:title"],meta[property="twitter:title"]',
-		description: 'meta[property="description"],meta[name="description"],meta[itemprop="description"],meta[property="og:description"]',
-		author: 'meta[name="author"],meta[property="article:author"],[itemprop*="author" i] [itemprop="name"],[itemprop*="author" i],[rel="author"]',
-		image: 'meta[property="og:image:secure_url"],meta[property="og:image:url"],meta[property="og:image"],meta[name="twitter:image:src"],meta[name="twitter:image"],meta[itemprop="image"]',
-		logo: 'link[rel="icon"][sizes="192x192"],link[rel="apple-touch-icon"][sizes="180x180"],link[rel="icon"][sizes="32x32"],link[rel="apple-touch-icon"]',
-		rss: 'link[type="application/rss+xml"],link[type="application/atom+xml"]',
-		twitter: 'meta[name="twitter:creator"],meta[property="twitter:creator"]',
-		github: 'a[href*="github.com"]',
-	}
-	const data = {
-		url,
-		title: $(selectors.title).attr('content') || $('title').text(),
-		description: $(selectors.description).attr('content'),
-		author: $(selectors.author).attr('content'),
+			let feed = await parser.parseURL( blog.rss );
+			
+			let item = feed.items[0]
+			const content = item.content || item.contentEncoded
 
-		logo: ( function(){
-			let logo = $(selectors.logo).attr('href') 
-			if (!logo) {
-				logo = $('meta[name="msapplication-TileImage"]').attr('content') 
-			} 
-			if (!logo) return
-			return getDomain(logo) ? logo : url + logo
-		})(),
-
-		image: $(selectors.image).attr('content'),
-
-		rss: ( function() {
-			let rss = $(selectors.rss).attr('href') 
-			if (!rss) return
-
-			return getDomain(rss) ? rss : url + rss
-		})(),
-
-		twitter: ( function() {
-			let user = $(selectors.twitter).attr('content')
-			if ( !user ) {
-				let url = $('[href*="twitter.com"]').attr('href')
-				if ( !url || !/\w{1,15}$/.test(url) ) return 
-				user = '@' + url.split('/').pop()
+			let post = {
+				title: item.title,
+				url: item.link,
+				date: item.pubDate,
+				description: (function(){
+					if (!!item.contentSnippet) {
+						return item.contentSnippet.substring(0, 250) 
+					} 
+					if (!item.content) return
+					const $ = cheerio.load( item.content )
+					return $.text().substring(0, 250)
+				})(),
+				image: ( function(){
+					if (item.media) return item.media['$']['url']
+					if (!content) return
+					const $ = cheerio.load( content )
+					return $('img').attr('src')
+				})(),
 			}
-			let username = user.replace(/@/,'')
+			blog.post = post
+			blog.updated_at = new Date()
 
-			return {
-				user,
-				url: `https://twitter.com/${username}`,
-				avatar: `https://unavatar.io/twitter/${username}`
-			}
-		})(),
+			let endTime = new Date()
+			executionTime = endTime - startTime
+			console.log(executionTime)
 
-		github: { 
-			url: $(selectors.github).attr('href'),
+		} catch (e) {
+			console.log(e)
 		}
+		// console.log(blog)
+	
 	}
-
-	if (!data.rss) return { body: { error: 'unknow' } }
-
-	const blogs = await db.add(data)
-	notify(`Nuevo Blog: ${data.title} ${data.url}`)
+	// notify(`Nuevo Blog: ${data.title} ${data.url}`)
 
 	return {
 		body: blogs
 	};
 }
+
+const isToday = (date) => {
+	
+	if (!date) return false
+
+    const today = new Date()
+    return date.getDate() === today.getDate() &&
+        date.getMonth() === today.getMonth() &&
+        date.getFullYear() === today.getFullYear();
+};

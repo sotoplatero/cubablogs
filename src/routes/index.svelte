@@ -53,7 +53,10 @@
 
 	async function addBlog(){
 		adding = true
-		const res = await fetch(`/blog/add.json?url=${url}`,{method: 'post'})
+		const res = await fetch(`/blog/add`,{
+			method: 'post',
+			body: JSON.stringify({url})
+		})
 		adding = false
 
 		if (!res.ok) {
@@ -67,7 +70,7 @@
 			return
 		} 
 
-		blogs = data
+		blogs = [...blogs, data]
 		url = ''
 
 	}
