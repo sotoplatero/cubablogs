@@ -28,6 +28,7 @@
 	let search
 	let error
 	let adding = false
+
 	const errors = {
 		exists: 'El blog ya está en el listado',
 		unknow: 'La página no parece ser un blog',
@@ -37,11 +38,19 @@
 
 	export let blogs = []
 
-	$: error = !!blogs.find( el => getHostname(el.url) === getHostname(url) ) ? 'exists' : ''
+	$: exists = !!blogs.find( el => getHostname(el.url) === getHostname(url) ) ? 'exists' : ''
+	$: empty = !url ? 'empty' : ''
 
 	function handleSubmit() {
-		error = !url ? 'empty' : ''
-		if (!!error) return
+		error = ''
+		if (!!empty) {
+			error = empty
+			return
+		}
+		if (!!exists) {
+			error = exists
+			return
+		}
 		addBlog()
 	}
 

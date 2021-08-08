@@ -40,7 +40,12 @@ export const db = {
 		let blogs = await this.all()
 
 		let indexBlog = blogs.findIndex( el => getHostname(el.url) === getHostname(blog.url) ) 
-		blogs = ( indexBlog > 0 ) ? blogs.splice( indexBlog, 1, blog ) : [...blogs, blog]
+
+		if ( indexBlog > 0 ) {
+			blogs.splice( indexBlog, 1, blog )
+		} else {
+			blogs.splice( blogs.length, 0, blog )
+		}
 
 		this.save(blogs)
 
