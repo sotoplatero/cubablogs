@@ -53,7 +53,7 @@ export async function post() {
 	    blogs.splice(blogIndex,1,blogUpdated)		
     }))
 
-	console.log(blogs)
+    await db.save(blogs)
 	// notify(`Nuevo Blog: ${data.title} ${data.url}`)
 
 	return {
