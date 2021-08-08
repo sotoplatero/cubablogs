@@ -13,21 +13,23 @@ let parser = new Parser({customFields: {
 export async function post() {
 
 	var blogs = await db.all()
-	// console.log(blogs)
-	const startTime = new Date()
-	let executionTime
+	let blogsWithoutUpdate = blogs.filter( el => !isToday(el.update_at) )
 
-	for (let blog of blogs){
-		console.log(blog.rss)
-		try	{
-			if (isToday(blog.updated_at)) continue
+    await Promise.all( blogsWithoutUpdate.map( async (blog) => {
+    	let feed
+    	try	{
+			feed = await parser.parseURL( blog.rss );
+    	} catch (e) {
+    		return { ...blog, update_at: new Date }
+    	}
+		
+		let item = feed.items[0]
+		const content = item.content || item.contentEncoded
 
-			let feed = await parser.parseURL( blog.rss );
-			
-			let item = feed.items[0]
-			const content = item.content || item.contentEncoded
-
-			let post = {
+		const blogUpdated = { 
+			...blog,
+			update_at: new Date,
+			post: {
 				title: item.title,
 				url: item.link,
 				date: item.pubDate,
@@ -45,24 +47,17 @@ export async function post() {
 					const $ = cheerio.load( content )
 					return $('img').attr('src')
 				})(),
-			}
-			blog.post = post
-			blog.updated_at = new Date()
-
-			let endTime = new Date()
-			executionTime = endTime - startTime
-			console.log(executionTime)
-
-		} catch (e) {
-			console.log(e)
+			},
 		}
-		// console.log(blog)
-	
-	}
+	    const blogIndex = blogs.findIndex(el=>el.url===blog.url)
+	    blogs.splice(blogIndex,1,blogUpdated)		
+    }))
+
+	console.log(blogs)
 	// notify(`Nuevo Blog: ${data.title} ${data.url}`)
 
 	return {
-		body: blogs
+		body: true
 	};
 }
 

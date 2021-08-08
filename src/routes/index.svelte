@@ -70,7 +70,7 @@
 			return
 		} 
 
-		blogs = [...blogs, data]
+		blogs = [ ...blogs, data ]
 		url = ''
 
 	}
@@ -117,7 +117,7 @@
 		<input type="text" bind:value={search} class="border border-gray-300 p-3 w-full focus:outline-none focus:border-gray-400 text-xl">
 	</div> -->
 	<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 2xl:grid-cols-5 gap-4 sm:gap-10">
-	{#each blogs.reverse() as blog (blog.url)}
+	{#each blogs as blog (blog.url)}
 		<div >
 			<a href={blog.url} class="group " target="_blank" rel="noopener nofollower">
 				<div class="aspect-w-1 aspect-h-1 overflow-hidden rounded-lg">
