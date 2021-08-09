@@ -2,6 +2,7 @@ import cheerio from 'cheerio'
 import { getDomain } from 'tldts'
 import {db} from '$lib/db'
 import {notify} from '$lib/bot'
+import getPost from '$lib/post'
 
 async function clearbit(url) {
 	const domain = getDomain(url)
@@ -72,7 +73,9 @@ export async function post(request) {
 
 		github: { 
 			url: $(selectors.github).attr('href'),
-		}
+		},
+
+		post: await getPost(this.rss),
 	}
 
 	if (!data.rss) return { body: { error: 'unknow' } }

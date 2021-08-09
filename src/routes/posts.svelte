@@ -28,17 +28,19 @@
 </script>
 
 <div class="text-center py-4 mb-8">
-	<h1 class="flex items-center justify-center text-4xl font-bold text-red-700 ">
-		<img src="/logo.png" alt="Logo Cubablog" class="w-11 h-11">	
-		CubaBlog
-	</h1>
+	<a href="/">
+		<h1 class="flex items-center justify-center text-4xl font-bold text-red-700 ">
+			<img src="/logo.png" alt="Logo Cubablog" class="w-11 h-11">	
+			CubaBlog
+		</h1>
+	</a>
 </div>
 
 <div class="mb-12">
 <!-- 	<div class="mb-6">
 		<input type="text" bind:value={search} class="border border-gray-300 p-3 w-full focus:outline-none focus:border-gray-400 text-xl">
 	</div> -->
-	<div class="w-full max-w-screen-md mx-auto space-y-16">
+	<div class="w-full max-w-screen-md mx-auto space-y-8 sm:space-y-16">
 	{#each blogsWithPost as blog (blog.post.url)}
 		<div >
 			<div class="group " >
@@ -62,14 +64,17 @@
 									{blog.post.description}
 								</p>
 							</a>
-							<div class="mt-2 text-gray-400 font-semibold">
-								{ new Date(blog.post.date).toLocaleDateString('es-ES', { month:"short", day:"numeric"}) }
+							<div class="mt-2 text-gray-400 space-x-4">
+								<span class="font-semibold">
+									{ new Date(blog.post.date).toLocaleDateString('es-ES', { month:"short", day:"numeric"}) }
+								</span>
+								<span class="hidden sm:inline">{@html (blog.post.categories || []).join(' &bull; ') }</span>
 							</div>
 						</div>
 						{#if blog.post.image}
 							<div class="w-1/4 flex-shrink-0 ml-2 sm:ml-6">
 								<div class="aspect-w-4 aspect-h-4 overflow-hidden rounded-lg">
-									<img src="{ blog.post.image || ''}" alt="{blog.post.title}" class="object-center object-cover transition transform group-hover:scale-105">
+									<img src="{ blog.post.image || ''}" alt="{blog.post.title}" class="object-center object-cover">
 								</div>			
 							</div>
 						{/if}
