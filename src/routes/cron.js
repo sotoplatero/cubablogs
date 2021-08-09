@@ -6,7 +6,8 @@ import Parser from 'rss-parser';
 let parser = new Parser({customFields: {
     item: [
 	    ['content:encoded','contentEncoded'],
-	    ['media:content','media']
+	    ['media:content','media'],
+	    ['dc:creator','dcCreator']
     ]
   }});
 
@@ -14,8 +15,10 @@ export async function post() {
 
 	var blogs = await db.all()
 	let blogsWithoutUpdate = blogs.filter( el => !isToday(el.update_at) )
+	// let blogsWithoutUpdate = blogs.filter( el => el.rss == 'https://kwelta.tech/feed/' )
 
     await Promise.all( blogsWithoutUpdate.map( async (blog) => {
+    	console.log(blog.rss)
     	let feed
     	try	{
 			feed = await parser.parseURL( blog.rss );
@@ -33,6 +36,7 @@ export async function post() {
 				title: item.title,
 				url: item.link,
 				date: item.pubDate,
+				author: item.creator || item.dcCreator,
 				description: (function(){
 					if (!!item.contentSnippet) {
 						return item.contentSnippet.substring(0, 250) 
@@ -43,8 +47,7 @@ export async function post() {
 				})(),
 				image: ( function(){
 					if (item.media) return item.media['$']['url']
-					if (!content) return
-					const $ = cheerio.load( content )
+					const $ = cheerio.load( item.content + item.contentEncoded )
 					return $('img').attr('src')
 				})(),
 			},
@@ -53,6 +56,7 @@ export async function post() {
 	    blogs.splice(blogIndex,1,blogUpdated)		
     }))
 
+	// console.log(blogs)
     await db.save(blogs)
 	// notify(`Nuevo Blog: ${data.title} ${data.url}`)
 
@@ -64,7 +68,7 @@ export async function post() {
 const isToday = (date) => {
 	
 	if (!date) return false
-
+	date = new Date(date)
     const today = new Date()
     return date.getDate() === today.getDate() &&
         date.getMonth() === today.getMonth() &&
