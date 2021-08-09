@@ -14,8 +14,8 @@ let parser = new Parser({customFields: {
 export async function post() {
 
 	var blogs = await db.all()
-	let blogsWithoutUpdate = blogs.filter( el => !isToday(el.update_at) )
-	// let blogsWithoutUpdate = blogs.filter( el => el.rss == 'https://kwelta.tech/feed/' )
+	// let blogsWithoutUpdate = blogs.filter( el => !isToday(el.update_at) )
+	let blogsWithoutUpdate = blogs
 
     await Promise.all( blogsWithoutUpdate.map( async (blog) => {
     	console.log(blog.rss)
@@ -35,14 +35,14 @@ export async function post() {
 			post: {
 				title: item.title,
 				url: item.link,
-				date: item.pubDate,
+				date: new Date(item.pubDate),
 				author: item.creator || item.dcCreator,
 				description: (function(){
 					if (!!item.contentSnippet) {
 						return item.contentSnippet.substring(0, 250) 
 					} 
-					if (!item.content) return
-					const $ = cheerio.load( item.content )
+					if (!content) return
+					const $ = cheerio.load( content )
 					return $.text().substring(0, 250)
 				})(),
 				image: ( function(){

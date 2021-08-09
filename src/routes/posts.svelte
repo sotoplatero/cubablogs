@@ -23,7 +23,7 @@
 <script>
 	export let blogs = []
 	$: blogsWithPost = blogs
-		.filter(el => !!el.post && !!el.post.description)
+		.filter(el => !!el.post )
 		.sort( (a,b) => (new Date(b.post.date)) - (new Date(a.post.date)) )
 </script>
 
