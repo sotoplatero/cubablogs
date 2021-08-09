@@ -24,30 +24,28 @@ const options = {
 	path: `cubablogs/db.json`,
 }
 
-const message = '+'
-// let sha
-
 export const db = {
 
-	sha: '',
 	blogs: [], 
 
 	async all() {
 
-		if (this.blogs.length) return this.blogs
-
 	  let {data} = await octokit.repos.getContent(options)
-	  this.sha = data.sha
-	  this.blogs = JSON.parse( decode(data.content) )
+	  let blogs = JSON.parse( decode(data.content) )
 
-	  return this.blogs
+	  return blogs
 	},
 
 	async add(blog) {
 		let blogs = await this.all()
 
 		let indexBlog = blogs.findIndex( el => getHostname(el.url) === getHostname(blog.url) ) 
-		blogs = ( indexBlog > 0 ) ? blogs.splice( indexBlog, 1, blog ) : [...blogs, blog]
+
+		if ( indexBlog > 0 ) {
+			blogs.splice( indexBlog, 1, blog )
+		} else {
+			blogs.splice( blogs.length, 0, blog )
+		}
 
 		this.save(blogs)
 
@@ -62,17 +60,14 @@ export const db = {
 
 	async save(blogs) {
 
-		const content = encode( JSON.stringify(blogs) );
-		const sha = this.sha
+		const {data} = await octokit.repos.getContent(options)
 
-		const { data } = await octokit.repos.createOrUpdateFileContents({
+		await octokit.repos.createOrUpdateFileContents({
 		  ...options,
-		  message,
-		  sha,
-		  content,
+		  message: '+',
+		  sha: data.sha,
+		  content: encode( JSON.stringify(blogs) ),
 		});
-
-		this.blogs = blogs
 
 		return blogs
 
