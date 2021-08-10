@@ -13,7 +13,7 @@ export async function post() {
     await Promise.all( blogsWithoutUpdate.map( async (blog) => {
     	const post = await getPost(blog.rss)
 
-    	if ( post.url !== blog.post.url ) {
+    	if ( !!post.url && (post.url !== blog.post.url) ) {
 	    	blog = { 
 	    		...blog, 
 	    		updated_at: new Date,
