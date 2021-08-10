@@ -14,6 +14,7 @@ export async function post() {
     	const post = await getPost(blog.rss)
 
     	if ( !!post.url && (post.url !== blog.post.url) ) {
+	    	console.log(post.url)
 	    	blog = { 
 	    		...blog, 
 	    		updated_at: new Date,
