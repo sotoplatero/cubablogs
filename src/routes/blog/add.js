@@ -30,6 +30,16 @@ export async function post(request) {
 		github: 'a[href*="github.com"]',
 		keywords: 'meta[name="keywords"]',
 	}
+
+	const rss = ( function() {
+		let rss = $(selectors.rss).attr('href') 
+		if (!rss) return
+
+		return getDomain(rss) ? rss : url + rss
+	})()
+
+	const post = await getPost(rss)
+
 	const data = {
 		url,
 		title: $(selectors.title).attr('content') || $('title').text(),
@@ -48,24 +58,17 @@ export async function post(request) {
 
 		image: $(selectors.image).attr('content'),
 
-		rss: ( function() {
-			let rss = $(selectors.rss).attr('href') 
-			if (!rss) return
-
-			return getDomain(rss) ? rss : url + rss
-		})(),
-
 		twitter: ( function() {
 			let user = $(selectors.twitter).attr('content')
 			if ( !user ) {
 				let url = $('[href*="twitter.com"]').attr('href')
-				if ( !url || !/\w{1,15}$/.test(url) ) return 
-				user = '@' + url.split('/').pop()
+				if ( !url || !/\@?w{1,15}$/.test(url) ) return 
+				user = url.split('/').pop()
 			}
-			let username = user.replace(/@/,'')
+			let username = user.replace(/@/g,'')
 
 			return {
-				user,
+				user: username,
 				url: `https://twitter.com/${username}`,
 				avatar: `https://unavatar.io/twitter/${username}`
 			}
@@ -74,8 +77,8 @@ export async function post(request) {
 		github: { 
 			url: $(selectors.github).attr('href'),
 		},
-
-		post: await getPost(this.rss),
+		rss,
+		post,
 	}
 
 	if (!data.rss) return { body: { error: 'unknow' } }

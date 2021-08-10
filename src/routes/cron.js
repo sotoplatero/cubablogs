@@ -11,13 +11,18 @@ export async function post() {
 	// let blogsWithoutUpdate = blogs
 
     await Promise.all( blogsWithoutUpdate.map( async (blog) => {
-    	blog = { 
-    		...blog, 
-    		updated_at: new Date,
-    		post: await getPost(blog.rss)
+    	const post = await getPost(blog.rss)
+
+    	if ( post.url !== blog.post.url ) {
+	    	blog = { 
+	    		...blog, 
+	    		updated_at: new Date,
+	    		post,
+	    	}
+		    const blogIndex = blogs.findIndex( el => el.url === blog.url )
+		    blogs.splice(blogIndex,1,blog)	
+		    notify(post.url)
     	}
-	    const blogIndex = blogs.findIndex(el=>el.url===blog.url)
-	    blogs.splice(blogIndex,1,blogUpdated)	
     }))
 
 	// console.log(blogs)

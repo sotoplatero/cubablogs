@@ -11,7 +11,7 @@ let parser = new Parser({customFields: {
 	}});
 
 export default async function (url) {
-    	// console.log(blog.rss)
+    	console.log(url)
     	let feed
     	try	{
 			feed = await parser.parseURL( url );
