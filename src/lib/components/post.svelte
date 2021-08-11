@@ -1,7 +1,7 @@
 <script >
 	import SaveToPocket from '$lib/components/saveToPocket.svelte'
 	export let blog
-	let avatar = (blog.twitter ? blog.twitter.avatar + `?fallback=${blog.logo}` : null) || blog.image
+	let avatar = (blog.twitter ? blog.twitter.avatar : blog.logo) || blog.image
 	let date = new Date(blog.post.date).toLocaleDateString('es-ES', { month:"short", day:"numeric"})
 </script>
 <div >
@@ -26,8 +26,8 @@
 							{blog.post.description}
 						</p>
 						{#if blog.post.categories}
-							<span class="text-sm text-gray-400 mt-1">
-								{@html blog.post.categories.join(' &bull; ') }
+							<span class="text-sm text-gray-400 mt-1 line-clamp-2">
+								{blog.post.categories.join(', ') }
 							</span>
 						{/if}
 					</a>

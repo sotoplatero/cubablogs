@@ -46,7 +46,7 @@ export async function post(request) {
 		author: $(selectors.author).attr('content'),
 		keywords: $(selectors.keywords).attr('content')?.replace(/\s+/g,'').split(','),
 
-		logo: ( async function(){
+		logo: await ( async function(){
 			let logo = $(selectors.logo).attr('href') 
 
 			logo = logo ?? $('meta[name="msapplication-TileImage"]').attr('content') 
