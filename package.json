@@ -22,6 +22,7 @@
 		"prettier": "~2.2.1",
 		"prettier-plugin-svelte": "^2.2.0",
 		"svelte": "^3.42.1",
+		"svelte-forms-lib": "^1.10.5",
 		"svelte-preprocess": "^4.7.4",
 		"tailwindcss": "^2.2.4"
 	},

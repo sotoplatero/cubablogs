@@ -1,4 +1,5 @@
 import { Octokit } from "@octokit/rest";
+import {notify} from '$lib/bot'
 // import {
 //   createOAuthAppAuth,
 //   createOAuthUserAuth,
@@ -45,6 +46,7 @@ export const db = {
 			blogs.splice( indexBlog, 1, blog )
 		} else {
 			blogs.splice( blogs.length, 0, blog )
+			notify(`Nuevo Blog: ${blog.title} ${blog.url}`)
 		}
 
 		this.save(blogs)

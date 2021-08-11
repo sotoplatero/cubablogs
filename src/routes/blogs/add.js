@@ -1,7 +1,6 @@
 import cheerio from 'cheerio'
 import { getDomain } from 'tldts'
 import {db} from '$lib/db'
-import {notify} from '$lib/bot'
 import getPost from '$lib/post'
 
 async function clearbit(url) {
@@ -31,12 +30,12 @@ export async function post(request) {
 		keywords: 'meta[name="keywords"]',
 	}
 
-	const rss = ( function() {
-		let rss = $(selectors.rss).attr('href') 
-		if (!rss) return
-
-		return getDomain(rss) ? rss : url + rss
-	})()
+	const rss = $(selectors.rss).attr('href') 
+	if (!rss) return { 
+		status: 400,
+		body: ''
+	}
+	rss = getDomain(rss) ? rss : url + rss
 
 	const post = await getPost(rss)
 
@@ -47,11 +46,12 @@ export async function post(request) {
 		author: $(selectors.author).attr('content'),
 		keywords: $(selectors.keywords).attr('content')?.replace(/\s+/g,'').split(','),
 
-		logo: ( function(){
+		logo: ( async function(){
 			let logo = $(selectors.logo).attr('href') 
-			if (!logo) {
-				logo = $('meta[name="msapplication-TileImage"]').attr('content') 
-			} 
+
+			logo = logo ?? $('meta[name="msapplication-TileImage"]').attr('content') 
+			logo = logo ?? await clearbit(url)
+			console.log(logo)
 			if (!logo) return
 			return getDomain(logo) ? logo : url + logo
 		})(),
@@ -81,10 +81,9 @@ export async function post(request) {
 		post,
 	}
 
-	if (!data.rss) return { body: { error: 'unknow' } }
+
 
 	const blogs = await db.add(data)
-	notify(`Nuevo Blog: ${data.title} ${data.url}`)
 
 	return {
 		body: data
