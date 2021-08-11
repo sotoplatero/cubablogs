@@ -7,14 +7,13 @@ import getPost from '$lib/post'
 export async function post() {
 
 	var blogs = await db.all()
-	let blogsWithoutUpdate = blogs.filter( el => !isToday(el.update_at) )
+	let blogsWithoutUpdate = blogs.filter( el => !isToday(el.updated_at) )
 	// let blogsWithoutUpdate = blogs
 
     await Promise.all( blogsWithoutUpdate.map( async (blog) => {
     	const post = await getPost(blog.rss)
 
     	if ( !!post.url && (post.url !== blog.post.url) ) {
-	    	console.log(post.url)
 	    	blog = { 
 	    		...blog, 
 	    		updated_at: new Date,
