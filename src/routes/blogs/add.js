@@ -30,7 +30,7 @@ export async function post(request) {
 		keywords: 'meta[name="keywords"]',
 	}
 
-	const rss = $(selectors.rss).attr('href') 
+	let rss = $(selectors.rss).attr('href') 
 	if (!rss) return { 
 		status: 400,
 		body: ''
