@@ -10,6 +10,7 @@
 
 	function handleSubmit() {
 		error = ''
+		msg = ''
     if ( !url ) {
       error = "Escriba la URL del blog";
       return
