@@ -47,14 +47,18 @@ export default async function (url) {
 				return $.text().substring(0, 250)
 			})(),
 			image: await ( async function(){
-				if (item.media) return item.media['$']['url']
+				console.log(item.media)
+				if (item.media ) {
+					if (item.media['$']['medium'] === 'image') {
+						return item.media['$']['url']
+					}
+				}
 				if (item.contentEncoded) {
 					const $ = cheerio.load( item.contentEncoded )
 					const img = $('img')
 					return img.length ? img.attr('data-src') || img.attr('src') : null
 				}
 				const ogImage = await getOgImage(item.link)
-				console.log(ogImage)
 				return ogImage
 			})(),
 			categories: item.categories,

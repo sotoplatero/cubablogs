@@ -7,7 +7,9 @@ import getPost from '$lib/post'
 export async function post() {
 
 	var blogs = await db.all()
-	let blogsWithoutUpdate = blogs.filter( el => !isToday(el.updated_at) )
+	let blogsWithoutUpdate = blogs
+		.filter( el => !isToday(el.updated_at) )
+		.filter( (el,index) => index < 5 )
 	// let blogsWithoutUpdate = blogs
 
     await Promise.all( blogsWithoutUpdate.map( async (blog) => {
