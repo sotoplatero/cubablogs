@@ -7,7 +7,7 @@
 		const res = await fetch(url);
 		const blogs = await res.json()
 
-		if (!res.ok) {
+		if ( !res.ok ) {
 			return {
 				status: res.status,
 				error: new Error(`Could not load ${url}`)

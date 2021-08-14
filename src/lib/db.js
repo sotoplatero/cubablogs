@@ -25,9 +25,28 @@ const options = {
 	path: `cubablogs/db.json`,
 }
 
+function paginate(items, page = 1, per_page = 10) {
+ 
+  offset = (page - 1) * per_page,
+ 
+  paginatedItems = items.slice(offset).slice(0, per_page),
+  total_pages = Math.ceil(items.length / per_page);
+
+  return {
+	  page: page,
+	  per_page: per_page,
+	  pre_page: page - 1 ? page - 1 : null,
+	  next_page: (total_pages > page) ? page + 1 : null,
+	  total: items.length,
+	  total_pages: total_pages,
+	  data: paginatedItems
+  };
+}
+
 export const db = {
 
 	blogs: [], 
+
 
 	async all() {
 
@@ -41,9 +60,11 @@ export const db = {
 		let blogs = await this.all()
 
 		let indexBlog = blogs.findIndex( el => getHostname(el.url) === getHostname(blog.url) ) 
+			console.log(indexBlog)
 
 		if ( indexBlog > 0 ) {
 			blogs.splice( indexBlog, 1, blog )
+			console.log(blog)
 		} else {
 			blogs.splice( blogs.length, 0, blog )
 			notify(`Nuevo Blog: ${blog.title} ${blog.url}`)

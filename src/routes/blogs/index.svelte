@@ -109,7 +109,8 @@
 			<a href={blog.url} class="group " target="_blank" rel="noopener nofollower">
 				<div class="aspect-w-1 aspect-h-1 overflow-hidden rounded-lg">
 					<img src="{(blog.twitter ? blog.twitter.avatar + `?fallback=${blog.image}` : null) || blog.image}" alt="{blog.title}" class="w-full h-full object-center object-cover transition transform group-hover:scale-105">
-				</div>			
+				</div>	
+				{blog.image}		
 				<div>
 					<div class="mb-4 mt-3 text-center">
 						<h2 class="text-lg sm:text-2xl font-semibold transition group-hover:scale-105">
