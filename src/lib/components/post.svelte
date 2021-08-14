@@ -1,5 +1,6 @@
 <script >
 	import SaveToPocket from '$lib/components/saveToPocket.svelte'
+	import Avatar from '$lib/components/avatar.svelte'
 	export let blog
 	let avatar = (blog.twitter ? blog.twitter.avatar : blog.logo) || blog.image
 	let date = new Date(blog.post.date).toLocaleDateString('es-ES', { month:"short", day:"numeric"})
@@ -8,10 +9,14 @@
 	<div class="group " >
 		<div>
 			<div class='flex items-center mb-2'>
-				<img 
-					src="{avatar}" 
-					alt="{blog.title}" 
-					class="w-8 h-8 object-center object-cover rounded-full overflow-hidden">
+				{#if avatar}
+					<img 
+						src="{avatar}" 
+						alt="{blog.title}" 
+						class="w-8 h-8 object-center object-cover rounded-full overflow-hidden">
+				{:else}
+					<Avatar text={blog.title} class="w-8 h-8 rounded-full"/>
+				{/if}
 				<span class="text-lg ml-2 font-semibold">
 					<!-- {blog.post.author || ''} <span class="text-gray-500">en</span> --> <a href="{blog.url}" target="_blank" rel="noopener nofollower">{blog.title}</a>
 				</span>
@@ -19,14 +24,14 @@
 			<div class="flex ">
 				<div class="mr-auto">
 					<a href={blog.post.url} target="_blank" rel="noopener nofollower">
-						<h2 class="text-xl sm:text-3xl font-bold sm:font-semibold leading-tight transition text-gray-700 group-hover:text-gray-900">
+						<h2 class="text-xl sm:text-2xl font-bold sm:font-semibold leading-tight transition text-gray-700 group-hover:text-gray-900">
 							{blog.post.title}
-						</h2>
+						</h2>	
 						<p class="mt-1 transition text-gray-500 group-hover:text-gray-600 sm:line-clamp-3 text-base sm:text-lg sm:text-justify hidden">
 							{blog.post.description}
 						</p>
 						{#if blog.post.categories}
-							<span class="text-sm text-gray-400 mt-1 line-clamp-2">
+							<span class="text-sm text-gray-400 mt-1 line-clamp-1">
 								{blog.post.categories.join(', ') }
 							</span>
 						{/if}

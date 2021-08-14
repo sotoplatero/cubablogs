@@ -5,7 +5,7 @@ import Parser from 'rss-parser';
 let parser = new Parser({customFields: {
 		item: [
 		    ['content:encoded','contentEncoded'],
-		    ['media:content','media'],
+		    ['media:content','media', {keepArray: true}],
 		    ['dc:creator','dcCreator']
 		]
 	}});
@@ -36,6 +36,7 @@ export default async function (url) {
 				return $.text().substring(0, 250)
 			})(),
 			image: ( function(){
+				// console.log(item.media)
 				if (item.media) return item.media['$']['url']
 				const $ = cheerio.load( item.content + item.contentEncoded )
 				return $('img').attr('src')

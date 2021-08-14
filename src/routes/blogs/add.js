@@ -51,7 +51,6 @@ export async function post(request) {
 
 			logo = logo ?? $('meta[name="msapplication-TileImage"]').attr('content') 
 			logo = logo ?? await clearbit(url)
-			console.log(logo)
 			if (!logo) return
 			return getDomain(logo) ? logo : url + logo
 		})(),
@@ -80,8 +79,6 @@ export async function post(request) {
 		rss,
 		post,
 	}
-
-
 
 	const blogs = await db.add(data)
 
