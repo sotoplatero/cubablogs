@@ -19,7 +19,7 @@
 				blogs: blogs
 					.filter( (el,index) => !!el.post && !!el.post.title )
 					.sort( (a,b) => (new Date(b.post.date)) - (new Date(a.post.date)) )
-					.filter( (el,index) => index<5 )
+					.filter( (el,index) => index < 10 )
 			}
 		};
 
@@ -29,7 +29,6 @@
 	import Post from '$lib/components/post.svelte'
 	
 	export let blogs = []
-	$: blogsWithPost = blogs
 		
 </script>
 
@@ -37,8 +36,11 @@
 <!-- 	<div class="mb-6">
 		<input type="text" bind:value={search} class="border border-gray-300 p-3 w-full focus:outline-none focus:border-gray-400 text-xl">
 	</div> -->
-	<div class="w-full max-w-screen-md mx-auto space-y-8 sm:space-y-16">
-	{#each blogsWithPost as blog (blog.post.url)}
+	<div class="mb-16"> 
+		<Post blog={blogs[0]} featured/>
+	</div>
+	<div class="w-full max-w-screen-md mx-auto space-y-8 sm:space-y-16 ">
+	{#each blogs.slice(1) as blog (blog.post.url)}
 		<Post {blog} />
 	{/each}
 	</div>
