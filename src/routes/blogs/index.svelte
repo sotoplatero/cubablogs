@@ -3,18 +3,21 @@
 	 * @type {import('@sveltejs/kit').Load}
 	 */
 	export async function load({ page, fetch, session, context }) {
-		const url = `/blogs.json`
-		const res = await fetch(url)
-		const blogs = await res.json()
+		const p = page.query.get('page') ?? 1
+		const res = await fetch(`/blogs.json?page=${p}`);
+
+		const {
+			data: blogs,
+			next_page,
+			prev_page,
+		} = await res.json()
 
 		if (res.ok) {
 			return {
 				props: {
-					blogs: blogs.map(el=>({ 
-						...el, 
-						last_date: el.post.date, 
-						post: '' 
-					}))
+					blogs,
+					next_page, 
+					prev_page,
 				}
 			};
 		}
@@ -26,51 +29,54 @@
 	}
 </script>
 <script>
-
-	let url
-	let exists = 0
-	let search = ''
-	let error
-	let adding = false
-
+	import Pagination from '$lib/components/pagination.svelte'
 
 	export let blogs = []
-	$: theBlogs = blogs
-		.sort((a,b)=>{
-			return a.title.toLowerCase()>b.title.toLowerCase() ? 1 : -1
-		})
-		.filter( el => {
-			return (el.title + el.description).toLowerCase().includes(search.toLowerCase()) 
-		})
+	export let next_page
+	export let prev_page
+	let q = ''
 
-	function getHostname(url='https://example.com') {
-		const checkUrl = new URL(url);
-		return checkUrl.hostname
+	function debounce(func, timeout = 300){
+	  let timer;
+	  return (...args) => {
+	    clearTimeout(timer)
+	    timer = setTimeout(() => { func.apply(this, args); }, timeout)
+	  }
 	}
+
+	async function search() {
+		const res = await fetch(`/blogs.json?q=${q}`)
+		if (res.ok) {
+			({data:blogs, next_page, prev_page} = await res.json())  
+		}
+	}
+
+
+
 </script>
 
 <div class="mb-12">
 	<div class="flex items-center mb-6">
-		<span class="font-semibold text-gray-600 mr-auto">{theBlogs.length} blogs</span>
+		<span class="font-semibold text-gray-600 mr-auto">{blogs.length} blogs</span>
 		<div class="flex items-center border border-gray-200 p-3  focus:border-gray-400 text-xl">
 			<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 			  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
 			</svg>
-			<input type="text" bind:value={search} class="focus:outline-none ml-2">
+			<input type="text" bind:value={q} on:input={debounce(()=>search())} class="focus:outline-none ml-2">
 		</div>
 	</div>
 	<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 2xl:grid-cols-5 gap-4 sm:gap-12">
-	{#each theBlogs as blog (blog.url)}
+	{#each blogs as blog (blog.url)}
 		<div >
 			<a href={blog.url} class="group " target="_blank" rel="noopener nofollower">
 				<div class="aspect-w-1 aspect-h-1 overflow-hidden rounded-lg">
 					{#if !!blog.twitter || !!blog.logo}
 						<img src="{(blog.twitter ? blog.twitter.avatar : blog.logo) || blog.image}" alt="{blog.title}" class="w-full h-full object-center object-cover transition transform group-hover:scale-105">
 					{:else}
-<svg xmlns="http://www.w3.org/2000/svg" class="h-full w-full bg-gray-100 text-gray-300" viewBox="0 0 20 20" fill="currentColor">
-  <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
-</svg>				
-		
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-full w-full bg-gray-100 text-gray-300" viewBox="0 0 20 20" fill="currentColor">
+						  <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+						</svg>				
+								
 					{/if}
 				</div>	
 				<div>
@@ -78,7 +84,7 @@
 						<h2 class="text-lg sm:text-2xl font-semibold">
 							{blog.title}
 						</h2>
-						<p class="text-gray-400 truncate text-green-400 text-sm">{blog.url}</p>
+						<!-- <p class="text-gray-400 truncate text-green-400 text-sm">{blog.url}</p> -->
 					</div>
 					{#if blog.description}
 						<p class="transition text-gray-500 group-hover:text-gray-700 line-clamp-5 text-justify">
@@ -108,5 +114,8 @@
 			</div>
 		</div>
 	{/each}
+	</div>
+	<div class="mt-10">
+		<Pagination {prev_page} {next_page}/>
 	</div>
 </div>

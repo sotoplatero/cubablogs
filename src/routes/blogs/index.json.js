@@ -1,9 +1,25 @@
 import {db} from '$lib/db'
+import paginate from '$lib/paginate'
 
-export async function get() {
-	const blogs = await db.all()
+export async function get({query}) {
+	const p = query.get('page') || 1
+	const q = query.get('q')
+
+	let blogs = await db.all()
+
+	blogs = blogs
+		.map(el => ({...el, post: null}))
+		.sort((a,b)=>{
+			return a.title.toLowerCase()>b.title.toLowerCase() ? 1 : -1
+		})
+
+	if (!!q) {
+		blogs = blogs.filter( el => {
+			return (el.title + el.description).toLowerCase().includes(q.toLowerCase()) 
+		})
+	}
 
 	return {
-		body: blogs.sort( (a,b) => (new Date(b.post.date)) - (new Date(a.post.date)) )
+		body: paginate( blogs, p, 12 )
 	};
 }
