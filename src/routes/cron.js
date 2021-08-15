@@ -8,13 +8,15 @@ export async function post() {
 
 	var blogs = await db.all()
 	let blogsWithoutUpdate = blogs
-		.sort( (a,b) => (new Date(a.post.date)) - (new Date(b.post.date)) )
+		.sort( (a,b) => (new Date(a.scheduled_at || 0)) - (new Date(b.scheduled_at || 0)) )
 		.filter( (el,index) => index < 10 )
 	// let blogsWithoutUpdate = blogs
 
     await Promise.all( blogsWithoutUpdate.map( async (blog) => {
     	const post = await getPost(blog.rss)
+    	console.log(blog.url + ' '+  blog.scheduled_at)
 
+    	blog.scheduled_at = new Date
     	if ( (post?.url !== blog.post.url) ) {
 	    	blog = { 
 	    		...blog, 
@@ -23,8 +25,9 @@ export async function post() {
 	    	}
 		    const blogIndex = blogs.findIndex( el => el.url === blog.url )
 		    blogs.splice(blogIndex,1,blog)	
-		    notify(post.url)
+		    notify(`Nueva entrada en ${blog.title} ${post.url}`)
     	}
+
     }))
 
 	// console.log(blogs)

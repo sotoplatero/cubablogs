@@ -60,11 +60,9 @@ export const db = {
 		let blogs = await this.all()
 
 		let indexBlog = blogs.findIndex( el => getHostname(el.url) === getHostname(blog.url) ) 
-			console.log(indexBlog)
 
 		if ( indexBlog > 0 ) {
 			blogs.splice( indexBlog, 1, blog )
-			console.log(blog)
 		} else {
 			blogs.splice( blogs.length, 0, blog )
 			notify(`Nuevo Blog: ${blog.title} ${blog.url}`)

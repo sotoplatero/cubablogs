@@ -47,7 +47,6 @@ export default async function (url) {
 				return $.text().substring(0, 250)
 			})(),
 			image: await ( async function(){
-				console.log(item.media)
 				if (item.media ) {
 					if (item.media['$']['medium'] === 'image') {
 						return item.media['$']['url']
