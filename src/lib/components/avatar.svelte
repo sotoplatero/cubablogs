@@ -13,8 +13,6 @@
 		.map(el=>el[0])
 		.join('')
 		.toUpperCase()
-	$: console.log(initials)
-	$: console.log(text)
 </script>
 <svg class="{_class}" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <!-- 	<defs>

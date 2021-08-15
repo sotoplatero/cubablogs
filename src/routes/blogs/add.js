@@ -76,7 +76,6 @@ export async function post(request) {
 		github: { 
 			url: $(selectors.github).attr('href'),
 		},
-		updated_at: new Date,
 		rss,
 		post,
 	}

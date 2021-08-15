@@ -14,7 +14,6 @@ export async function post() {
 
     await Promise.all( blogsWithoutUpdate.map( async (blog) => {
     	const post = await getPost(blog.rss)
-    	console.log(blog.url + ' '+  blog.scheduled_at)
 
     	blog.scheduled_at = new Date
     	if ( (post?.url !== blog.post.url) ) {
