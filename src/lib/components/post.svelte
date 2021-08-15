@@ -5,7 +5,7 @@
 	export let featured = false
 
 	let avatar = (blog.twitter ? blog.twitter.avatar : blog.logo) || blog.image
-	let date = new Date(blog.post.date).toLocaleDateString('es-ES', { month:"short", day:"numeric"})
+	let date = new Date(blog.post.date).toLocaleDateString('es-ES', { month:"short", day:"numeric", year: "numeric"})
 </script>
 
 <div class="group" >

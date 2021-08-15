@@ -2,10 +2,16 @@
 	/**
 	 * @type {import('@sveltejs/kit').Load}
 	 */
-	export async function load({ page, fetch, session, context }) {
-		const url = `/blogs.json`;
-		const res = await fetch(url);
-		const blogs = await res.json()
+	export async function load({ page, fetch }) {
+		const p = page.query.get('page') ?? 1
+		const res = await fetch(`/posts.json?page=${p}`);
+		const json = await res.json()
+		console.log(json)
+		const {
+			data: blogs,
+			next_page,
+			prev_page,
+		} = json
 
 		if ( !res.ok ) {
 			return {
@@ -16,10 +22,7 @@
 
 		return {
 			props: {
-				blogs: blogs
-					.filter( (el,index) => !!el.post && !!el.post.title )
-					.sort( (a,b) => (new Date(b.post.date)) - (new Date(a.post.date)) )
-					.filter( (el,index) => index < 20 )
+				blogs, next_page, prev_page
 			}
 		};
 
@@ -27,8 +30,12 @@
 </script>
 <script>
 	import Post from '$lib/components/post.svelte'
+	import Pagination from '$lib/components/pagination.svelte'
 	
 	export let blogs = []
+	export let next_page = null
+	export let prev_page = null
+	// $: console.log('page: ' + next_page)
 	$: blogsWithPost = blogs
 		
 </script>
@@ -38,14 +45,12 @@
 		<input type="text" bind:value={search} class="border border-gray-300 p-3 w-full focus:outline-none focus:border-gray-400 text-xl">
 	</div> -->
 	<div class="w-full max-w-screen-md mx-auto space-y-8 sm:space-y-16">
-	{#each blogsWithPost as blog (blog.post.url)}
-		<Post {blog} />
-	{/each}
+		{#each blogsWithPost as blog (blog.post.url)}
+			<Post {blog} />
+		{/each}
 	</div>
-	<a href="/posts" class="flex items-center justify-center mt-8 text-xl font-semibold hover:underline">
-		Todos los artículos
-		<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-		  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-		</svg>		
-	</a>
+	<div class="mt-10">
+		<Pagination {prev_page} {next_page}/>
+	</div>
+
 </div>

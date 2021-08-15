@@ -3,9 +3,9 @@
 	 * @type {import('@sveltejs/kit').Load}
 	 */
 	export async function load({ page, fetch, session, context }) {
-		const url = `/blogs.json`;
+		const url = `/posts.json`;
 		const res = await fetch(url);
-		const blogs = await res.json()
+		const { data: blogs } = await res.json()
 
 		if (!res.ok) {
 			return {
@@ -15,12 +15,7 @@
 		}
 
 		return {
-			props: {
-				blogs: blogs
-					.filter( (el,index) => !!el.post && !!el.post.title )
-					.sort( (a,b) => (new Date(b.post.date)) - (new Date(a.post.date)) )
-					.filter( (el,index) => index < 10 )
-			}
+			props: { blogs }
 		};
 
 	}
@@ -29,6 +24,7 @@
 	import Post from '$lib/components/post.svelte'
 	
 	export let blogs = []
+
 		
 </script>
 
