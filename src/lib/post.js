@@ -12,12 +12,11 @@ let parser = new Parser({customFields: {
 
 async function getOgImage(url) {
 	const res = await fetch(url)
-	if (!res.ok) {
-		return
-	}
+	if (!res.ok) return
+	
 	const html = await res.text()
 	const $ = cheerio.load(html)
-	const selector = 'meta[property="og:image:secure_url"],meta[property="og:image:url"],meta[property="og:image"],meta[name="twitter:image:src"],meta[name="twitter:image"],meta[itemprop="image"]'
+	const selector = 'meta[property="og:image:secure_url"],meta[property="og:image:url"],meta[property="og:image"],meta[name="og:image"],meta[name="twitter:image:src"],meta[name="twitter:image"],meta[itemprop="image"]'
 	return $(selector)?.attr('content')
 }
 
@@ -46,20 +45,25 @@ export default async function (url) {
 				const $ = cheerio.load( content )
 				return $.text().substring(0, 250)
 			})(),
+
 			image: await ( async function(){
 				if (item.media ) {
 					if (item.media['$']['medium'] === 'image') {
 						return item.media['$']['url']
 					}
 				}
+
+				const ogImage = await getOgImage(item.link)
+				if (ogImage) return ogImage
+
 				if (item.contentEncoded) {
 					const $ = cheerio.load( item.contentEncoded )
 					const img = $('img')
 					return img.length ? img.attr('data-src') || img.attr('src') : null
 				}
-				const ogImage = await getOgImage(item.link)
-				return ogImage
+				return
 			})(),
+
 			categories: item.categories,
 		}
 
