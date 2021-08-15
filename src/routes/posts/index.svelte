@@ -5,13 +5,12 @@
 	export async function load({ page, fetch }) {
 		const p = page.query.get('page') ?? 1
 		const res = await fetch(`/posts.json?page=${p}`);
-		const json = await res.json()
-		console.log(json)
+
 		const {
 			data: blogs,
 			next_page,
 			prev_page,
-		} = json
+		} = await res.json()
 
 		if ( !res.ok ) {
 			return {

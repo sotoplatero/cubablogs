@@ -52,6 +52,7 @@ export async function post(request) {
 			logo = logo ?? $('meta[name="msapplication-TileImage"]').attr('content') 
 			logo = logo ?? await clearbit(url)
 			if (!logo) return
+				console.log(getDomain(logo))
 			return getDomain(logo) ? logo : url + logo
 		})(),
 

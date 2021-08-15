@@ -33,12 +33,6 @@
 	let error
 	let adding = false
 
-	const errors = {
-		exists: 'El blog ya está en el listado',
-		unknow: 'La página no parece ser un blog',
-		cxn: 'Error en la conexión. Pruebe más tarde',
-		empty: 'Escriba la url del blog'
-	}
 
 	export let blogs = []
 	$: theBlogs = blogs
@@ -48,44 +42,6 @@
 		.filter( el => {
 			return (el.title + el.description).toLowerCase().includes(search.toLowerCase()) 
 		})
-
-	function handleSubmit() {
-		url = !/^http/.test(url) ? `https://${url}` : url
-		error = ''
-		if (!url) {
-			error = 'empty'
-			return
-		}
-		if (blogs.some( el => getHostname(el.url) === getHostname(url) )) {
-			error = 'exists'
-			return
-		}
-		addBlog()
-	}
-
-	async function addBlog(){
-		adding = true
-		const res = await fetch(`/blogs/add`,{
-			method: 'post',
-			body: JSON.stringify({url})
-		})
-		adding = false
-
-		if (!res.ok) {
-			error = 'cxn'
-			return
-		}
-
-		const data = await res.json() 
-		if (data.error) {
-			error = data.error
-			return
-		} 
-
-		blogs = [ ...blogs, data ]
-		url = ''
-
-	}
 
 	function getHostname(url='https://example.com') {
 		const checkUrl = new URL(url);
@@ -108,12 +64,18 @@
 		<div >
 			<a href={blog.url} class="group " target="_blank" rel="noopener nofollower">
 				<div class="aspect-w-1 aspect-h-1 overflow-hidden rounded-lg">
-					<img src="{(blog.twitter ? blog.twitter.avatar + `?fallback=${blog.image}` : null) || blog.image}" alt="{blog.title}" class="w-full h-full object-center object-cover transition transform group-hover:scale-105">
+					{#if !!blog.twitter || !!blog.logo}
+						<img src="{(blog.twitter ? blog.twitter.avatar : blog.logo) || blog.image}" alt="{blog.title}" class="w-full h-full object-center object-cover transition transform group-hover:scale-105">
+					{:else}
+<svg xmlns="http://www.w3.org/2000/svg" class="h-full w-full bg-gray-100 text-gray-300" viewBox="0 0 20 20" fill="currentColor">
+  <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+</svg>				
+		
+					{/if}
 				</div>	
-				{blog.image}		
 				<div>
 					<div class="mb-4 mt-3 text-center">
-						<h2 class="text-lg sm:text-2xl font-semibold transition group-hover:scale-105">
+						<h2 class="text-lg sm:text-2xl font-semibold">
 							{blog.title}
 						</h2>
 						<p class="text-gray-400 truncate text-green-400 text-sm">{blog.url}</p>
