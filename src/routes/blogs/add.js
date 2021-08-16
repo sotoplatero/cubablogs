@@ -41,7 +41,7 @@ export async function post(request) {
 
 	const data = {
 		url,
-		title: $(selectors.title).attr('content') || $('title').text(),
+		title: $('title').text() || $(selectors.title).attr('content'),
 		description: $(selectors.description).attr('content'),
 		author: $(selectors.author).attr('content'),
 		keywords: $(selectors.keywords).attr('content')?.replace(/\s+/g,'').split(','),

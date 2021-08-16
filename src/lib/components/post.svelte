@@ -25,7 +25,8 @@
 					<span class="text-lg ml-2 font-semibold">
 						<!-- {blog.post.author || ''} <span class="text-gray-500">en</span> --> <a href="{blog.url}" target="_blank" rel="noopener nofollower" class="text-gray-600">{blog.title}</a>
 					</span>
-				</div>				
+				</div>		
+				<!-- <a href="/posts/{blog.id}">{blog.id}</a>		 -->
 				<a href={blog.post.url} target="_blank" rel="noopener nofollower">
 					<h2 class="text-xl  { featured ? 'sm:text-5xl' : 'sm:text-2xl'} font-bold !leading-snug transition text-gray-800 group-hover:text-gray-900">
 						{blog.post.title}

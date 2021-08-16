@@ -12,6 +12,7 @@
 		"@sveltejs/adapter-netlify": "^1.0.0-next.27",
 		"@sveltejs/adapter-vercel": "next",
 		"@sveltejs/kit": "^1.0.0-next.142",
+		"@tailwindcss/typography": "^0.4.1",
 		"autoprefixer": "^10.3.1",
 		"copee": "^1.0.6",
 		"cssnano": "^5.0.6",
@@ -25,7 +26,8 @@
 		"prettier-plugin-svelte": "^2.2.0",
 		"svelte": "^3.42.1",
 		"svelte-preprocess": "^4.7.4",
-		"tailwindcss": "^2.2.4"
+		"tailwindcss": "^2.2.4",
+		"uuid": "^3.4.0"
 	},
 	"type": "module",
 	"dependencies": {
