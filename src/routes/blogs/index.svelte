@@ -10,6 +10,7 @@
 			data: blogs,
 			next_page,
 			prev_page,
+			total,
 		} = await res.json()
 
 		if (res.ok) {
@@ -18,6 +19,7 @@
 					blogs,
 					next_page, 
 					prev_page,
+					total,
 				}
 			};
 		}
@@ -34,6 +36,7 @@
 	export let blogs = []
 	export let next_page
 	export let prev_page
+	export let total
 	let q = ''
 
 	function debounce(func, timeout = 300){
@@ -45,6 +48,7 @@
 	}
 
 	async function search() {
+
 		const res = await fetch(`/blogs.json?q=${q}`)
 		if (res.ok) {
 			({data:blogs, next_page, prev_page} = await res.json())  
@@ -57,7 +61,7 @@
 
 <div class="mb-12">
 	<div class="flex items-center mb-6">
-		<span class="font-semibold text-gray-600 mr-auto">{blogs.length} blogs</span>
+		<span class="font-semibold text-gray-600 mr-auto">{blogs.length} de {total} blogs</span>
 		<div class="flex items-center border border-gray-200 p-3  focus:border-gray-400 text-xl">
 			<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 			  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -93,18 +97,18 @@
 					{/if}
 				</div>
 			</a>
-			<div class="flex items-center justify-between space-x-3 mt-4 text-gray-500">
-				<span class="whitespace-nowrap font-semibold">
-					{	new Date(blog.last_date).toLocaleDateString('es-ES', { month:"short", day:"numeric", year:'numeric'}) }
-				</span>
-				<div class="flex items-center space-x-2 ">
-					<a href="{blog.rss}" class="hover:text-yellow-500">
+			<div class="flex items-center justify-between space-x-4 mt-4 text-gray-400">
+	<!-- 				<span class="whitespace-nowrap font-semibold">
+						{	new Date(blog.last_date).toLocaleDateString('es-ES', { month:"short", day:"numeric", year:'numeric'}) }
+					</span> -->
+				<div class="flex items-center space-x-3 ">
+					<a href="{blog.rss}" class="hover:text-yellow-500" target="_blank" rel="noopener nofollower">
 						<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 						  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 5c7.18 0 13 5.82 13 13M6 11a7 7 0 017 7m-6 0a1 1 0 11-2 0 1 1 0 012 0z" />
 						</svg>					
 					</a>
 					{#if blog.twitter}
-						<a href="{blog.twitter.url}" class="hover:text-blue-400 font-medium flex items-center justify-center ">
+						<a href="{blog.twitter.url}" target="_blank" rel="noopener nofollower" class="hover:text-blue-400 font-medium flex items-center justify-center ">
 							<svg class="w-6 h-6 inline fill-current" stroke="currentColor" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Twitter</title><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
 						</a>
 					{/if}
