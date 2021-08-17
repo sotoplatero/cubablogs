@@ -16,10 +16,12 @@ export async function get({query}) {
 
 	return {
 		body: {
-			title: $('title').text(),
-			description: $('meta[name="description"]')?.attr('content'),
+			title: $('title')?.text().trim(),
+			description: $('meta[name="description"]')?.attr('content').trim(),
 			creator: $('meta[name="twitter:creator"],meta[property="twitter:creator"]')?.attr('content'),
+			og_description: $('meta[property="og:description"],meta[name="og:description"]')?.attr('content'),
 			og_image: $('meta[property="og:image"],meta[name="og:image"]')?.attr('content'),
+			og_locale: $('meta[property="og:locale"]')?.attr('content'),
 			twitter_image: $('meta[property="twitter:image"],meta[name="twitter:image"]')?.attr('content'),
 			apple_touch_icon: $('link[rel="apple-touch-icon"][sizes="180x180"]')?.attr('href'),
 			icon32x32: $('link[rel="icon"][sizes="32x32"]')?.attr('href'),
