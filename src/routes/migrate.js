@@ -1,11 +1,11 @@
 import {db} from '$lib/db'
-import { v4 as uuidv4 } from 'uuid';
+import { nanoid } from 'nanoid'
 
 
 export async function post() {
 
 	let blogs = await db.all()
-	blogs = blogs.map( el => ({...el, id: uuidv4()}) )
+	blogs = blogs.map( el => ({...el, id: nanoid()}) )
 	// // console.log(blogs)
     await db.save(blogs)
 	// notify(`Nuevo Blog: ${data.title} ${data.url}`)

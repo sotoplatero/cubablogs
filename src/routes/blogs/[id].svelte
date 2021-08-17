@@ -35,7 +35,7 @@
 	<header class="mb-10 text-center">
 		<a href="{blog.url}" target="_blank" rel="noopener nofollower">
 			{#if blog.twitter || blog.logo}
-				<img src="{blog.twitter ? blog.twitter.avatar : blog.logo}" class="w-32 h-32 mx-auto rounded-xl">
+				<img src="{blog.twitter ? blog.twitter.avatar : blog.logo}" class="w-32 h-32 mx-auto rounded-xl" alt="logo {blog.title}">
 			{:else}
 				<svg xmlns="http://www.w3.org/2000/svg" class="w-32 h-32 rounded-xl mx-auto bg-gray-100 text-gray-300" viewBox="0 0 20 20" fill="currentColor">
 				  <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
@@ -44,7 +44,7 @@
 			<div class="w-full sm:w-3/4 mx-auto mt-6">
 				<h1 class="text-3xl font-bold">
 					{feed.title}
-					<svg xmlns="http://www.w3.org/2000/svg" class="inline h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+					<svg xmlns="http://www.w3.org/2000/svg" class="inline h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 					  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
 					</svg>					
 				</h1>

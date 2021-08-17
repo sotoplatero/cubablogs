@@ -21,6 +21,7 @@
 		"eslint": "^7.22.0",
 		"eslint-config-prettier": "^8.1.0",
 		"eslint-plugin-svelte3": "^3.2.0",
+		"nanoid": "^3.1.25",
 		"normalize-url": "^6.1.0",
 		"postcss": "^8.3.5",
 		"postcss-load-config": "^3.1.0",

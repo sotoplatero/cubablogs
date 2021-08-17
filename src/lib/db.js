@@ -1,6 +1,6 @@
 import { Octokit } from "@octokit/rest";
 import {notify} from '$lib/bot'
-import { v4 as uuidv4 } from 'uuid';
+import { nanoid } from 'nanoid'
 // import {
 //   createOAuthAppAuth,
 //   createOAuthUserAuth,
@@ -50,7 +50,7 @@ export const db = {
 			blogs.splice( indexBlog, 1, blog )
 		} else { // create
 			blog.created_at = new Date
-			blog.id = uuidv4()
+			blog.id = nanoid()
 			blogs.splice( blogs.length, 0, blog )
 			notify(`Nuevo Blog: ${blog.title} ${blog.url}`)
 		}
