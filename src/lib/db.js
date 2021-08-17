@@ -1,5 +1,6 @@
 import { Octokit } from "@octokit/rest";
 import {notify} from '$lib/bot'
+import { v4 as uuidv4 } from 'uuid';
 // import {
 //   createOAuthAppAuth,
 //   createOAuthUserAuth,
@@ -43,11 +44,13 @@ export const db = {
 
 		let indexBlog = blogs.findIndex( el => getHostname(el.url) === getHostname(blog.url) ) 
 
+		// update
 		if ( indexBlog > 0 ) {
 			blog.updated_at = new Date
 			blogs.splice( indexBlog, 1, blog )
-		} else {
+		} else { // create
 			blog.created_at = new Date
+			blog.id = uuidv4()
 			blogs.splice( blogs.length, 0, blog )
 			notify(`Nuevo Blog: ${blog.title} ${blog.url}`)
 		}

@@ -2,7 +2,7 @@
 </script>
 <footer class="my-16">
 	<div class="w-3/4 mx-auto text-center">
-		<p class="mb-4 w-full sm:w-1/2 mx-auto text-gray-700">Si ❤️ Cubablog apoyanos y compranos café para estar despiertos y seguir mejorandolo 🚀</p>
+		<p class="mb-4 w-full sm:w-1/2 mx-auto text-gray-700">Si ❤️ <b>Cubablog</b> apoyanos y compranos café para estar despiertos y seguir mejorandolo 🚀</p>
 		<a href='https://ko-fi.com/E1E05RU7A' target='_blank' class="text-lg font-semibold bg-red-500 text-white px-4 py-1 rounded-full inline-block">
 			<span class="flex items-center">
 				
