@@ -23,7 +23,10 @@
 						<Avatar text={blog.title} class="w-8 h-8 rounded-full shadow"/>
 					{/if}
 					<span class="text-lg ml-2 font-semibold">
-						<!-- {blog.post.author || ''} <span class="text-gray-500">en</span> --> <a href="{blog.url}" target="_blank" rel="noopener nofollower" class="text-gray-600">{blog.title}</a>
+						<!-- {blog.post.author || ''} <span class="text-gray-500">en</span> --> 
+						<a href="/blogs/{blog.id}" target="_blank" rel="noopener nofollower" class="text-gray-600">
+							{blog.title}
+						</a>
 					</span>
 				</div>		
 				<!-- <a href="/posts/{blog.id}">{blog.id}</a>		 -->
