@@ -9,7 +9,7 @@ export async function post() {
 	var blogs = await db.all()
 	let blogsWithoutUpdate = blogs
 		.sort( (a,b) => (new Date(a.scheduled_at || 0)) - (new Date(b.scheduled_at || 0)) )
-		.filter( (el,index) => index < 10 )
+		.filter( (el,index) => index < 5 )
 	// let blogsWithoutUpdate = blogs
 
     await Promise.all( blogsWithoutUpdate.map( async (blog) => {

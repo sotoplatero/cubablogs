@@ -1,8 +1,8 @@
 <script context="module">
 	export async function load({ page, fetch }) {
-		const {id} = page.params
+		const {domain} = page.params
 
-		const res = await fetch(`/blogs/${id}.json`)
+		const res = await fetch(`/blogs/${domain}.json`)
 		const {blog,feed} = await res.json()
 		// if ( !res.ok ) {
 		// 	return {
