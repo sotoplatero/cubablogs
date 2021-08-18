@@ -28,7 +28,7 @@
 </script>
 
 <svelte:head>
-	<title>CubaBlog - {feed.title}</title>
+	<title>CubaBlog - {blog.title}</title>
 </svelte:head>
 
 <div class="w-full max-w-2xl mx-auto">
