@@ -45,7 +45,7 @@
 	}
 
 </script>
-<div class="sm:w-1/2 min-h-screen mx-auto text-center py-10 sm:py-20 mb-8">
+<div class="sm:w-1/2 mx-auto text-center py-10 sm:py-24 mb-8">
 	<h2 class="text-3xl font-semibold">Agregar Blog</h2>
 	<p class="text-xl text-gray-500">
 		Incluye tu blog, el de un amigo o los blogs que te gustan. Cualquiera puede agregar cualquier blog.
