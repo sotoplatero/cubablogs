@@ -24,7 +24,7 @@ export async function post() {
 	    	}
 		    const blogIndex = blogs.findIndex( el => el.url === blog.url )
 		    blogs.splice(blogIndex,1,blog)	
-		    notify(`Nueva entrada en ${blog.title} ${post.url}`)
+		    notify(`✨ Nueva Artículo en *${blog.title}* \n\n [${post.title}](${post.url})`)
     	}
 
     }))

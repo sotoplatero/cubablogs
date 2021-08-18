@@ -50,9 +50,9 @@ export const db = {
 			blogs.splice( indexBlog, 1, blog )
 		} else { // create
 			blog.created_at = new Date
-			blog.id = nanoid()
+			blog.id = 'id' + nanoid()
 			blogs.splice( blogs.length, 0, blog )
-			notify(`Nuevo Blog: ${blog.title} ${blog.url}`)
+			notify(`✔️ Nuevo Blog\n\n *${blog.title}*\n${blog.url}`)
 		}
 
 		this.save(blogs)

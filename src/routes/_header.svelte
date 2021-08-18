@@ -7,7 +7,7 @@
 	</a>
 	<div class="flex items-center space-x-6">
 		<a href="/posts" class="font-bold transition text-gray-600 hover:text-gray-800">
-			Escritos
+			Artículos
 		</a>
 		<a href="/blogs" class="font-bold transition text-gray-600 hover:text-gray-800">
 			Blogs
