@@ -31,7 +31,7 @@
 				</div>		
 				<!-- <a href="/posts/{blog.id}">{blog.id}</a>		 -->
 				<a href={blog.post.url} target="_blank" rel="noopener nofollower">
-					<h2 class="text-xl  { featured ? 'sm:text-5xl' : 'sm:text-2xl'} font-bold !leading-snug transition text-gray-800 group-hover:text-gray-900">
+					<h2 class="text-xl  { featured ? 'sm:text-5xl' : 'sm:text-2xl'} font-bold !leading-tight transition text-gray-800 group-hover:text-gray-900">
 						{blog.post.title}
 					</h2>	
 					<p class="mt-3 transition text-gray-500 group-hover:text-gray-600 text-base {featured ? 'sm:text-xl' :'sm:text-lg'} sm:text-justify hidden sm:block">

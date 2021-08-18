@@ -52,7 +52,7 @@ export const db = {
 			blog.created_at = new Date
 			blog.id = 'id' + nanoid()
 			blogs.splice( blogs.length, 0, blog )
-			notify(`✔️ Nuevo Blog\n\n *${blog.title}*\n${blog.url}`)
+			notify(`✨ Nuevo Blog\n\n [${blog.title}](${blog.url})`)
 		}
 
 		this.save(blogs)
