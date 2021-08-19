@@ -23,8 +23,11 @@ export async function get({params}) {
 		  // We don't currently allow img itself by default, but this
 		  // would make sense if we did. You could add srcset here,
 		  // and if you do the URL is checked for safety
-		  img: [ '*' ]
-		},	  	
+		  img: [ 'src' ]
+		},	 
+	    exclusiveFilter: function(frame) {
+	      return /p|table/.test(frame.tag) && !frame.text.trim();
+	    }		 	
 	 //  	transformTags: {
 		// 	'img': sanitizeHtml.simpleTransform('ul', {class: 'foo'}),
 		// }
