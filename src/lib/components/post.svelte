@@ -30,7 +30,7 @@
 					</span>
 				</div>		
 				<!-- <a href="/posts/{blog.id}">{blog.id}</a>		 -->
-				<a href="{blog.post.url}" >
+				<a href="/post/{blog.post.slug}" >
 					<h2 class="text-xl  { featured ? 'sm:text-5xl' : 'sm:text-2xl'} font-bold !leading-tight transition text-gray-800 group-hover:text-gray-900">
 						{blog.post.title}
 					</h2>	

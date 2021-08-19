@@ -42,10 +42,13 @@ export const db = {
 	async add(blog) {
 		let blogs = await this.all()
 
-		let indexBlog = blogs.findIndex( el => getHostname(el.url) === getHostname(blog.url) ) 
-
+		let indexBlog = blogs.findIndex( el => {
+			console.log(getHostname(el.url) +' == '+ getHostname(blog.url) )
+			return getHostname(el.url) == getHostname(blog.url) 
+		}) 
+		console.log(indexBlog)
 		// update
-		if ( indexBlog > 0 ) {
+		if ( indexBlog > -1 ) {
 			blog.updated_at = new Date
 			blogs.splice( indexBlog, 1, blog )
 		} else { // create

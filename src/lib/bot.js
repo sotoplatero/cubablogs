@@ -1,9 +1,12 @@
 // import {Telegram} from 'telegraf'
 import TelegramBot from 'node-telegram-bot-api';
 
-function notify (channel = 'public', msg) {
-	
-	const CHANNEL_ID = channel === 'admin' ? -1001544550528 : -1001544550528 
+
+const CHANNEL_PUBLIC_ID = import.meta.env.VITE_LOCAL ? -1001544550528 : -1001518905562 
+
+function notify (msg, channel = 'public' ) {
+
+	CHANNEL_ID = channel === 'admin' ? -1001544550528 : CHANNEL_PUBLIC_ID
 
 	const bot = new TelegramBot(import.meta.env.VITE_BOT_TOKEN, {polling: false});
 	try {
