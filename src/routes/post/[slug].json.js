@@ -29,7 +29,8 @@ export async function get({params}) {
 		// 	'img': sanitizeHtml.simpleTransform('ul', {class: 'foo'}),
 		// }
 	}
-	post['content:encoded'] = sanitizeHtml( post['content:encoded'], options)
+	const html = post['content:encoded'] || post['content']
+	post['body'] = sanitizeHtml( html, options)
 
 	return {
 		body: post

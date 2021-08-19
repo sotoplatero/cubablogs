@@ -43,10 +43,8 @@ export const db = {
 		let blogs = await this.all()
 
 		let indexBlog = blogs.findIndex( el => {
-			console.log(getHostname(el.url) +' == '+ getHostname(blog.url) )
 			return getHostname(el.url) == getHostname(blog.url) 
 		}) 
-		console.log(indexBlog)
 		// update
 		if ( indexBlog > -1 ) {
 			blog.updated_at = new Date

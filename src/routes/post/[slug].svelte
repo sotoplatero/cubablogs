@@ -31,7 +31,7 @@
 		<p>{}</p>
 	</div> -->
 	<div  class="text-right">
-		<a href="{post.link}" class="flex items-center justify-end text-normal font-semibold">
+		<a href="{post.link}" class="flex items-center justify-end text-normal font-semibold" target="_blank" rel="noopener nofollower">
 			<span>Original</span>
 			<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-600 inline ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 			  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
@@ -49,6 +49,6 @@
 		</button> -->
 	</div>
 	<article class="text-justify">
-		{@html post['content:encoded'] }
+		{@html post['body'] }
 	</article>
 </div>
