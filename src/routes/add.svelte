@@ -39,7 +39,7 @@
 		}
 
 		blog = await res.json() 
-		msg = `El blog ${blog.title} se ha agregado correctamente`
+		msg = `El blog <b>${blog.title}</b> se ha agregado correctamente`
 		url = ''
 
 	}
@@ -80,7 +80,7 @@
 	    {/if}		
 	   {#if msg}
 			<div class="text-green-600">
-				{msg}
+				{@html msg}
 			</div>
 	    {/if}		
 

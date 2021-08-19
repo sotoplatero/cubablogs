@@ -2,6 +2,7 @@
 import TelegramBot from 'node-telegram-bot-api';
 import cheerio from 'cheerio'
 import Parser from 'rss-parser';
+
 let parser = new Parser({customFields: {
 		item: [
 		    ['content:encoded','contentEncoded'],
@@ -26,7 +27,7 @@ export default async function (url) {
     	try	{
 			feed = await parser.parseURL( url );
     	} catch (e) {
-    		return { }
+    		return null
     	}
 		
 		let item = feed.items[0]

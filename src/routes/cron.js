@@ -6,33 +6,33 @@ import getPost from '$lib/post'
 
 export async function post() {
 
+	let msg = []
 	var blogs = await db.all()
 	let blogsWithoutUpdate = blogs
 		.sort( (a,b) => (new Date(a.scheduled_at || 0)) - (new Date(b.scheduled_at || 0)) )
 		.filter( (el,index) => index < 5 )
-	// let blogsWithoutUpdate = blogs
 
-    await Promise.all( blogsWithoutUpdate.map( async (blog) => {
-    	const post = await getPost(blog.rss)
-
+    const blogUpdated = await Promise.all( blogsWithoutUpdate.map( async (blog) => {
     	blog.scheduled_at = new Date
-    	if ( (post?.url !== blog.post.url) ) {
+    	let post = await getPost(blog.rss)
+
+    	if  ( !!post && (post.url !== blog.post.url) ) {
 	    	blog = { 
 	    		...blog, 
 	    		updated_at: new Date,
 	    		post,
 	    	}
-		    const blogIndex = blogs.findIndex( el => el.url === blog.url )
-		    blogs.splice(blogIndex,1,blog)	
-		    notify(`✨ Nueva Artículo en *${blog.title}* \n\n 📰 [${post.title}](${post.url})`)
+	    	msg.push(`✨ Nuevo Artículo en *${blog.title}* \n [${post.title}](${post.url})`)
     	}
+
+    	return await db.add(blog)
 
     }))
 
-	// console.log(blogs)
-    await db.save(blogs)
-	// notify(`Nuevo Blog: ${data.title} ${data.url}`)
-
+    if ( msg.length ) {
+	    notify( msg.join('\n\n') )
+    }
+		    
 	return {
 		body: 'ok'
 	};

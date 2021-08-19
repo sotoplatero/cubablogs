@@ -3,7 +3,7 @@
 	 * @type {import('@sveltejs/kit').Load}
 	 */
 	export async function load({ page, fetch, session, context }) {
-		const url = `/posts.json`;
+		const url = `/blogs.json`;
 		const res = await fetch(url);
 		const { data: blogs } = await res.json()
 

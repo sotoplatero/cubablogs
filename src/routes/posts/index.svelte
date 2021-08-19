@@ -4,7 +4,7 @@
 	 */
 	export async function load({ page, fetch }) {
 		const p = page.query.get('page') ?? 1
-		const res = await fetch(`/posts.json?page=${p}`);
+		const res = await fetch(`/blogs.json?page=${p}`);
 
 		const {
 			data: blogs,
