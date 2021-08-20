@@ -3,7 +3,7 @@
 	import TelegramCannelIcon from '$lib/icons/TelegramChannel.svelte'
 	import TwitterIcon from '$lib/icons/TwitterIcon.svelte'
 </script>
-<footer class="container py-12 mt-16 bg-gray-100">
+<footer class="container py-12 mt-16 bg-gray-100 print:hidden">
 	<div class="flex items-center justify-center space-x-4 mb-8">
 		<a href="https://t.me/cubablog">
 			<TelegramCannelIcon/>

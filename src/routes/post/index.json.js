@@ -6,15 +6,14 @@ import sanitizeHtml from 'sanitize-html';
 /**
  * @type {import('@sveltejs/kit').Load}
  */
-export async function get({params}) {
-	const {slug} = params
+export async function get({query}) {
+	const url = query.get('url')
 
 	const blog = (await db.all()).find( el => {
-		return slugify(el.post.url) === slugify(slug)
+		return slugify(el.post.url) === slugify(url)
 	} )
 	const feed = await parser.parseURL( blog.rss );
-
-	let post = feed.items.find( el => slugify(el.link) === slugify(slug))
+	let post = feed.items.find( el => slugify(el.link) === slugify(url))
 
 	const options ={
 	  	allowedTags: sanitizeHtml.defaults.allowedTags.concat([ 'img' ]),
@@ -36,7 +35,13 @@ export async function get({params}) {
 	post['body'] = sanitizeHtml( html, options)
 
 	return {
-		body: post
+		body: {
+			...post,
+			blog: {
+				title: feed.title,
+				url: feed.link,
+			}
+		}
 	};
 
 }

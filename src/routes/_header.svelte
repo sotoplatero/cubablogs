@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container print:hidden">
 	<div class="flex items-center py-4 mb-8">
 		<a href="/" class="mr-auto">
 			<h1 class="flex items-center justify-center text-3xl text-red-700 ">

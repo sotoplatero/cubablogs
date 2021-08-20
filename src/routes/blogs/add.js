@@ -60,6 +60,7 @@ export async function post(request) {
 				if (!logo) {
 					logo = $('meta[name="msapplication-TileImage"]').attr('content') 
 				}
+				if (!logo) return
 				return getDomain(logo) ? logo : url + logo
 			})(),
 
