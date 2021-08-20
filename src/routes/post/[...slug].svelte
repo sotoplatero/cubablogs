@@ -2,7 +2,9 @@
 	import {onMount} from 'svelte'
 	import { page } from '$app/stores';
 	import { browser } from '$app/env';
-	let post 
+	import Loading from '$lib/components/loading.svelte'
+
+	let post
 	let loading = true
 
 	onMount( async () => {
@@ -19,11 +21,13 @@
 	function print() {
 		if (browser) window.print()
 	}
-	// $:title = post.title ?? 
+
+	$: title = post ? post.title : ''
+
 </script>
 
 <svelte:head>
-	<title>CubaBlog - </title>
+	<title>CubaBlog - {title}</title>
 </svelte:head>
 
 <div class="prose prose-xl mx-auto">
@@ -63,21 +67,6 @@
 			</div>
 		</article>
 {:else}
-	<div class="pro">
-	  <div class="animate-pulse flex space-x-4">
-	    <div class="flex-1 space-y-12 py-1">
-	      <div class="justify-center h-12 bg-gray-700 rounded w-3/4"></div>
-	      <div class="space-y-3">
-	        <div class="h-6 bg-gray-400 rounded"></div>
-	        <div class="h-6 bg-gray-400 rounded w-5/6"></div>
-	        <div class="h-6 bg-gray-400 rounded w-5/6"></div>
-	        <div class="h-6"></div>
-	        <div class="h-6 bg-gray-400 rounded"></div>
-	        <div class="h-6 bg-gray-400 rounded w-5/6"></div>
-	        <div class="h-6 bg-gray-400 rounded w-4/6"></div>
-	      </div>
-	    </div>
-	  </div>
-	</div>
+	<Loading />
 {/if}
 </div>

@@ -12,8 +12,9 @@ export async function post() {
 		.sort( (a,b) => (new Date(a.scheduled_at || 0)) - (new Date(b.scheduled_at || 0)) )
 		.filter( (el,index) => index < 5 )
 
-    const blogUpdated = await Promise.all( blogsWithoutUpdate.map( async (blog) => {
+    await Promise.all( blogsWithoutUpdate.map( async (blog) => {
     	blog.scheduled_at = new Date
+    	console.log(blog.url)
     	let post = await getPost(blog.rss)
 
     	if  ( !!post && (post.url !== blog.post.url) ) {
