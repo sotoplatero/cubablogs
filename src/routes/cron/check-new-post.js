@@ -35,6 +35,6 @@ export async function post() {
     )
 
 	return {
-		body: true
+		body: 'ok'
 	};
 }

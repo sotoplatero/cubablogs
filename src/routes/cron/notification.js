@@ -1,5 +1,5 @@
 import supabase from '$lib/supabase'
-import {notify} from '$lib/bot'
+import { notify } from '$lib/bot'
 
 export async function post() {
 
@@ -18,6 +18,6 @@ export async function post() {
 	}
  
 	return {
-		body: true
+		body: 'ok'
 	};
 }
