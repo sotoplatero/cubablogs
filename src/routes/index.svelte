@@ -5,7 +5,7 @@
 	export async function load({ page, fetch, session, context }) {
 		const url = `/blogs.json`;
 		const res = await fetch(url);
-		const { data: blogs } = await res.json()
+		const blogs = await res.json()
 
 		if (!res.ok) {
 			return {

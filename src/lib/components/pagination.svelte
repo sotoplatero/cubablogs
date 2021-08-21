@@ -1,7 +1,10 @@
 <script>
 	import { page } from '$app/stores';	
-	export let next_page
-	export let prev_page
+	export let p
+	$: intPage = parseInt(p)
+
+	$: next_page = intPage + 1
+	$: prev_page = intPage <= 0 ? 0 : intPage - 1
 
 	$: prev_url = `${$page.path}?page=${prev_page}`
 	$: next_url = `${$page.path}?page=${next_page}` 

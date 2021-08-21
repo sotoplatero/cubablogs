@@ -1,4 +1,4 @@
-name: 15-minute-cron
+name: 15-minute_check-new-post
 on:
   schedule:
     - cron: '*/15 * * * *'
@@ -9,5 +9,5 @@ jobs:
       - name: Call our API route
         run: |
           curl --request POST \
-          --url 'https://cubablog.net/cron' \
+          --url 'https://cubablog.net/cron/check-new-post' \
           --header 'Authorization: Bearer ${{ secrets.API_SECRET_KEY }}'

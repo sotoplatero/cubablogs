@@ -9,9 +9,12 @@ import sanitizeHtml from 'sanitize-html';
 export async function get({query}) {
 	const url = query.get('url')
 
-	const blog = (await db.all()).find( el => {
-		return slugify(el.post.url) === slugify(url)
-	} )
+	let { data: blogs, error } = await supabase
+		.from('blogs')
+		.select('id,rss')
+		.like('post->>url', '%'+slugify(url)+'%')
+		.single()	
+
 	const feed = await parser.parseURL( blog.rss );
 	let post = feed.items.find( el => slugify(el.link) === slugify(url))
 

@@ -1,13 +1,18 @@
-import {db} from '$lib/db'	
 import Parser from 'rss-parser';	
 import { getHostname } from 'tldts'
+import supabase from '$lib/supabase'
 
 let parser = new Parser()
 
 export async function get({params}) {
 	const {domain} = params
 
-	const blog = (await db.all()).find(el=> getHostname(el.url)==domain)
+	let { data: blog, error } = await supabase
+		.from('blogs')
+		.select('id,rss')
+		.like('post->>url', '%'+domain+'%')
+		.single()	
+
 	let feed = await parser.parseURL( blog.rss );
 	feed = {
 		...feed, 

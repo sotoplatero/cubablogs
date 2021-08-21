@@ -1,6 +1,6 @@
 import cheerio from 'cheerio'
 import { getDomain } from 'tldts'
-import {db} from '$lib/db'
+import supabase from '$lib/supabase'
 import getPost from '$lib/post'
 
 async function clearbit(url) {
@@ -13,11 +13,12 @@ async function clearbit(url) {
 export async function post(request) {
 	let { url } = JSON.parse(request.body)
 	url = !/^http/.test(url) ? `https://${url}` : url
-	let data
+	let blog = {}
 
 	try {
 
 		const response = await fetch(url)
+
 		if (!response.ok) {
 			return { body: response }
 		}
@@ -46,19 +47,22 @@ export async function post(request) {
 
 		const post = await getPost(rss)
 
-		data = {
+		blog = {
 			url,
+
 			title: $('title').text() || $(selectors.title).attr('content'),
+
 			description: $(selectors.description).attr('content'),
+
 			author: $(selectors.author).attr('content'),
-			keywords: $(selectors.keywords).attr('content')?.replace(/\s+/g,'').split(','),
+
 			logo: await ( async function(){
 				let logo = $(selectors.logoBig).attr('href') 
 				if (!logo) {
-					logo = $(selectors.logoSmall).attr('href') 
+					logo = $('meta[name="msapplication-TileImage"]').attr('content') 
 				}
 				if (!logo) {
-					logo = $('meta[name="msapplication-TileImage"]').attr('content') 
+					logo = $(selectors.logoSmall).attr('href') 
 				}
 				if (!logo) return
 				return getDomain(logo) ? logo : url + logo
@@ -83,13 +87,17 @@ export async function post(request) {
 			})(),
 
 			github: { 
-				url: $(selectors.github).attr('href'),
+				url: $(selectors.github)?.attr('href'),
 			},
 			rss,
 			post,
 		}
 
-		const blogs = await db.add(data)
+		const { data, error } = await supabase
+		  .from('blogs')
+		  .upsert (blog,{ url: blog.url })
+
+		blog = data.pop()
 
 	} catch (e) {
 		return {
@@ -98,6 +106,6 @@ export async function post(request) {
 	}
 
 	return {
-		body: data
+		body: blog
 	};
 }

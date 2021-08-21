@@ -6,12 +6,6 @@
 		const p = page.query.get('page') ?? 1
 		const res = await fetch(`/blogs.json?page=${p}`);
 
-		const {
-			data: blogs,
-			next_page,
-			prev_page,
-		} = await res.json()
-
 		if ( !res.ok ) {
 			return {
 				status: res.status,
@@ -21,7 +15,8 @@
 
 		return {
 			props: {
-				blogs, next_page, prev_page
+				blogs: await res.json(),
+				p
 			}
 		};
 
@@ -32,10 +27,9 @@
 	import Pagination from '$lib/components/pagination.svelte'
 	
 	export let blogs = []
-	export let next_page = null
-	export let prev_page = null
-	// $: console.log('page: ' + next_page)
-	$: blogsWithPost = blogs
+	export let p = 1
+
+	$: filteredBlogs = blogs
 		
 </script>
 
@@ -44,12 +38,12 @@
 		<input type="text" bind:value={search} class="border border-gray-300 p-3 w-full focus:outline-none focus:border-gray-400 text-xl">
 	</div> -->
 	<div class="w-full max-w-screen-md mx-auto space-y-8 sm:space-y-16">
-		{#each blogsWithPost as blog (blog.post.url)}
+		{#each filteredBlogs as blog (blog.post.url)}
 			<Post {blog} />
 		{/each}
 	</div>
 	<div class="mt-10">
-		<Pagination {prev_page} {next_page}/>
+		<Pagination {p}/>
 	</div>
 
 </div>

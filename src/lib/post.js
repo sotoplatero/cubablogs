@@ -27,7 +27,7 @@ export default async function (url) {
     	try	{
 			feed = await parser.parseURL( url );
     	} catch (e) {
-    		return null
+    		return {}
     	}
 		
 		let item = feed.items[0]

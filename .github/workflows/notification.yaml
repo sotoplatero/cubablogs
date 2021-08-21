@@ -1,4 +1,4 @@
-name: 16-minute-cron
+name: 16-minute-cron_send-notification
 on:
   schedule:
     - cron: '*/16 * * * *'
@@ -9,5 +9,5 @@ jobs:
       - name: Call our API route
         run: |
           curl --request POST \
-          --url 'https://cubablog.net/cron' \
+          --url 'https://cubablog.net/cron/notification' \
           --header 'Authorization: Bearer ${{ secrets.API_SECRET_KEY }}'

@@ -2,25 +2,15 @@
 	/**
 	 * @type {import('@sveltejs/kit').Load}
 	 */
-	export async function load({ page, fetch, session, context }) {
+	export async function load({ page, fetch }) {
 		const p = page.query.get('page') ?? 1
-		const res = await fetch(`/blogs.json?page=${p}`);
-		let json = await res.json()
-
-		const {
-			data: blogs,
-			next_page,
-			prev_page,
-			total,
-		} = json
+		const res = await fetch(`/blogs.json?page=${p}&limit16`);
 
 		if (res.ok) {
 			return {
 				props: {
-					blogs,
-					next_page, 
-					prev_page,
-					total,
+					blogs: await res.json(),
+					p,
 				}
 			};
 		}
@@ -35,9 +25,7 @@
 	import Pagination from '$lib/components/pagination.svelte'
 
 	export let blogs = []
-	export let next_page
-	export let prev_page
-	export let total
+	export let p = 1
 	let q = ''
 
 	function debounce(func, timeout = 300){
@@ -123,6 +111,6 @@
 	{/each}
 	</div>
 	<div class="mt-10">
-		<Pagination {prev_page} {next_page}/>
+		<Pagination {p}/>
 	</div>
 </div>

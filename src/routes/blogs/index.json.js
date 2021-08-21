@@ -1,6 +1,7 @@
 import {db} from '$lib/db'
 import paginate from '$lib/paginate'
 import slug from '$lib/slug'
+import supabase from '$lib/supabase'
 import { getHostname } from 'tldts'
 
 export async function get({query}) {
@@ -10,30 +11,43 @@ export async function get({query}) {
 	const limit = query.get('limit') || 12
 	const q = query.get('q')
 
-	let blogs = await db.all()
-	blogs = blogs
-		.filter( el => {
-			let filter = true
-			if (!!q) {
-				filter = (el.title + el.description).toLowerCase().includes(q.toLowerCase()) 
-			}
-			return filter && (el.title.trim().length >= 4 )
-		})	
-		.map( el => ({
-			...el, 
-			hostname: getHostname(el.url),
-			post: { 
-				...el.post,
-				slug: slug(el.post?.url),
-			}
-		}))
-		.sort( (a,b) => {
-			return ( order === 'title' )
-				? a.title.toLowerCase()>b.title.toLowerCase() ? 1 : -1
-				: (new Date(b.post.date)) - (new Date(a.post.date)) 
-		})
+	const from = (p-1) * limit
+	const to = p * limit
+
+	let { data: blogs, error } = await supabase
+		.from('blogs')
+		.select('*')
+		.not('post','is', null)
+		.order('post->>date', { ascending: false })
+		.range(from,to)
+
+	// blogs = blogs``
+	// 	.filter( el => {
+	// 		let filter = true
+	// 		if (!!q) {
+	// 			filter = (el.title + el.description).toLowerCase().includes(q.toLowerCase()) 
+	// 		}
+	// 		return filter && (el.title.trim().length >= 4 )
+	// 	})	
+	// 	.map( el => ({
+	// 		...el, 
+	// 		hostname: getHostname(el.url),
+	// 		post: { 
+	// 			...el.post,
+	// 			slug: slug(el.post?.url),
+	// 		}
+	// 	}))
+
 
 	return {
-		body: paginate( blogs, p, limit )
+		body: blogs
+			.map( el => ({
+				...el, 
+				hostname: getHostname(el.url),
+				post: { 
+					...el.post,
+					slug: slug(el.post?.url),
+				}
+			}))
 	};
 }

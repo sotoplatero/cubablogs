@@ -11,7 +11,7 @@ export async function post() {
 
     await Promise.all( 
     	blogs.map( async ({id, rss, url}) => {
-    		console.log(rss)
+
     		const post = await getPost(rss)
 
     		if ( JSON.stringify(post) === '{}' ) {
