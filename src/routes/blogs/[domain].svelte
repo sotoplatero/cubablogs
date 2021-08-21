@@ -3,7 +3,7 @@
 		const {domain} = page.params
 
 		const res = await fetch(`/blogs/${domain}.json`)
-		const {blog,feed} = await res.json()
+		const blog = await res.json()
 		// if ( !res.ok ) {
 		// 	return {
 		// 		status: res.status,
@@ -12,15 +12,15 @@
 		// }
 
 		return {
-			props: {feed,blog}
+			props: {blog}
 		};
 
 	}
 </script>
 <script>
-	export let feed
+	// export let feed
 	export let blog
-	let post = feed.items[0]
+	// let post = feed.items[0]
 
 	function formatDate(d) {
 		return new Date(d).toLocaleDateString('es-ES', { month:"short", day:"numeric"})	
@@ -43,7 +43,7 @@
 			{/if}
 			<div class="w-full sm:w-3/4 mx-auto mt-6">
 				<h1 class="text-3xl font-bold">
-					{feed.title}
+					{blog.title}
 					<svg xmlns="http://www.w3.org/2000/svg" class="inline h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 					  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
 					</svg>					
@@ -59,7 +59,7 @@
 			Últimos Escritos
 		</p>
 		<ul class="space-y-2 text-lg">
-			{#each feed.items as item, index}
+			{#each blog.items as item, index}
 				<li>
 					<a href="{item.link}" class="flex " target="_blank" rel="noopener nofollower">
 						<span class="text-sm text-gray-400 mr-3 w-8 sm:w-12 inline-block flex-shrink-0">
