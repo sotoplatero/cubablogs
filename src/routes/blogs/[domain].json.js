@@ -9,25 +9,23 @@ export async function get({params}) {
 
 	let { data: blog, error } = await supabase
 		.from('blogs')
-		.select('id,rss')
+		.select('*')
 		.like('post->>url', '%'+domain+'%')
 		.single()	
 
-	let feed = await parser.parseURL( blog.rss );
-	feed = {
-		...feed, 
-		items: feed.items.map( 
+	let {items} = await parser.parseURL( blog.rss );
+	items = items.map( 
 			({title,link,pubDate}) => ({
 				title,
 				link,
 				pubDate,
 			}) 
 		)
-	}
+	
 
 	return {
 		body: {
-			feed,blog
+			...blog, items
 		}
 	};
 
