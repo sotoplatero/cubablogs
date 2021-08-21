@@ -7,7 +7,7 @@ export async function post() {
 		.from('blogs')
 		.select('id,rss,post->url')
 		.order('updated_at', { ascending: true })
-		.limit(10)
+		.limit(5)
 
     await Promise.all( 
     	blogs.map( async ({id, rss, url}) => {
