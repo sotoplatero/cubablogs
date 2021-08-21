@@ -3,19 +3,21 @@ import Parser from 'rss-parser';
 import slugify from '$lib/slug'	
 let parser = new Parser()
 import sanitizeHtml from 'sanitize-html';
+import supabase from '$lib/supabase'
 /**
  * @type {import('@sveltejs/kit').Load}
  */
 export async function get({query}) {
 	const url = query.get('url')
 
-	let { data: blogs, error } = await supabase
+	let { data: blog, error } = await supabase
 		.from('blogs')
 		.select('id,rss')
 		.like('post->>url', '%'+slugify(url)+'%')
 		.single()	
 
 	const feed = await parser.parseURL( blog.rss );
+	console.log(feed)
 	let post = feed.items.find( el => slugify(el.link) === slugify(url))
 
 	const options ={
@@ -34,7 +36,7 @@ export async function get({query}) {
 		// 	'img': sanitizeHtml.simpleTransform('ul', {class: 'foo'}),
 		// }
 	}
-	const html = post['content:encoded'] || post['content']
+	const html = post['content:encoded'] ? post['content:encoded'] : post['content']
 	post['body'] = sanitizeHtml( html, options)
 
 	return {
