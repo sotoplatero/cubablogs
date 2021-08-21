@@ -3,13 +3,16 @@ import TelegramBot from 'node-telegram-bot-api';
 import cheerio from 'cheerio'
 import Parser from 'rss-parser';
 
-let parser = new Parser({customFields: {
+let parser = new Parser({
+	timeout: 2000,
+	customFields: {
 		item: [
 		    ['content:encoded','contentEncoded'],
 		    ['media:content','media'],
 		    ['dc:creator','dcCreator']
 		]
-	}});
+	}
+});
 
 async function getOgImage(url) {
 	const res = await fetch(url)
