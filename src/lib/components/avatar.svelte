@@ -1,26 +1,12 @@
 <script>
-	export let text = 'AB'
 	export { _class as class}
 	let _class = ""
 
-	const colors = ["#E284B3", "#FFED8B",  "#681313", "#F3C1C6",  "#735372",  "#009975", "#FFBD39", "#B1E8ED", "#52437B", "#F76262", "#216583", "#293462", "#DD9D52", "#936B93", "#6DD38D", "#888888", "#6F8190", "#BCA0F0", "#AAF4DD", "#96C2ED", "#3593CE", "#5EE2CD", "#96366E", "#E38080"];
+	const colors = ["text-red-500", "text-green-500",  "text-blue-500", "text-indigo-500"]
 
-	let fill = colors[ Math.floor( Math.random() * colors.length ) ] 
-	let initials = text
-		.replace(/\s+/g,' ')
-		.split(' ')
-		.filter((el,i)=>i<2)
-		.map(el=>el[0])
-		.join('')
-		.toUpperCase()
+	let color = colors[ Math.floor( Math.random() * colors.length ) ] 
+
 </script>
-<svg class="{_class}" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<!-- 	<defs>
-		<style type="text/css">@font-face {font-family: "montserratbold";src: url("https://cdn.oxro.io/fonts/montserrat-bold-webfont.woff2") format("woff2"),url("https://cdn.oxro.io/fonts/montserrat-bold-webfont.woff") format("woff");font-weight: normal;font-style: normal;}
-		</style>
-	</defs> -->
-	<rect x="0" y="0" width="100%" height="100%" rx="0" style="fill: {fill};"/>
-	<text x="50%" y="50%" dy=".1em" fill="#fff" text-anchor="middle" dominant-baseline="middle" style="font-size: 16px; line-height: 1; font-weight: bold;">
-		{initials}
-	</text>
+<svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 {_class} {color}" viewBox="0 0 20 20" fill="currentColor">
+  <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clip-rule="evenodd" />
 </svg>

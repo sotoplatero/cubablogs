@@ -16,17 +16,19 @@
 		<div class="flex ">
 			<div class="mr-auto">
 				<div class='flex items-center mb-1'>
-					{#if avatar}
-						<img 
-							src="{avatar}" 
-							alt="{blog.title}" 
-							class="w-8 h-8 object-center object-cover rounded-full overflow-hidden shadow">
-					{:else}
-						<Avatar text={blog.title} class="w-8 h-8 rounded-full shadow"/>
-					{/if}
+					<span class="flex-shrink-0 rounded-full shadow overflow-hidden ">
+						{#if avatar}
+							<img 
+								src="{avatar}" 
+								alt="{blog.title}" 
+								class="w-8 h-8 object-center object-cover  ">
+						{:else}
+							<Avatar class="w-8 h-8"/>
+						{/if}
+					</span>
 					<span class="text-lg ml-2 font-semibold">
 						<!-- {blog.post.author || ''} <span class="text-gray-500">en</span> --> 
-						<a href="/blogs/{blog.hostname}" class="text-gray-600">
+						<a href="/blogs/{blog.hostname}" class="text-gray-600 line-clamp-1">
 							{blog.title}
 						</a>
 					</span>
