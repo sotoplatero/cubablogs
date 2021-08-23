@@ -28,9 +28,9 @@
 		
 </script>
 
-<header>
+<!-- <header>
 	<h1 class="text-5xl text-center mb-16 font-bold">CubaBlog</h1>
-</header>
+</header> -->
 <div class="mb-12">
 <!-- 	<div class="mb-6">
 		<input type="text" bind:value={search} class="border border-gray-300 p-3 w-full focus:outline-none focus:border-gray-400 text-xl">
