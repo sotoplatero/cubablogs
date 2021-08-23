@@ -3,7 +3,7 @@
 		<a href="/" class="mr-auto">
 			<h1 class="flex items-center justify-center text-3xl text-red-700 ">
 				<img src="/logo.png" alt="Logo Cubablog" class="w-9 h-9">	
-				<span class="hidden sm:inline font-semibold">Cubablog</span>
+				<!-- <span class="hidden sm:inline font-semibold">Cubablog</span> -->
 			</h1>
 		</a>
 		<div class="flex items-center space-x-6">
@@ -13,7 +13,7 @@
 			<a href="/blogs" class="font-bold transition text-gray-600 hover:text-gray-800">
 				Blogs
 			</a>
-			<a href="/add" class="flex items-center py-3 px-4 bg-red-500 text-white font-bold whitespace-nowrap border-2 border-red-500" >
+			<a href="/add" class="flex items-center py-2 px-4 bg-red-500 text-white font-bold whitespace-nowrap border-2 border-red-500" >
 				<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
 				  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd" />
 				</svg>				

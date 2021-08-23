@@ -30,7 +30,7 @@
 	<title>CubaBlog - {title}</title>
 </svelte:head>
 
-<div class="prose prose-xl mx-auto">
+<article class="prose prose-xl mx-auto">
 {#if post}
 		<div class="text-center">
 			<a href="{post.blog.url}" class="text-lg font-semibold">
@@ -69,4 +69,4 @@
 {:else}
 	<Loading />
 {/if}
-</div>
+</article>

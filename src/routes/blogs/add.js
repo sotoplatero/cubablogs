@@ -65,7 +65,6 @@ export async function post(request) {
 					logo = $(selectors.logoSmall).attr('href') 
 				}
 				if (!logo) return null
-					console.log(logo)
 				return getDomain(logo) ? logo : url + logo
 			})(),
 
@@ -94,24 +93,25 @@ export async function post(request) {
 			post,
 		}
 
-		let { data: { id }, error } = await supabase
+		let { data, error } = await supabase
 		  .from('blogs')
 		  .select('id,url')
 		  .like('url', '%'+getHostname(url)+'%')
 		  .single()
 
-		if (id) {
+		if (data) {
 			({ data: blog, error } = await supabase
 				.from('blogs')
 				.update(blog)
-				.eq('id',id))
+				.eq('id',data.id))
 		} else {
 			({ data: blog, error } = await supabase
 				.from('blogs')
-				.insert(blog))
+				.insert([blog]))
 		}
 
 	} catch (e) {
+		console.log(e)
 		return {
 			body: e
 		};		
