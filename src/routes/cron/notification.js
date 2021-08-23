@@ -9,11 +9,12 @@ export async function post() {
 		.is('notified_at',null)
 
 	if (error) {
-		notify(`error`,'admin')
+		notify(`error `,'admin')
 	}
 
 	if (blogs.length) {
-		const msg = blogs.map( el => `Nueva publicación en *${el.title}* \n[${el.title_post}](${el.url})`).join('\n\n')
+		let msg = 'Nuevas publicacion:\n\n'
+		msg += blogs.map( el => `[${el.title_post}](${el.url}) en  *${el.title}* \n`).join('\n\n')
 		notify(msg)
 	}
  

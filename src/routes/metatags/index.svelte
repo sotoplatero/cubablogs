@@ -1,4 +1,4 @@
-<script context="module">
+<!-- <script context="module">
 	/**
 	 * @type {import('@sveltejs/kit').Load}
 	 */
@@ -18,7 +18,7 @@
 			error: new Error(`Could not load ${url}`)
 		};
 	}
-</script>
+</script> -->
 <script>
 	import Avatar from '$lib/components/avatar.svelte'
 	import Rule from './_rule.svelte'
@@ -26,19 +26,21 @@
 	import { onMount } from 'svelte'
 	import FormInput from './_input.svelte'
 
-	export let metatags = {}
+	// export let metatags = {}
+	let metatags = {}
+	let url = ''
 	let disabled = false
 	$: ({ 
-			title,
-			description,
-			creator,
-			og_image,
-			og_description,
-			og_locale,
-			twitter_image,
-			apple_touch_icon,
-			icon32x32,
-			icon16x16,
+			title = '',
+			description = '',
+			creator = '',
+			og_image = '',
+			og_description = '',
+			og_locale = '',
+			twitter_image = '',
+			apple_touch_icon = '',
+			icon32x32 = '',
+			icon16x16 = '',
 		} = metatags)
 
 	async function getMetatag() {
@@ -59,38 +61,43 @@
 	<h2 class="text-3xl mb-8 font-semibold">
 		Validador <i>meta tag</i>
 	</h2>
-
-	https://ahrefs.com/blog/open-graph-meta-tags/
-	<div class="space-y-4 text-lg">
-		<Rule 
-			condition={!!title} 
-			title="Titulo"7a1q1 
-		/>
-		<Rule 
-			condition={ title.length > 4 && title.length <= 60 } 
-			title="Logintud del título entre 4 y 60 caracteres"
-		/>
-		<Rule 
-			condition={ title.split(' ').every( word => /[A-Z]/.test(word[0]))} 
-			title="Uso de mayúsculas en la primera letra de cada palabra del título"
-		/>
-		<Rule 
-			condition={ !!description } 
-			title="Descripción"
-		/>
-		<Rule 
-			condition={ description === og_description } 
-			title="Descripción igual al Open Graph "
-		/>
-		<Rule 
-			condition={ !!og_image } 
-			title="Imagen Open Graph"
-		/>
-		<Rule 
-			condition={ !!twitter_image } 
-			title="Twitter Image"
-		/>
-	</div>
+	<form on:submit|preventDefault={getMetatag}>
+		<FormInput bind:value={url} label="URL" />
+	</form>
+	<!-- https://ahrefs.com/blog/open-graph-meta-tags/ -->
+	{#if JSON.stringify(metatags) !== '{}'}
+		<div class="space-y-4 text-lg">
+			<Rule 
+				condition={!!title} 
+				title="Titulo"7a1q1 
+			/>
+			<Rule 
+				condition={ title.length > 4 && title.length <= 60 } 
+				title="Logintud del título entre 4 y 60 caracteres"
+			/>
+			<Rule 
+				condition={ title.split(' ').every( word => /[A-Z]/.test(word[0]))} 
+				title="Uso de mayúsculas en la primera letra de cada palabra del título"
+			/>
+			<Rule 
+				condition={ !!description } 
+				title="Descripción"
+			/>
+			<Rule 
+				condition={ description === og_description } 
+				title="Descripción igual al Open Graph "
+			/>
+			<Rule 
+				condition={ !!og_image } 
+				title="Imagen Open Graph"
+			/>
+			<Rule 
+				condition={ !!twitter_image } 
+				title="Twitter Image"
+			/>
+		</div>
+		
+	{/if}
 	
 </div>
 

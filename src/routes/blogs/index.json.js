@@ -1,8 +1,7 @@
-import {db} from '$lib/db'
-import paginate from '$lib/paginate'
+import { getHostname } from 'tldts'
+import pagination from '$lib/pagination'
 import slug from '$lib/slug'
 import supabase from '$lib/supabase'
-import { getHostname } from 'tldts'
 
 export async function get({query}) {
 
@@ -13,6 +12,10 @@ export async function get({query}) {
 
 	const from = (p-1) * limit
 	const to = p * limit
+
+	console.log(await pagination(p, limit))
+
+
 
 	let { data: blogs, error } = await supabase
 		.from('blogs')
@@ -40,8 +43,7 @@ export async function get({query}) {
 
 
 	return {
-		body: blogs
-			.map( el => ({
+		body: blogs.map( el => ({
 				...el, 
 				hostname: getHostname(el.url),
 				post: { 

@@ -7,7 +7,7 @@ export async function post() {
 		.from('blogs')
 		.select('id,rss,post->url')
 		.order('updated_at', { ascending: true })
-		.limit(5)
+		.limit(3)
 
     await Promise.all( 
     	blogs.map( async ({id, rss, url}) => {
@@ -31,6 +31,11 @@ export async function post() {
 			  .from('blogs')	
 			  .update( dataToUpdate )
 			  .eq('id', id) 
+
+			if (error) {
+				notify(`error `,'admin')
+			}
+			console.log(error)
     	})
     )
 
