@@ -4,7 +4,7 @@
 	 */
 	export async function load({ page, fetch }) {
 		const p = page.query.get('page') ?? 1
-		const res = await fetch(`/blogs.json?page=${p}&limit16`);
+		const res = await fetch(`/blogs.json?page=${p}&limit=16`);
 
 		if (res.ok) {
 			return {
@@ -40,7 +40,7 @@
 
 		const res = await fetch(`/blogs.json?q=${q}`)
 		if (res.ok) {
-			({data:blogs, next_page, prev_page} = await res.json())  
+			(blogs = await res.json())  
 		}
 	}
 
