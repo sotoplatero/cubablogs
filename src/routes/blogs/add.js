@@ -1,5 +1,5 @@
 import cheerio from 'cheerio'
-import { getDomain } from 'tldts'
+import { getDomain, getHostname } from 'tldts'
 import supabase from '$lib/supabase'
 import getPost from '$lib/post'
 
@@ -93,11 +93,22 @@ export async function post(request) {
 			post,
 		}
 
-		const { data, error } = await supabase
+		let { data: { id }, error } = await supabase
 		  .from('blogs')
-		  .upsert (blog,{ url: blog.url })
+		  .select('id,url')
+		  .like('url', '%'+getHostname(url)+'%')
+		  .single()
 
-		blog = data.pop()
+		if (id) {
+			({ data: blog, error } = await supabase
+				.from('blogs')
+				.update(blog)
+				.eq('id',id))
+		} else {
+			({ data: blog, error } = await supabase
+				.from('blogs')
+				.insert(blog))
+		}
 
 	} catch (e) {
 		return {
@@ -106,6 +117,6 @@ export async function post(request) {
 	}
 
 	return {
-		body: blog
+		body: blog.pop()
 	};
 }
