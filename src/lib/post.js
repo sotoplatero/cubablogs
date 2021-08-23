@@ -4,7 +4,7 @@ import cheerio from 'cheerio'
 import Parser from 'rss-parser';
 
 let parser = new Parser({
-	timeout: 2000,
+	// timeout: 5000,
 	customFields: {
 		item: [
 		    ['content:encoded','contentEncoded'],
@@ -30,6 +30,7 @@ export default async function (url) {
     	try	{
 			feed = await parser.parseURL( url );
     	} catch (e) {
+    		console.log('error' + e)
     		return {}
     	}
 		

@@ -7,18 +7,18 @@ export async function post() {
 		.from('blogs')
 		.select('id,rss,post->url')
 		.order('updated_at', { ascending: true })
-		.limit(3)
+		// .limit(3)
 
     await Promise.all( 
     	blogs.map( async ({id, rss, url}) => {
 
     		const post = await getPost(rss)
+    		let dataToUpdate = { rss }
 
-    		if ( JSON.stringify(post) === '{}' ) {
-    			return
+    		if ( JSON.stringify(post) !== '{}' ) {
+	    		dataToUpdate = { post }
+    			console.log('ok -> ' + rss)
     		}
-
-    		let dataToUpdate = { post }
 
     		if ( 
     			typeof post?.url !== 'undefined' && 

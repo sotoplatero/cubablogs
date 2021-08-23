@@ -5,16 +5,19 @@ export async function post() {
 
 	let { data: blogs, error } = await supabase
 		.from('blogs')
-		.select('title, title_post:post->>title, post->>url')
+		.update({ notified_at: new Date })
 		.is('notified_at',null)
 
-	if (error) {
+	console.log(blogs)
+		// .select('title, title_post:post->>title, post->>url')
+
+	if (error.length) {
 		notify(`error `,'admin')
 	}
 
-	if (blogs.length) {
-		let msg = 'Nuevas publicacion:\n\n'
-		msg += blogs.map( el => `[${el.title_post}](${el.url}) en  *${el.title}* \n`).join('\n\n')
+	if (blogs) {
+		let msg = '✨✨ Nuevas publicaciones ✨✨\n\n'
+		msg += blogs.map( el => `[${el.post.title}](${el.post.url}) en  *${el.title}* \n`).join('\n')
 		notify(msg)
 	}
  

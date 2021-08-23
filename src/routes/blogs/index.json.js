@@ -13,9 +13,7 @@ export async function get({query}) {
 	const from = (p-1) * limit
 	const to = p * limit
 
-	console.log(await pagination(p, limit))
-
-
+	// console.log(await pagination(p, limit))
 
 	let { data: blogs, error } = await supabase
 		.from('blogs')
