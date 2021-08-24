@@ -1,4 +1,4 @@
-name: 15-minute_check-new-post
+name: 15-minute_update
 on:
   schedule:
     - cron: '*/15 * * * *'
