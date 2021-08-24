@@ -9,5 +9,5 @@ jobs:
       - name: Call our API route
         run: |
           curl --request POST \
-          --url 'https://cubablog.net/cron/check-new-post' \
+          --url 'https://cubablog.net/cron/update' \
           --header 'Authorization: Bearer ${{ secrets.API_SECRET_KEY }}'

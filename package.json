@@ -17,6 +17,7 @@
 		"@tailwindcss/line-clamp": "^0.2.1",
 		"@tailwindcss/typography": "^0.4.1",
 		"@types/sanitize-html": "^2.3.2",
+		"@vercel/client": "^10.2.2",
 		"autoprefixer": "^10.3.1",
 		"copee": "^1.0.6",
 		"cssnano": "^5.0.6",
