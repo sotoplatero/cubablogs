@@ -17,7 +17,6 @@ export async function post() {
 
     		if ( JSON.stringify(post) !== '{}' ) {
 	    		dataToUpdate = { post }
-    			console.log('ok -> ' + rss)
     		}
 
     		if ( 
@@ -25,6 +24,7 @@ export async function post() {
 				post?.url !== url
 			) {
 				dataToUpdate = { post, notified_at: null}
+    			console.log('update -> ' + rss)
 			}
 
 			const { data, error } = await supabase

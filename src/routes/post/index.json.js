@@ -17,10 +17,9 @@ export async function get({query}) {
 		.single()	
 
 	const feed = await parser.parseURL( blog.rss );
-	console.log(feed)
 	let post = feed.items.find( el => slugify(el.link) === slugify(url))
 
-	const options ={
+	const options = {
 	  	allowedTags: sanitizeHtml.defaults.allowedTags.concat([ 'img' ]),
 		allowedAttributes: {
 		  a: [ 'href', 'name', 'target' ],

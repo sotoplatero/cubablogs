@@ -3,7 +3,7 @@
 		<a href="/" class="mr-auto">
 			<h1 class="flex items-center justify-center text-3xl text-red-700 ">
 				<img src="/logo.png" alt="Logo Cubablog" class="w-9 h-9">	
-				<span class="hidden sm:inline font-semibold">Cubablog</span>
+				<span class="hidden sm:inline font-semibold">CubaBlog</span>
 			</h1>
 		</a>
 		<div class="flex items-center space-x-6">

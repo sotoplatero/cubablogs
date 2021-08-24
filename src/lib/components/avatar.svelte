@@ -2,7 +2,7 @@
 	export { _class as class}
 	let _class = ""
 
-	const colors = ["text-red-500", "text-green-500",  "text-blue-500", "text-indigo-500"]
+	const colors = ["text-red-500","text-red-700", "text-green-500",  "text-blue-500", "text-indigo-500", "text-indigo-700","text-purple-500","text-purple-700","text-yellow-600","text-yellow-700","text-pink-500","text-pink-700"]
 
 	let color = colors[ Math.floor( Math.random() * colors.length ) ] 
 

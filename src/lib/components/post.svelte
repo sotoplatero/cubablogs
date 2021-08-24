@@ -1,5 +1,7 @@
 <script >
 	import SaveToPocket from '$lib/components/saveToPocket.svelte'
+	import IntentTweet from '$lib/components/IntentTweet.svelte'
+	import Share from '$lib/components/share.svelte'
 	import Avatar from '$lib/components/avatar.svelte'
 	export let blog
 	export let featured = false
@@ -11,8 +13,8 @@
 </script>
 
 <article class="group" >
-	<div class="flex ">
-		<div class="mr-auto">
+	<div class="flex justify-between">
+		<div class="">
 			<div class='flex items-center mb-1'>
 				<span class="flex-shrink-0 rounded-full shadow overflow-hidden ">
 					{#if avatar}
@@ -41,10 +43,8 @@
 				</p>
 			</a>
 			<div class="flex items-center mt-3 text-gray-400">
-				<span class="font-semibold whitespace-nowrap">{date}</span>
-				<div class="ml-auto">
-					<SaveToPocket url={blog.post.url}/>
-				</div>
+				<span class="font-semibold whitespace-nowrap ">{date}</span>
+				<Share post={blog.post} class="ml-auto/>
 			</div>
 		</div>
 		{#if image}

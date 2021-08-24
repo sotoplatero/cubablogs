@@ -8,11 +8,9 @@ export async function post() {
 		.update({ notified_at: new Date })
 		.is('notified_at',null)
 
-	console.log(blogs)
-		// .select('title, title_post:post->>title, post->>url')
-
 	if (error.length) {
-		notify(`error `,'admin')
+		console.log(error)
+		notify(`error `,JSON.stringify(error, null, 1))
 	}
 
 	if (blogs) {
