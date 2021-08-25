@@ -10,7 +10,7 @@ export async function get({params}) {
 	let { data: blog, error } = await supabase
 		.from('blogs')
 		.select('*')
-		.like('post->>url', '%'+domain+'%')
+		.like('url', '%'+domain+'%')
 		.single()	
 
 	let {items} = await parser.parseURL( blog.rss );
