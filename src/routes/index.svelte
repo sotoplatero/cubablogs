@@ -139,7 +139,7 @@
 		<div >
 			<a href={blog.url} class="group " target="_blank" rel="noopener nofollower">
 				<div class="aspect-w-1 aspect-h-1 overflow-hidden rounded-lg">
-					<img src="{(blog.twitter ? blog.twitter.avatar + `?fallback=${blog.image}` : null) || blog.image}" alt="{blog.title}" class="w-full h-full object-center object-cover transition transform group-hover:scale-105">
+					<img src="{(blog.twitter ? blog.twitter.avatar + `?fallback=${blog.image}` : null) || blog.image}" alt="{blog.title}" class="w-full h-full object-center object-cover transition transform group-hover:scale-105" loading="lazy">
 				</div>			
 				<div>
 					<div class="mb-4 mt-3 text-center">
