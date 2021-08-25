@@ -14,7 +14,7 @@ export async function post() {
 
     		const post = await getPost(rss)
     		let dataToUpdate = { rss }
-    		console.log(post)
+
     		if ( JSON.stringify(post) !== '{}' ) {
 	    		dataToUpdate = { post }
 
