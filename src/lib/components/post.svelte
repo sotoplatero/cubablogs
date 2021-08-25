@@ -44,7 +44,7 @@
 			</a>
 			<div class="flex items-center mt-3 text-gray-400">
 				<span class="font-semibold whitespace-nowrap ">{date}</span>
-				<Share post={blog.post} class="ml-auto/>
+				<Share post={blog.post} class="ml-auto"/>
 			</div>
 		</div>
 		{#if image}

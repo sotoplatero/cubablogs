@@ -8,7 +8,7 @@ import supabase from '$lib/supabase'
  * @type {import('@sveltejs/kit').Load}
  */
 export async function get({query}) {
-	const url = query.get('url')
+	const url = encodeURI(query.get('url'))
 
 	let { data: blog, error } = await supabase
 		.from('blogs')
@@ -17,7 +17,7 @@ export async function get({query}) {
 		.single()	
 
 	const feed = await parser.parseURL( blog.rss );
-	let post = feed.items.find( el => slugify(el.link) === slugify(url))
+	let post = feed.items.find( el => el.link.indexOf(url))
 
 	const options = {
 	  	allowedTags: sanitizeHtml.defaults.allowedTags.concat([ 'img' ]),

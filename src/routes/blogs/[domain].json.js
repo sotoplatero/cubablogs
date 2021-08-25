@@ -25,7 +25,7 @@ export async function get({params}) {
 
 	return {
 		body: {
-			...blog, items
+			...blog, hostname: getHostname(blog.url), items
 		}
 	};
 
