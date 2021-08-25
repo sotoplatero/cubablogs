@@ -1,4 +1,6 @@
 import { Octokit } from "@octokit/rest";
+import {notify} from '$lib/bot'
+import { nanoid } from 'nanoid'
 // import {
 //   createOAuthAppAuth,
 //   createOAuthUserAuth,
@@ -28,6 +30,7 @@ export const db = {
 
 	blogs: [], 
 
+
 	async all() {
 
 	  let {data} = await octokit.repos.getContent(options)
@@ -39,12 +42,18 @@ export const db = {
 	async add(blog) {
 		let blogs = await this.all()
 
-		let indexBlog = blogs.findIndex( el => getHostname(el.url) === getHostname(blog.url) ) 
-
-		if ( indexBlog > 0 ) {
+		let indexBlog = blogs.findIndex( el => {
+			return getHostname(el.url) == getHostname(blog.url) 
+		}) 
+		// update
+		if ( indexBlog > -1 ) {
+			blog.updated_at = new Date
 			blogs.splice( indexBlog, 1, blog )
-		} else {
+		} else { // create
+			blog.created_at = new Date
+			blog.id = 'id' + nanoid()
 			blogs.splice( blogs.length, 0, blog )
+			notify(`✨ Nuevo Blog\n\n [${blog.title}](${blog.url})`)
 		}
 
 		this.save(blogs)

@@ -7,34 +7,36 @@ export async function post() {
 		.from('blogs')
 		.select('id,rss,post->url')
 		.order('updated_at', { ascending: true })
-		.limit(10)
+		// .limit(3)
 
     await Promise.all( 
     	blogs.map( async ({id, rss, url}) => {
-    		console.log(rss)
-    		const post = await getPost(rss)
 
-    		if ( JSON.stringify(post) === '{}' ) {
-    			return
+    		const post = await getPost(rss)
+    		let dataToUpdate = { rss }
+    		console.log(post)
+    		if ( JSON.stringify(post) !== '{}' ) {
+	    		dataToUpdate = { post }
+
+	    		if ( post?.url != url ) {
+					dataToUpdate.notified_at = null
+	    			console.log('update -> ' + rss)
+				}
     		}
 
-    		let dataToUpdate = { post }
-
-    		if ( 
-    			typeof post?.url !== 'undefined' && 
-				post?.url !== url
-			) {
-				dataToUpdate = { post, notified_at: null}
-			}
 
 			const { data, error } = await supabase
 			  .from('blogs')	
 			  .update( dataToUpdate )
 			  .eq('id', id) 
+
+			if (error) {
+				notify(JSON.stringify(error,null,2),'admin')
+			}
     	})
     )
 
 	return {
-		body: true
+		body: 'ok'
 	};
 }

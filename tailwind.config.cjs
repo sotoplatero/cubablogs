@@ -1,14 +1,19 @@
 const config = {
-	mode: "jit",
+	mode: "jit", 
 	purge: [
 		"./src/**/*.{html,js,svelte,ts}",
 	],
 	theme: {
-		extend: {},
+		extend: {
+		  	screens: {
+		    	'print': {'raw': 'print'},
+		  	}
+		}
 	},
 	plugins: [
 		require('@tailwindcss/aspect-ratio'),
 		require('@tailwindcss/line-clamp'),
+		require('@tailwindcss/typography'),
 	],
 };
 
