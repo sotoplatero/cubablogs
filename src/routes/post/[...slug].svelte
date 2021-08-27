@@ -30,13 +30,13 @@
 	<title>CubaBlog - {title}</title>
 </svelte:head>
 
-<article class="prose prose-xl mx-auto">
+<article class="post prose prose-xl mx-auto">
 {#if post}
 		<div class="text-center">
 			<a href="{post.blog.url}" class="text-lg font-semibold">
 				{post.blog.title}
 			</a>
-			<h1 class="">
+			<h1 class="post-title">
 				{post.title}
 			</h1>
 		</div>
