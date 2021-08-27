@@ -32,21 +32,20 @@
 
 <article class="post prose prose-xl mx-auto">
 {#if post}
-		<div class="text-center">
-			<a href="{post.blog.url}" class="text-lg font-semibold">
+		<div class="text-center mb-8">
+			<a href="{post.blog.url}" class="text-lg font-semibold" target="_blank" rel="noopener nofollower" >
 				{post.blog.title}
 			</a>
 			<h1 class="post-title">
 				{post.title}
 			</h1>
+			<div class="text-center mt-8">
+				<a href="{post.link}" class="" target="_blank" rel="noopener nofollower">
+					Leer el Original			
+				</a>			
+			</div>			
 		</div>
 		<div  class="flex items-center justify-end print:hidden space-x-2 mb-4 !text-gray-600">
-			<a href="{post.link}" target="_blank" rel="noopener nofollower">
-				<!-- <span>Original</span> -->
-				<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-				  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-				</svg>			
-			</a>
 			<button on:click={print} >
 				<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 				  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />

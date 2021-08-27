@@ -1,4 +1,4 @@
-name: 15-minute_update
+name: cron-update-post-and-notification
 on:
   schedule:
     - cron: '*/10 * * * *'
@@ -6,7 +6,7 @@ jobs:
   cron:
     runs-on: ubuntu-latest
     steps:
-      - name: Call API Update``
+      - name: Call API Update
         run: |
           curl --request POST \
           --url 'https://cubablog.net/cron/update' \

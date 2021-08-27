@@ -16,7 +16,7 @@
 			10: 'w-10 h-10',
 		}[size]
 </script>
-<div class="flex items-center space-x-2 {size_class} {_class}">
+<div class="flex items-center space-x-2 {_class}">
 	<SaveToPocket url={post.url}/>
 	<IntentTweet {post} />
 </div>

@@ -17,15 +17,13 @@ export async function post() {
 
     		if ( JSON.stringify(post) !== '{}' ) {
 	    		dataToUpdate = { post }
+
+	    		if ( post?.url != url ) {
+					dataToUpdate.notified_at = null
+	    			console.log('update -> ' + rss)
+				}
     		}
 
-    		if ( 
-    			typeof post?.url !== 'undefined' && 
-				post?.url !== url
-			) {
-				dataToUpdate = { post, notified_at: null}
-    			console.log('update -> ' + rss)
-			}
 
 			const { data, error } = await supabase
 			  .from('blogs')	
@@ -33,9 +31,8 @@ export async function post() {
 			  .eq('id', id) 
 
 			if (error) {
-				notify(`error `,'admin')
+				notify(JSON.stringify(error,null,2),'admin')
 			}
-			console.log(error)
     	})
     )
 
