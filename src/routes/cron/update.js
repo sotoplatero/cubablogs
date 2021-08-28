@@ -20,7 +20,7 @@ export async function post() {
 
 	    		if ( post?.url != url ) {
 					dataToUpdate.notified_at = null
-	    			console.log('update -> ' + rss)
+	    			console.log('update -> ' + dataToUpdate)
 				}
     		}
 
