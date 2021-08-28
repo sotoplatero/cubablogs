@@ -25,17 +25,13 @@
 	
 	export let blogs = []
 
-		
 </script>
 
 <!-- <header>
 	<h1 class="text-5xl text-center mb-16 font-bold">CubaBlog</h1>
 </header> -->
 <div class="mb-12">
-<!-- 	<div class="mb-6">
-		<input type="text" bind:value={search} class="border border-gray-300 p-3 w-full focus:outline-none focus:border-gray-400 text-xl">
-	</div> -->
-	<div class="mb-16"> 
+	<div class="mb-20"> 
 		<Post blog={blogs[0]} featured/>
 	</div>
 	<div class="w-full max-w-screen-md mx-auto space-y-8 sm:space-y-16 ">
