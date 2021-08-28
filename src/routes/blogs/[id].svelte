@@ -1,15 +1,16 @@
 <script context="module">
 	export async function load({ page, fetch }) {
-		const {domain} = page.params
+		const {id} = page.params
 
-		const res = await fetch(`/blogs/${domain}.json`)
+		const res = await fetch(`/blogs/${id}.json`)
 		const blog = await res.json()
-		// if ( !res.ok ) {
-		// 	return {
-		// 		status: res.status,
-		// 		error: new Error(`Could not load ${url}`)
-		// 	};
-		// }
+		
+		if ( !res.ok ) {
+			return {
+				status: res.status,
+				error: new Error(`Could not load ${url}`)
+			};
+		}
 
 		return {
 			props: {blog}

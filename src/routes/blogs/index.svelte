@@ -62,7 +62,7 @@
 	<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 2xl:grid-cols-5 gap-4 sm:gap-12">
 	{#each blogs as blog (blog.url)}
 		<div >
-			<a href="/blogs/{blog.url.replace(/https?:\/\//,'')}" class="group mb-auto">
+			<a href="/blogs/{blog.id}" class="group mb-auto">
 				<div class="overflow-hidden rounded-lg">
 					{#if !!blog.twitter || !!blog.logo}
 						<img 

@@ -5,12 +5,12 @@ import supabase from '$lib/supabase'
 let parser = new Parser()
 
 export async function get({params}) {
-	const {domain} = params
+	const {id} = params
 
 	let { data: blog, error } = await supabase
 		.from('blogs')
 		.select('*')
-		.like('url', '%'+domain+'%')
+		.eq('id', id)
 		.single()	
 
 	let {items} = await parser.parseURL( blog.rss );

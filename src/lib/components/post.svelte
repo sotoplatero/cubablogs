@@ -27,8 +27,7 @@
 					{/if}
 				</span>
 				<span class="text-normal sm:text-lg ml-2 font-medium sm:font-semibold">
-					<!-- {blog.post.author || ''} <span class="text-gray-500">en</span> --> 
-					<a href="/blogs/{blog.hostname}" class="text-gray-600 line-clamp-1">
+					<a href="/blogs/{blog.id}" class="text-gray-600 line-clamp-1">
 						{blog.title}
 					</a>
 				</span>
