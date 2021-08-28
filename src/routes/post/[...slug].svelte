@@ -69,13 +69,13 @@
 			</a>
 		</div>
 
-		<div class="text-justify">
+		<div class="post-body text-justify">
 			{@html post['body'] }
-			<div class="text-center mt-8">
-				<a href="{post.link}" class="" target="_blank" rel="noopener nofollower">
-					Leer el Original			
-				</a>			
-			</div>
+		</div>
+		<div class="text-center mt-8">
+			<a href="{post.link}" class="" target="_blank" rel="noopener nofollower">
+				Leer el Original			
+			</a>			
 		</div>
 {:else}
 	<Loading />
