@@ -4,6 +4,7 @@ import slugify from '$lib/slug'
 let parser = new Parser()
 import sanitizeHtml from 'sanitize-html';
 import supabase from '$lib/supabase'
+import { getHostname } from 'tldts'
 /**
  * @type {import('@sveltejs/kit').Load}
  */
@@ -13,7 +14,7 @@ export async function get({query}) {
 	let { data: blog, error } = await supabase
 		.from('blogs')
 		.select('id,rss')
-		.like('post->>url', '%'+slugify(url)+'%')
+		.like('url', '%'+getHostname(url)+'%')
 		.single()	
 
 	const feed = await parser.parseURL( blog.rss );

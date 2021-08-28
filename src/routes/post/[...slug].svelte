@@ -33,9 +33,19 @@
 <article class="post prose prose-xl mx-auto">
 {#if post}
 		<div class="text-center mb-8">
-			<a href="{post.blog.url}" class="text-lg font-semibold" target="_blank" rel="noopener nofollower" >
+			<a href="{post.blog.url}" class="post-author text-lg font-semibold" target="_blank" rel="noopener nofollower" >
 				{post.blog.title}
 			</a>
+			<div class="post-date" datetime="{new Date(post.pubDate).getTime()}">
+				{new Date(post.pubDate).toLocaleDateString(
+					'es-ES', 
+					{ 
+						month:"short", 
+						day:"numeric", 
+						year: "numeric"
+					})
+				}
+			</div>				
 			<h1 class="post-title">
 				{post.title}
 			</h1>
@@ -45,6 +55,7 @@
 				</a>			
 			</div>			
 		</div>
+
 		<div  class="flex items-center justify-end print:hidden space-x-2 mb-4 !text-gray-600">
 			<button on:click={print} >
 				<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -57,14 +68,15 @@
 				</svg>			
 			</a>
 		</div>
-		<article class="text-justify">
+
+		<div class="text-justify">
 			{@html post['body'] }
 			<div class="text-center mt-8">
 				<a href="{post.link}" class="" target="_blank" rel="noopener nofollower">
 					Leer el Original			
 				</a>			
 			</div>
-		</article>
+		</div>
 {:else}
 	<Loading />
 {/if}
