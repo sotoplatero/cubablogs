@@ -95,6 +95,14 @@
 				condition={ !!twitter_image } 
 				title="Twitter Image"
 			/>
+			<Rule 
+				condition={ !!apple_touch_icon } 
+				title="Apple Icon"
+			/>
+			<Rule 
+				condition={ !!icon32x32 } 
+				title="Apple Icon"
+			/>
 		</div>
 		
 	{/if}

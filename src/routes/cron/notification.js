@@ -8,6 +8,8 @@ export async function post() {
 		.update({ notified_at: new Date })
 		.is('notified_at',null)
 
+	console.log(blogs)
+	
 	if (error?.length) {
 		notify(`error ${JSON.stringify(error, null, 1)}`, 'admin')
 	}

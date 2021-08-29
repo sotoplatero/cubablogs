@@ -23,7 +23,7 @@ export async function get({query}) {
 			og_image: $('meta[property="og:image"],meta[name="og:image"]')?.attr('content'),
 			og_locale: $('meta[property="og:locale"]')?.attr('content'),
 			twitter_image: $('meta[property="twitter:image"],meta[name="twitter:image"]')?.attr('content'),
-			apple_touch_icon: $('link[rel="apple-touch-icon"][sizes="180x180"]')?.attr('href'),
+			apple_touch_icon: $('link[rel="apple-touch-icon"]')?.attr('href'),
 			icon32x32: $('link[rel="icon"][sizes="32x32"]')?.attr('href'),
 			icon16x16: $('link[rel="icon"][sizes="16x16"]')?.attr('href'),
 		}
