@@ -15,7 +15,7 @@ export async function post() {
 	}
 
 	if (blogs?.length) {
-		let msg = `✨✨ Nuevas publicaci${blogs.length===1 ? 'ón' : 'ones'} ✨✨\n\n`
+		let msg = `✨✨ Nueva${blogs.length===1 ? '' : 's'}  publicaci${blogs.length===1 ? 'ón' : 'ones'} ✨✨\n\n`
 		msg += blogs.map( el => `[${el.post.title}](${el.post.url}) en *${el.title}* \n`).join('\n')
 		notify(msg)
 	}

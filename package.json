@@ -16,35 +16,24 @@
 		"@tailwindcss/aspect-ratio": "^0.2.1",
 		"@tailwindcss/line-clamp": "^0.2.1",
 		"@tailwindcss/typography": "^0.4.1",
-		"@types/sanitize-html": "^2.3.2",
-		"@vercel/client": "^10.2.2",
 		"autoprefixer": "^10.3.1",
-		"copee": "^1.0.6",
 		"cssnano": "^5.0.6",
 		"eslint": "^7.22.0",
 		"eslint-config-prettier": "^8.1.0",
 		"eslint-plugin-svelte3": "^3.2.0",
-		"nanoid": "^3.1.25",
 		"normalize-url": "^6.1.0",
 		"postcss": "^8.3.5",
 		"postcss-load-config": "^3.1.0",
 		"prettier": "~2.2.1",
 		"prettier-plugin-svelte": "^2.2.0",
-		"sanitize-html": "^2.4.0",
 		"svelte": "^3.42.1",
 		"svelte-preprocess": "^4.7.4",
 		"tailwindcss": "^2.2.4"
 	},
 	"type": "module",
 	"dependencies": {
-		"@microlink/mql": "^0.9.8",
 		"@octokit/auth-oauth-app": "^4.3.0",
 		"@octokit/rest": "^18.9.0",
-		"cheerio": "^1.0.0-rc.10",
-		"js-base64": "^3.6.1",
-		"node-telegram-bot-api": "^0.54.0",
-		"rss": "^1.2.2",
-		"rss-parser": "^3.12.0",
-		"tldts": "^5.7.39"
+		"node-telegram-bot-api": "^0.54.0"
 	}
 }
