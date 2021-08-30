@@ -8,7 +8,7 @@ const supabase = createClient(supabaseUrl, supabaseKey)
 const onInsertBlog = supabase
   .from('blogs')
   .on('INSERT', ({ new: blog }) => {
-    notify(`✨ Nuevo Blog\n\n [${blog.title}](${blog.url})`, 'admin')
+    notify(`✨ Nuevo Blog\n\n [${blog.title}](${blog.url})`)
   })
   .subscribe()
 

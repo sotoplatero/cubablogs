@@ -1,10 +1,8 @@
-import {db} from '$lib/db'	
 import Parser from 'rss-parser';
 import slugify from '$lib/slug'	
-import sanitizeHtml from 'sanitize-html';
+import sanitizeHtml from 'sanitize-html'
 import supabase from '$lib/supabase'
 import { getHostname } from 'tldts'
-
 let parser = new Parser()
 /**
  * @type {import('@sveltejs/kit').Load}
@@ -20,8 +18,9 @@ export async function get({query}) {
 
 	if (error) {
 		return {
-			body: 
-		};		
+			status: 404,
+			body: {}
+		}		
 	}
 
 	const feed = await parser.parseURL( blog.rss );
