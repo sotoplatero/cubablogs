@@ -1,17 +1,16 @@
 import {db} from '$lib/db'	
 import Parser from 'rss-parser';
 import slugify from '$lib/slug'	
-let parser = new Parser()
 import sanitizeHtml from 'sanitize-html';
 import supabase from '$lib/supabase'
 import { getHostname } from 'tldts'
+
+let parser = new Parser()
 /**
  * @type {import('@sveltejs/kit').Load}
  */
 export async function get({query}) {
 	const url = encodeURI(query.get('url'))
-
-	console.log(url)
 
 	let { data: blog, error } = await supabase
 		.from('blogs')
@@ -21,7 +20,7 @@ export async function get({query}) {
 
 	if (error) {
 		return {
-			body: {	}
+			body: 
 		};		
 	}
 
@@ -32,9 +31,6 @@ export async function get({query}) {
 	  	allowedTags: sanitizeHtml.defaults.allowedTags.concat([ 'img' ]),
 		allowedAttributes: {
 		  a: [ 'href', 'name', 'target' ],
-		  // We don't currently allow img itself by default, but this
-		  // would make sense if we did. You could add srcset here,
-		  // and if you do the URL is checked for safety
 		  img: [ 'src' ]
 		},	 
 	    exclusiveFilter: function(frame) {
