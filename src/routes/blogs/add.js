@@ -31,7 +31,7 @@ export async function post(request) {
 			author: 'meta[name="author"],meta[property="article:author"],[itemprop*="author" i] [itemprop="name"],[itemprop*="author" i],[rel="author"]',
 			image: 'meta[property="og:image:secure_url"],meta[property="og:image:url"],meta[property="og:image"],meta[name="twitter:image:src"],meta[name="twitter:image"],meta[itemprop="image"]',
 			logoBig: 'link[rel="icon"][sizes="192x192"],link[rel="apple-touch-icon"][sizes="180x180"],link[rel="apple-touch-icon"]',
-			logoSmall: 'link[rel="icon"][sizes="32x32"]link[rel="icon"]',
+			logoSmall: 'link[rel="icon"][sizes="32x32"],link[rel="icon"]',
 			rss: 'link[type="application/rss+xml"],link[type="application/atom+xml"]',
 			twitter: 'meta[name="twitter:creator"],meta[property="twitter:creator"]',
 			github: 'a[href*="github.com"]',

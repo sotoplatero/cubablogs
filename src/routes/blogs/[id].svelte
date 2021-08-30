@@ -57,7 +57,7 @@
 	</header>
 	<div>
 		<p class="uppercase mb-4 text-gray-600">
-			Últimos Escritos
+			Últimos Artículos
 		</p>
 		<ul class="space-y-2 text-lg">
 			{#each blog.items as item, index}

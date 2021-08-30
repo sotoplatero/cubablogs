@@ -1,22 +1,41 @@
+<script context="module">
+	export async function load({ page, fetch }) {
+		const {url} = page.params
+
+		const res = await fetch(`/post.json?url=${url}`)	
+
+		if ( !res.ok ) {
+			return {
+				status: res.status,
+				error: new Error(`Could not load ${url}`)
+			};
+		}
+
+		return {
+			props: {post: await res.json()}
+		};
+
+	}
+</script>
 <script>
 	import {onMount} from 'svelte'
 	import { page } from '$app/stores';
 	import { browser } from '$app/env';
 	import Loading from '$lib/components/loading.svelte'
 
-	let post
-	let loading = true
+	export let post
+	let loading = false
 
-	onMount( async () => {
-		const {slug} = $page.params
-		const res = await fetch(`/post.json?url=${slug}`)
-		loading = false
+	// onMount( async () => {
+	// 	const {slug} = $page.params
+	// 	const res = await fetch(`/post.json?url=${slug}`)
+	// 	loading = false
 
-		if (res.ok) {
-			post = await res.json()
-		}
+	// 	if (res.ok) {
+	// 		post = await res.json()
+	// 	}
 
-	})
+	// })
 
 	function print() {
 		if (browser) window.print()

@@ -1,4 +1,3 @@
-import rss from 'rss'
 import supabase from '$lib/supabase'
 
 export async function get() {
@@ -26,7 +25,7 @@ export async function get() {
 			<title>CubaBlog » Últimas Noticias de Cuba por sus Blogueros</title>
 			<atom:link href="https://cubablog.net/rss" rel="self" type="application/rss+xml" />
 			<link>https://cubablog.net</link>
-			<description>Descubre CUba por su blogueros</description>
+			<description>Descubre Cuba por su blogueros</description>
 			${items}
 		</channel>
 	</rss>`;

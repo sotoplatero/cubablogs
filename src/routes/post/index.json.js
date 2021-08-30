@@ -11,11 +11,19 @@ import { getHostname } from 'tldts'
 export async function get({query}) {
 	const url = encodeURI(query.get('url'))
 
+	console.log(url)
+
 	let { data: blog, error } = await supabase
 		.from('blogs')
 		.select('id,rss')
 		.like('url', '%'+getHostname(url)+'%')
 		.single()	
+
+	if (error) {
+		return {
+			body: {	}
+		};		
+	}
 
 	const feed = await parser.parseURL( blog.rss );
 	let post = feed.items.find( el => el.link.indexOf(url))

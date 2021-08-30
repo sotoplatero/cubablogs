@@ -38,7 +38,7 @@
 		<input type="text" bind:value={search} class="border border-gray-300 p-3 w-full focus:outline-none focus:border-gray-400 text-xl">
 	</div> -->
 	<div class="w-full max-w-screen-md mx-auto space-y-8 sm:space-y-16">
-		{#each filteredBlogs as blog (blog.post.url)}
+		{#each filteredBlogs as blog (blog.id)}
 			<Post {blog} />
 		{/each}
 	</div>
