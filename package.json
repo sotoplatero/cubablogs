@@ -17,6 +17,7 @@
 		"@tailwindcss/line-clamp": "^0.2.1",
 		"@tailwindcss/typography": "^0.4.1",
 		"autoprefixer": "^10.3.1",
+		"copee": "^1.0.6",
 		"cssnano": "^5.0.6",
 		"eslint": "^7.22.0",
 		"eslint-config-prettier": "^8.1.0",
@@ -26,14 +27,17 @@
 		"postcss-load-config": "^3.1.0",
 		"prettier": "~2.2.1",
 		"prettier-plugin-svelte": "^2.2.0",
+		"sanitize-html": "^2.4.0",
 		"svelte": "^3.42.1",
 		"svelte-preprocess": "^4.7.4",
 		"tailwindcss": "^2.2.4"
 	},
 	"type": "module",
 	"dependencies": {
-		"@octokit/auth-oauth-app": "^4.3.0",
-		"@octokit/rest": "^18.9.0",
-		"node-telegram-bot-api": "^0.54.0"
+		"cheerio": "^1.0.0-rc.10",
+		"js-base64": "^3.6.1",
+		"node-telegram-bot-api": "^0.54.0",
+		"rss-parser": "^3.12.0",
+		"tldts": "^5.7.39"
 	}
 }

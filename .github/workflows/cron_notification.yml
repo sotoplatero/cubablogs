@@ -1,4 +1,4 @@
-name: cron-update-post-and-notification
+name: cron-notification
 on:
   schedule:
     - cron: '*/10 * * * *'
@@ -6,11 +6,6 @@ jobs:
   cron:
     runs-on: ubuntu-latest
     steps:
-      - name: Call API Update
-        run: |
-          curl --request POST \
-          --url 'https://cubablog.net/cron/update' \
-          --header 'Authorization: Bearer ${{ secrets.API_SECRET_KEY }}'
       - name: Call API Notification
         run: |
           curl --request POST \

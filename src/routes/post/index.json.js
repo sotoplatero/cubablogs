@@ -1,10 +1,9 @@
-import {db} from '$lib/db'	
 import Parser from 'rss-parser';
 import slugify from '$lib/slug'	
-let parser = new Parser()
-import sanitizeHtml from 'sanitize-html';
+import sanitizeHtml from 'sanitize-html'
 import supabase from '$lib/supabase'
 import { getHostname } from 'tldts'
+let parser = new Parser()
 /**
  * @type {import('@sveltejs/kit').Load}
  */
@@ -13,9 +12,17 @@ export async function get({query}) {
 
 	let { data: blog, error } = await supabase
 		.from('blogs')
-		.select('id,rss')
-		.like('url', '%'+getHostname(url)+'%')
+		.select('id,rss,url')
+		.like('post->>url', '%'+url)
 		.single()	
+
+	console.log(blog)
+	if (error) {
+		return {
+			status: 404,
+			body: {}
+		}		
+	}
 
 	const feed = await parser.parseURL( blog.rss );
 	let post = feed.items.find( el => el.link.indexOf(url))
@@ -24,9 +31,6 @@ export async function get({query}) {
 	  	allowedTags: sanitizeHtml.defaults.allowedTags.concat([ 'img' ]),
 		allowedAttributes: {
 		  a: [ 'href', 'name', 'target' ],
-		  // We don't currently allow img itself by default, but this
-		  // would make sense if we did. You could add srcset here,
-		  // and if you do the URL is checked for safety
 		  img: [ 'src' ]
 		},	 
 	    exclusiveFilter: function(frame) {

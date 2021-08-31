@@ -21,12 +21,12 @@
 						<img 
 							src="{avatar}" 
 							alt="{blog.title}" 
-							class="w-8 h-8 object-center object-cover  ">
+							class="w-7 h-7 object-center object-cover  ">
 					{:else}
-						<Avatar class="w-8 h-8"/>
+						<Avatar class="w-7 h-7"/>
 					{/if}
 				</span>
-				<span class="text-normal sm:text-lg ml-2 font-medium sm:font-semibold">
+				<span class="ml-2 font-medium sm:font-semibold">
 					<a href="/blogs/{blog.id}" class="text-gray-600 line-clamp-1">
 						{blog.title}
 					</a>
