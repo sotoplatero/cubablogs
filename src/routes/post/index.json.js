@@ -24,8 +24,9 @@ export async function get({query}) {
 		}		
 	}
 
+	const link = url.replace(/^\d+\//,'')
 	const feed = await parser.parseURL( blog.rss );
-	let post = feed.items.find( el => el.link.indexOf(url))
+	let post = feed.items.find( el => el.link.indexOf(link))
 
 	const options = {
 	  	allowedTags: sanitizeHtml.defaults.allowedTags.concat([ 'img' ]),

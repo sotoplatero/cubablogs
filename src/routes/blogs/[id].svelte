@@ -62,7 +62,7 @@
 		<ul class="space-y-2 text-lg">
 			{#each blog.items as item, index}
 				<li>
-					<a href="/post/{blog.id}-{item.link.replace(/https?:\/\//,'')}" class="flex " >
+					<a href="/post/{blog.id}/{item.link.replace(/https?:\/\//,'')}" class="flex " >
 						<span class="text-sm text-gray-400 mr-3 w-8 sm:w-12 inline-block flex-shrink-0">
 							{formatDate(item.pubDate)}
 						</span>
