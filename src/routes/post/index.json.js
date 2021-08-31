@@ -9,14 +9,14 @@ let parser = new Parser()
  */
 export async function get({query}) {
 	const url = encodeURI(query.get('url'))
+	const idBlog = parseInt(url)
 
 	let { data: blog, error } = await supabase
 		.from('blogs')
 		.select('id,rss,url')
-		.like('post->>url', '%'+url)
+		.eq('id', idBlog)
 		.single()	
 
-	console.log(blog)
 	if (error) {
 		return {
 			status: 404,
