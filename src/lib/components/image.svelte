@@ -8,8 +8,10 @@
 		.replace(/^https?:\/\//,'')
 		.replace(/\//,'|')
 		.split('|')
-		
-	$: src = `https://cdn.statically.io/img/${domain}/f=auto,w=600/${path}`
+
+	$: src = /\.(jpg|jpeg|png|gif|webp)$/i.test(url) 
+		? `https://cdn.statically.io/img/${domain}/f=auto,w=600/${path}`
+		: url
 
 </script>
 
