@@ -1,4 +1,5 @@
 <script >
+	import Image from '$lib/components/image.svelte'
 	import SaveToPocket from '$lib/components/saveToPocket.svelte'
 	import IntentTweet from '$lib/components/IntentTweet.svelte'
 	import Share from '$lib/components/share.svelte'
@@ -49,7 +50,11 @@
 		{#if image}
 			<a href={blog.post.url} target="_blank" rel="noopener nofollower" class="w-1/3 { featured ? 'sm:w-1/2' : 'sm:w-1/4'}  flex-shrink-0 ml-2 sm:ml-16">
 				<div class="aspect-w-4 { featured ? 'aspect-h-3' : 'aspect-h-4'} overflow-hidden rounded-lg">
-					<img src="{ image }" alt="{blog.post.title}" class="object-center object-cover">
+					<Image 
+						url={blog.post.image} 
+						alt={blog.post.title} 
+						class="object-center object-cover"/>
+					<!-- <img src="{ image }" alt="{blog.post.title}" class="object-center object-cover"> -->
 				</div>			
 			</a>
 		{/if}
