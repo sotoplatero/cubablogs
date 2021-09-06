@@ -8,14 +8,14 @@ export async function post() {
 		.update({ notified_at: new Date })
 		.is('notified_at',null)
 
-	console.log(blogs)
+	// console.log(blogs)
 	
 	if (error?.length) {
 		notify(`error ${JSON.stringify(error, null, 1)}`, 'admin')
 	}
 
 	if (blogs?.length) {
-		let msg = `✨✨ Nuevas publicaci${blogs.length===1 ? 'ón' : 'ones'} ✨✨\n\n`
+		let msg = `✨✨ Nueva${blogs.length===1 ? '' : 's'}  publicaci${blogs.length===1 ? 'ón' : 'ones'} ✨✨\n\n`
 		msg += blogs.map( el => `[${el.post.title}](${el.post.url}) en *${el.title}* \n`).join('\n')
 		notify(msg)
 	}

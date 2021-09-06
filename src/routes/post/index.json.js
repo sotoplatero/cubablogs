@@ -9,11 +9,12 @@ let parser = new Parser()
  */
 export async function get({query}) {
 	const url = encodeURI(query.get('url'))
+	const idBlog = parseInt(url)
 
 	let { data: blog, error } = await supabase
 		.from('blogs')
-		.select('id,rss')
-		.like('url', '%'+getHostname(url)+'%')
+		.select('id,rss,url')
+		.eq('id', idBlog)
 		.single()	
 
 	if (error) {
@@ -23,8 +24,9 @@ export async function get({query}) {
 		}		
 	}
 
+	const link = url.replace(/^\d+\//,'')
 	const feed = await parser.parseURL( blog.rss );
-	let post = feed.items.find( el => el.link.indexOf(url))
+	let post = feed.items.find( el => el.link.indexOf(link))
 
 	const options = {
 	  	allowedTags: sanitizeHtml.defaults.allowedTags.concat([ 'img' ]),

@@ -1,4 +1,5 @@
 <script >
+	import Image from '$lib/components/image.svelte'
 	import SaveToPocket from '$lib/components/saveToPocket.svelte'
 	import IntentTweet from '$lib/components/IntentTweet.svelte'
 	import Share from '$lib/components/share.svelte'
@@ -21,19 +22,19 @@
 						<img 
 							src="{avatar}" 
 							alt="{blog.title}" 
-							class="w-8 h-8 object-center object-cover  ">
+							class="w-7 h-7 object-center object-cover  ">
 					{:else}
-						<Avatar class="w-8 h-8"/>
+						<Avatar class="w-7 h-7"/>
 					{/if}
 				</span>
-				<span class="text-normal sm:text-lg ml-2 font-medium sm:font-semibold">
+				<span class="ml-2 font-medium sm:font-semibold">
 					<a href="/blogs/{blog.id}" class="text-gray-600 line-clamp-1">
 						{blog.title}
 					</a>
 				</span>
 			</div>		
 			<!-- <a href="/posts/{blog.id}">{blog.id}</a>		 -->
-			<a href="/post/{blog.post.slug}" >
+			<a href="/post/{blog.id}/{blog.post.slug}" >
 				<h2 class="text-lg { featured ? 'sm:text-5xl' : 'sm:text-2xl'} font-bold !leading-tight transition text-gray-800 group-hover:text-gray-900">
 					{blog.post.title}
 				</h2>	
@@ -49,7 +50,11 @@
 		{#if image}
 			<a href={blog.post.url} target="_blank" rel="noopener nofollower" class="w-1/3 { featured ? 'sm:w-1/2' : 'sm:w-1/4'}  flex-shrink-0 ml-2 sm:ml-16">
 				<div class="aspect-w-4 { featured ? 'aspect-h-3' : 'aspect-h-4'} overflow-hidden rounded-lg">
-					<img src="{ image }" alt="{blog.post.title}" class="object-center object-cover">
+					<Image 
+						url={blog.post.image} 
+						alt={blog.post.title} 
+						class="object-center object-cover"/>
+					<!-- <img src="{ image }" alt="{blog.post.title}" class="object-center object-cover"> -->
 				</div>			
 			</a>
 		{/if}

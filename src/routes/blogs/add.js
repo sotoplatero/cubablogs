@@ -111,7 +111,6 @@ export async function post(request) {
 		}
 
 	} catch (e) {
-		console.log(e)
 		return {
 			body: e
 		};		
