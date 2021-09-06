@@ -16,6 +16,7 @@ export async function get({params}) {
 	let {items} = await parser.parseURL( blog.rss );
 	items = items.map( 
 			({title,link,pubDate}) => ({
+				url, `/${blog.id}/${link.replace(/https?:\/\//,'')}`,
 				title,
 				link,
 				pubDate,
