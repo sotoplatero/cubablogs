@@ -23,6 +23,7 @@
 </script>
 <script>
 	import Pagination from '$lib/components/pagination.svelte'
+	import Avatar from '$lib/components/avatar.svelte'		
 
 	export let blogs = []
 	export let p = 1
@@ -64,7 +65,8 @@
 		<div >
 			<a href="/blogs/{blog.id}" class="group mb-auto">
 				<div class="overflow-hidden rounded-lg">
-					{#if !!blog.twitter || !!blog.logo}
+					<Avatar blog={blog} class="w-32 h-32 mx-auto rounded-xl"/>
+<!-- 					{#if !!blog.twitter || !!blog.logo}
 						<img 
 							src="{(blog.twitter ? blog.twitter.avatar : blog.logo) || blog.image}" 
 							alt="{blog.title}" 
@@ -73,7 +75,7 @@
 						<svg xmlns="http://www.w3.org/2000/svg" class="w-32 h-32 rounded-xl mx-auto bg-gray-100 text-gray-300" viewBox="0 0 20 20" fill="currentColor">
 						  <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
 						</svg>				
-					{/if}
+					{/if} -->
 				</div>	
 				<div>
 					<div class="mb-4 mt-3 text-center">
