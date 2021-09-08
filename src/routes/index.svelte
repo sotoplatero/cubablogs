@@ -21,10 +21,11 @@
 	}
 </script>
 <script>
+	import Spinner from '$lib/components/spinner.svelte'
 	import Post from '$lib/components/post.svelte'
 	
 	export let blogs = []
-
+	let loading = false
 </script>
 
 <!-- <header>
@@ -45,4 +46,9 @@
 		  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
 		</svg>		
 	</a>
+</div>
+<div class="h-12 w-12 relative">
+    {#if loading}
+        <Spinner/>
+    {/if}
 </div>

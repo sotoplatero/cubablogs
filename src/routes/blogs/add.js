@@ -75,7 +75,7 @@ export async function post(request) {
 				if ( !user ) {
 					let url = $('[href*="twitter.com"]').attr('href')
 					if ( !url || !/\@?w{1,15}$/.test(url) ) return 
-					user = url.split('/').pop()
+					user = url.split('/').pop().split('?')[0]
 				}
 				let username = user.replace(/@/g,'')
 
