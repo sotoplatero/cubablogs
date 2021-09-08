@@ -13,7 +13,7 @@ export async function get({query}) {
 
 	let { data: blog, error } = await supabase
 		.from('blogs')
-		.select('id,rss,url')
+		.select('*')
 		.eq('id', idBlog)
 		.single()	
 
@@ -50,6 +50,7 @@ export async function get({query}) {
 			blog: {
 				title: feed.title,
 				url: feed.link,
+				logo: blog.logo,
 			}
 		}
 	};

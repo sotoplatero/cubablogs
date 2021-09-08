@@ -18,24 +18,12 @@
 	}
 </script>
 <script>
-	import {onMount} from 'svelte'
 	import { page } from '$app/stores';
 	import { browser } from '$app/env';
 	import Loading from '$lib/components/loading.svelte'
 
 	export let post
 	let loading = false
-
-	// onMount( async () => {
-	// 	const {slug} = $page.params
-	// 	const res = await fetch(`/post.json?url=${slug}`)
-	// 	loading = false
-
-	// 	if (res.ok) {
-	// 		post = await res.json()
-	// 	}
-
-	// })
 
 	function print() {
 		if (browser) window.print()
@@ -55,7 +43,8 @@
 			<h1 class="post-title">
 				{post.title}
 			</h1>
-			<a href="{post.blog.url}" class="post-author text-lg font-semibold" target="_blank" rel="noopener nofollower" >
+			<a href="{post.blog.url}" class="post-author flex items-center justify-center  text-lg font-semibold" target="_blank" rel="noopener nofollower" >
+				<img src="{post.blog.logo}" alt="{post.blog.title}" class="w-6 !my-0 mr-2">
 				{post.blog.title}
 			</a>
 			<div class="post-date" datetime="{new Date(post.pubDate).getTime()}">
