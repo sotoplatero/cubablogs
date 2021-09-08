@@ -19,14 +19,7 @@
 		<div class="flex-grow">
 			<div class='flex items-center mb-1'>
 				<span class="flex-shrink-0 rounded-full shadow overflow-hidden ">
-					{#if avatar}
-						<img 
-							src="{avatar}" 
-							alt="{blog.title}" 
-							class="w-7 h-7 object-center object-cover  ">
-					{:else}
-						<Avatar class="w-7 h-7"/>
-					{/if}
+					<Avatar {blog} class="w-7 h-7"/>
 				</span>
 				<span class="ml-2 font-medium sm:font-semibold">
 					<a href="/blogs/{blog.id}" class="text-gray-600 line-clamp-1" >

@@ -20,7 +20,7 @@
 <script>
 	import { page } from '$app/stores';
 	import { browser } from '$app/env';
-	import Loading from '$lib/components/loading.svelte'
+	import Avatar from '$lib/components/avatar.svelte'	
 
 	export let post
 	let loading = false
@@ -44,7 +44,7 @@
 				{post.title}
 			</h1>
 			<a href="{post.blog.url}" class="post-author flex items-center justify-center  text-lg font-semibold" target="_blank" rel="noopener nofollower" >
-				<img src="{post.blog.logo}" alt="{post.blog.title}" class="w-6 !my-0 mr-2">
+				<Avatar blog={post.blog} class="w-7 h-7 mr-2"/>
 				{post.blog.title}
 			</a>
 			<div class="post-date" datetime="{new Date(post.pubDate).getTime()}">
