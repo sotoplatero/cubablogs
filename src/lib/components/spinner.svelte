@@ -1,8 +1,9 @@
 
-<script lang="ts">
-    type SpinnerSize = 'lg' | 'xl' | 'xxl' 
+<script >
+    // type SpinnerSize = 'lg' | 'xl' | 'xxl' 
 
-    export const size: SpinnerSize = 'lg'
+    // export const size: SpinnerSize = 'lg'
+    export const size = 'lg'
 </script>
 <div class="gg-spinner {size}">
 

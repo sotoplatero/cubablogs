@@ -1,4 +1,5 @@
 <script >
+	import { session } from '$app/stores';	
 	import Image from '$lib/components/image.svelte'
 	import SaveToPocket from '$lib/components/saveToPocket.svelte'
 	import IntentTweet from '$lib/components/IntentTweet.svelte'
@@ -28,7 +29,7 @@
 					{/if}
 				</span>
 				<span class="ml-2 font-medium sm:font-semibold">
-					<a href="/blogs/{blog.id}" class="text-gray-600 line-clamp-1">
+					<a href="/blogs/{blog.id}" class="text-gray-600 line-clamp-1" >
 						{blog.title}
 					</a>
 				</span>

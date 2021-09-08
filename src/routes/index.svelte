@@ -47,8 +47,3 @@
 		</svg>		
 	</a>
 </div>
-<div class="h-12 w-12 relative">
-    {#if loading}
-        <Spinner/>
-    {/if}
-</div>
