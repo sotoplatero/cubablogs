@@ -1,24 +1,30 @@
+<script>
+	import Logo from '$lib/logo.svelte'
+</script>
 <div class="container print:hidden bg-white">
-	<div class="flex items-center py-4 mb-8">
+	<div class="flex items-center py-4 mb-6 sm:mb-12">
 		<a href="/" class="mr-auto">
-			<h1 class="flex items-center justify-center text-3xl text-red-700 ">
-				<img src="/logo.png" alt="Logo Cubablog" class="w-9 h-9">	
-				<span class="hidden sm:inline font-semibold">CubaBlog</span>
+			<h1 class="brand flex items-center justify-center text-3xl text-gray-800 ">
+				<img src="/logo.png" alt="Logo Cubablog" class="flex-shrink-0 w-8 h-8">	
+				<span class="hidden sm:inline font-extrabold ml-1 tracking-wide bg-clip-text text-transparent bg-gradient-to-r from-[#FF2602] to-blue-500">
+					CubaBlog
+				</span>
+				<!-- <Logo class="h-10 fill-current text-black"/> -->
 			</h1>
 		</a>
 		<div class="flex items-center space-x-6">
+			<a href="/add" class="flex items-center py-2 px-6 bg-red-500 text-white font-semibold whitespace-nowrap rounded-xl" >
+				<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+				  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd" />
+				</svg>				
+				<span class="ml-1 hidden sm:inline "> Blog</span>
+			</a>		
 			<a href="/posts" class="font-bold transition text-gray-600 hover:text-gray-800">
 				Artículos
 			</a>
 			<a href="/blogs" class="font-bold transition text-gray-600 hover:text-gray-800">
-				Blogs
+				Blogroll
 			</a>
-			<a href="/add" class="flex items-center py-2 px-4 bg-red-500 text-white font-bold whitespace-nowrap border-2 border-red-500" >
-				<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
-				  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd" />
-				</svg>				
-				<span class="ml-2 hidden sm:inline ">Agregar Blog</span>
-			</a>		
 		</div>
 		<!-- <p class="text-xl text-gray-500">Blogs sobre Cuba y por Cubanos</p> -->
 	<!-- 	<a href="" class="flex items-center py-3 px-4 bg-red-500 text-white font-bold whitespace-nowrap border-2 border-red-500">
@@ -28,3 +34,7 @@
 	</div>
 	
 </div>
+
+<style>
+
+</style>

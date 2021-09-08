@@ -8,7 +8,7 @@ let parser = new Parser({
 	customFields: {
 		item: [
 		    ['content:encoded','contentEncoded'],
-		    ['media:content','media'],
+		    ['media:content','media', {keepArray: true}],
 		    ['dc:creator','dcCreator']
 		]
 	}
@@ -21,7 +21,7 @@ async function getOgImage(url) {
 	const html = await res.text()
 	const $ = cheerio.load(html)
 	const selector = 'meta[property="og:image:secure_url"],meta[property="og:image:url"],meta[property="og:image"],meta[name="og:image"],meta[name="twitter:image:src"],meta[name="twitter:image"],meta[itemprop="image"]'
-	return $(selector)?.attr('content')
+	return !/blank.jpg$/.test($(selector)?.attr('content')) ? $(selector)?.attr('content') : null
 }
 
 export default async function (url) {
@@ -52,11 +52,9 @@ export default async function (url) {
 			})(),
 
 			image: await ( async function(){
-				if (item.media ) {
-					if (item.media['$']['medium'] === 'image') {
-						return item.media['$']['url']
-					}
-				}
+
+				let image = item.media?.find( el => !/gravatar/g.test( el['$']['url'] ) )['$']['url']
+				if (image) return image
 
 				const ogImage = await getOgImage(item.link)
 				if (ogImage) return ogImage
