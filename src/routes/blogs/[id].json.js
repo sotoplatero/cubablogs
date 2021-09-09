@@ -26,7 +26,10 @@ export async function get({params}) {
 
 	return {
 		body: {
-			...blog, hostname: getHostname(blog.url), items
+			...blog, 
+			logo: blog.logo || '/avatar.svg',
+			hostname: getHostname(blog.url), 
+			items
 		}
 	};
 

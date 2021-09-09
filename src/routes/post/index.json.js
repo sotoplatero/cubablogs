@@ -50,7 +50,7 @@ export async function get({query}) {
 			blog: {
 				title: feed.title,
 				url: feed.link,
-				logo: blog.logo,
+				logo: blog.logo || 'https://cubablog.net/avatar.svg',
 			}
 		}
 	};

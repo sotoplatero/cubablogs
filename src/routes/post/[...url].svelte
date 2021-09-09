@@ -21,6 +21,8 @@
 	import { page } from '$app/stores';
 	import { browser } from '$app/env';
 	import Avatar from '$lib/components/avatar.svelte'	
+	import Meta from '$lib/components/meta.svelte'	
+
 
 	export let post
 	let loading = false
@@ -33,10 +35,13 @@
 
 </script>
 
-<svelte:head>
-	<title>CubaBlog - {title}</title>
-</svelte:head>
-
+<Meta
+	title={post.title}
+	description=""
+	isPost={1}
+	author={post.blog.title}
+	avatar={post.blog.logo}
+/>
 <article class="post prose prose-xl mx-auto mt-10">
 {#if post}
 		<div class="text-center mb-6">
@@ -62,7 +67,7 @@
 		<div  class="flex items-center justify-end print:hidden space-x-2 mb-4 !text-gray-600">
 			<div class="text-center">
 				<a href="{post.link}" class="text-sm" target="_blank" rel="noopener nofollower">
-					Leer el Original			
+					Leer el Original		
 				</a>			
 			</div>			
 			<button on:click={print} >

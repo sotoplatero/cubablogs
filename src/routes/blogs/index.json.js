@@ -36,6 +36,7 @@ export async function get({query}) {
 	return {
 		body: blogs.map( el => ({
 				...el, 
+				logo: el.logo || 'https://cubablog.net/avatar.svg',
 				hostname: getHostname(el.url),
 				post: { 
 					...el.post,
