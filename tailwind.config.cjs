@@ -15,6 +15,9 @@ const config = {
 		require('@tailwindcss/line-clamp'),
 		require('@tailwindcss/typography'),
 	],
+    corePlugins: {
+		preflight: false,
+    }	
 };
 
 module.exports = config;

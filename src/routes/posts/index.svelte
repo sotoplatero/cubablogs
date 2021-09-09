@@ -42,7 +42,7 @@
 			<Post {blog} />
 		{/each}
 	</div>
-	<div class="mt-10">
+	<div class="mt-16">
 		<Pagination {p}/>
 	</div>
 
