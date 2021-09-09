@@ -21,16 +21,15 @@
 	}
 </script>
 <script>
-	import Spinner from '$lib/components/spinner.svelte'
+    import Meta from '$lib/components/meta.svelte'
 	import Post from '$lib/components/post.svelte'
 	
 	export let blogs = []
 	let loading = false
 </script>
 
-<!-- <header>
-	<h1 class="text-5xl text-center mb-16 font-bold">CubaBlog</h1>
-</header> -->
+<Meta/>
+
 <div class="mb-12">
 	<div class="mb-20"> 
 		<Post blog={blogs[0]} featured/>
