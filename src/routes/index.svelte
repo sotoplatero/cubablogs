@@ -26,17 +26,16 @@
 	
 	export let blogs = []
 	let loading = false
+	let blogFeatured = blogs.find( el => !!el.post.image )
+	$: indexFeatured = blogs.findIndex( el => el.url == blogFeatured.url )
 </script>
 
-<!-- <header>
-	<h1 class="text-5xl text-center mb-16 font-bold">CubaBlog</h1>
-</header> -->
 <div class="mb-12">
 	<div class="mb-20"> 
-		<Post blog={blogs[0]} featured/>
+		<Post blog={blogFeatured} featured/>
 	</div>
 	<div class="w-full max-w-screen-md mx-auto space-y-8 sm:space-y-16 ">
-	{#each blogs.slice(1) as blog (blog.post.url)}
+	{#each blogs.filter( (el, idx) => idx !== indexFeatured ) as blog (blog.post.url)}
 		<Post {blog} />
 	{/each}
 	</div>
