@@ -15,7 +15,7 @@
 		}
 
 		return {
-			props: { blogs: blogs.filter(el=>!!el.post.description.trim()) }
+			props: { blogs: blogs.filter(el=>!!el.post.description) }
 		};
 
 	}

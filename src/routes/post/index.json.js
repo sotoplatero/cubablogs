@@ -25,6 +25,7 @@ export async function get({query}) {
 	}
 
 	const link = url.replace(/^\d+\//,'')
+	console.log(link)
 	const feed = await parser.parseURL( blog.rss );
 	let post = feed.items.find( el => el.link.indexOf(link))
 
