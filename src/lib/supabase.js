@@ -12,12 +12,7 @@ supabase
   .on('INSERT', ({ new: blog }) => {
     notify(`✨ Nuevo Blog\n\n [${blog.title}](${blog.url})`)
   })
-  .on('UPDATE', async ({ new: newBlog, old: oldBLog }) => {
-    if ( newBlog.post.url != oldBlog.post.url ) {
-      await sleep(1000)
-      notify(`✨ Nueva publicación en el blog *${blog.title}* \n\n [${blog.post.title}](${blog.post.url})`,'admin')
-    }
-  })
+
   .subscribe()
 
 export default supabase
