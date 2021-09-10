@@ -33,7 +33,7 @@
 					{blog.post.title}
 				</h2>	
 				<p class="mt-3 transition text-gray-500 group-hover:text-gray-600 text-base {featured ? 'sm:text-xl' :'sm:text-lg'} sm:text-justify hidden sm:block">
-					{blog.post.description}
+					{blog.post.description.split('.').filter((el,idx)=>idx<3).join('.') + '.'}
 				</p>
 			</a>
 			<div class="flex items-center justify-between mt-3 text-gray-400">

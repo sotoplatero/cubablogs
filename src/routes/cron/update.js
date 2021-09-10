@@ -1,12 +1,14 @@
 import supabase from '$lib/supabase'
 import getPost from '$lib/post'
+import { notify } from '$lib/bot'
+
 
 export async function post() {
 
 	try	{
 		let { data: blogs, error } = await supabase
 			.from('blogs')
-			.select('id,rss,post->url')
+			.select('*')
 			.order('updated_at', { ascending: true })
 			.limit()
 
@@ -21,7 +23,7 @@ export async function post() {
     			) {
 					const { data, error } = await supabase
 					  .from('blogs')	
-					  .update({ post })
+					  .update({post})
 					  .eq('id', blog.id) 
 
 					if (error) {

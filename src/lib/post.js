@@ -36,19 +36,24 @@ export default async function (url) {
 		
 		let item = feed.items[0]
 
+		const extract = (string = '') => string.split('.').filter((el,idx)=>idx<3).join('.') + '.'
 		return { 
 			title: item.title,
 			url: item.link,
 			date: item.isoDate,
 			author: item.creator || item.dcCreator,
 			description: (function(){
+				if (!!item.description) return item.description
+
 				if (!!item.contentSnippet) {
-					return item.contentSnippet.substring(0, 250) 
+					return extract( item.contentSnippet ) 
 				} 
 				const content = item.content || item.contentEncoded
+
 				if (!content) return
 				const $ = cheerio.load( content )
-				return $.text().substring(0, 250)
+			
+				return extract( $.text() )
 			})(),
 
 			image: await ( async function(){
