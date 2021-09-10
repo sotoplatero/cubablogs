@@ -27,8 +27,10 @@ const updateBlogSubscription = supabase
       has(newRecord, 'post.url') &&
       newRecord.post.url != oldRecord.post.url
     ) {
-      console.log( newRecord )
+      const {title,url} = newRecord.post
+      notify(`✨ Nuevo Artículo\n\n [${title}](${url})`,'admin')
     }
+    
   })
   .subscribe()
 

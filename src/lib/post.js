@@ -37,6 +37,7 @@ export default async function (url) {
 		let item = feed.items[0]
 
 		const extract = (string = '') => string.split('.').filter((el,idx)=>idx<3).join('.') + '.'
+		
 		return { 
 			title: item.title,
 			url: item.link,
@@ -52,7 +53,7 @@ export default async function (url) {
 
 				if (!content) return
 				const $ = cheerio.load( content )
-			
+
 				return extract( $.text() )
 			})(),
 
