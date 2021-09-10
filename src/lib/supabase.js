@@ -15,7 +15,7 @@ supabase
   .on('UPDATE', async payload => {
     if ( !!new.post && (new.post.url !== old.post.url) ) {
       await sleep(1000)
-      notify(`✨ Nueva publicación en el blog *${blog.title}* \n\n [${blog.post.title}](${blog.post.url})`)
+      notify(`✨ Nueva publicación en el blog *${blog.title}* \n\n [${blog.post.title}](${blog.post.url})`,'admin')
     }
   })
   .subscribe()
