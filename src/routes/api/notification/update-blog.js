@@ -1,5 +1,7 @@
-import {isEmpty, has} from 'lodash'
+import lodash from 'lodash';
 import { notify } from '$lib/bot'
+
+const { isEmpty, has } = lodash;
 
 export async function post({body, headers}) {
 
