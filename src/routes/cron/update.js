@@ -17,7 +17,7 @@ export async function post() {
 
 	    		if ( 
 	    			JSON.stringify(post) !== '{}' &&
-	    			post?.url != blog.post.url
+	    			post?.url != blog.post?.url
     			) {
 					const { data, error } = await supabase
 					  .from('blogs')	
