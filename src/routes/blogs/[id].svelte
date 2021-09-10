@@ -39,6 +39,7 @@
 
 <div class="w-full max-w-2xl mx-auto">
 	<header class="mb-10 text-center">
+		<img src="{blog.image}" alt="">
 		<a href="{blog.url}" target="_blank" rel="noopener nofollower">
 			{#if blog.twitter || blog.logo}
 				<img src="{blog.twitter ? blog.twitter.avatar : blog.logo}" class="w-32 h-32 mx-auto rounded-xl" alt="logo {blog.title}">

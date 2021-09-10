@@ -21,7 +21,7 @@ export async function get({query}) {
 		({ data: blogs, error } = await supabase
 			.from('blogs')
 			.select('*')
-			.textSearch('title', q)
+			.textSearch('title', `'${q}'`)
 			.order('post->>date', { ascending: false })
 			.range(from,to))
 	} else {
