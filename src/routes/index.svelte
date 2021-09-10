@@ -15,7 +15,8 @@
 		}
 
 		return {
-			props: { blogs: blogs.filter(el=>!!el.post.description) }
+			// props: { blogs: blogs.filter(el=>!!el.post.description) }
+			props: { blogs }
 		};
 
 	}
