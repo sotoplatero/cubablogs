@@ -1,9 +1,19 @@
+import {isEmpty, has} from 'lodash'
+import { notify } from '$lib/bot'
 
 export async function post({body, headers}) {
-	// let { name, type, value, ttl = 60 } = JSON.parse(body)
 
-	console.log(body)
-	
+	const { record, old_record } = body
+
+	// NEW ARTICLES NOTIFICATION
+	if ( 
+		!isEmpty(record) && 
+		has(record, 'post.url') &&
+		record.post.url != old_record.post.url
+	) {
+		notify(`Nuevo Artículo`, 'admin')
+	}
+
 	return {
 		body: 'ok'
 	};

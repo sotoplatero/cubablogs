@@ -15,13 +15,13 @@
 </script>
 
 <article class="group" >
-	<div class="flex justify-between">
+	<div class="flex justify-between items-center">
 		<div class="flex-grow">
 			<div class='flex items-center mb-1'>
 				<span class="flex-shrink-0 rounded-full shadow overflow-hidden ">
 					<Avatar {blog} class="w-7 h-7"/>
 				</span>
-				<span class="ml-2 font-medium sm:font-semibold">
+				<span class="ml-2 font-medium">
 					<a href="/blogs/{blog.id}" class="text-gray-600 line-clamp-1" >
 						{blog.title}
 					</a>
@@ -37,7 +37,7 @@
 				</p>
 			</a>
 			<div class="flex items-center justify-between mt-3 text-gray-400">
-				<span class="font-medium sm:font-semibold whitespace-nowrap">{date}</span>
+				<span class="font-medium whitespace-nowrap">{date}</span>
 				<Share post={blog.post} class=""/>
 			</div>
 		</div>

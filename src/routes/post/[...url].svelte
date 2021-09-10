@@ -49,7 +49,7 @@
 				{post.title}
 			</h1>
 			<a href="{post.blog.url}" class="post-author flex items-center justify-center  text-lg font-semibold" target="_blank" rel="noopener nofollower" >
-				<Avatar blog={post.blog} class="w-7 h-7 mr-2"/>
+				<Avatar blog={post.blog} class="w-7 h-7 mr-2 rounded-full"/>
 				{post.blog.title}
 			</a>
 			<div class="post-date" datetime="{new Date(post.pubDate).getTime()}">
