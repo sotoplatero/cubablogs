@@ -53,8 +53,9 @@ export default async function (url) {
 
 			image: await ( async function(){
 
-				let image = item.media?.find( el => !/gravatar/g.test( el['$']['url'] ) )['$']['url']
-				if (image) return image
+				let image = item.media?.find( el => !/gravatar/g.test( el['$']['url'] ) )
+				// console.log(image)
+				if (image) return image['$']['url']
 
 				const ogImage = await getOgImage(item.link)
 				if (ogImage) return ogImage

@@ -19,6 +19,7 @@
 	}
 </script>
 <script>
+	import Meta from '$lib/components/meta.svelte'
 	// export let feed
 	export let blog
 	// let post = feed.items[0]
@@ -28,6 +29,10 @@
 	} 
 </script>
 
+<Meta
+	title={blog.title}
+	description={blog.description}
+/>
 <svelte:head>
 	<title>CubaBlog - {blog.title}</title>
 </svelte:head>

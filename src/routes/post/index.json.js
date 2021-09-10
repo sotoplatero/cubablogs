@@ -25,6 +25,7 @@ export async function get({query}) {
 	}
 
 	const link = url.replace(/^\d+\//,'')
+	console.log(link)
 	const feed = await parser.parseURL( blog.rss );
 	let post = feed.items.find( el => el.link.indexOf(link))
 
@@ -50,7 +51,7 @@ export async function get({query}) {
 			blog: {
 				title: feed.title,
 				url: feed.link,
-				logo: blog.logo,
+				logo: blog.logo || 'https://cubablog.net/avatar.svg',
 			}
 		}
 	};

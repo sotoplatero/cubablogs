@@ -11,27 +11,25 @@ export async function post() {
 			.limit()
 
 	    await Promise.all( 
-	    	blogs.map( async ({id, rss, url}) => {
+	    	blogs.map( async blog => {
 
-	    		const post = await getPost(rss)
-	    		let dataToUpdate = { rss }
+	    		const post = await getPost( blog.rss )
 
-	    		if ( JSON.stringify(post) !== '{}' ) {
-		    		dataToUpdate = { post }
+	    		if ( 
+	    			JSON.stringify(post) !== '{}' &&
+	    			post?.url != blog.post.url
+    			) {
+					const { data, error } = await supabase
+					  .from('blogs')	
+					  .update({ post })
+					  .eq('id', blog.id) 
 
-		    		if ( post?.url != url ) {
-						dataToUpdate.notified_at = null
+					if (error) {
+						notify(JSON.stringify(error,null,2),'admin')
 					}
 	    		}
 
-				const { data, error } = await supabase
-				  .from('blogs')	
-				  .update( dataToUpdate )
-				  .eq('id', id) 
 
-				if (error) {
-					notify(JSON.stringify(error,null,2),'admin')
-				}
 	    	})
 	    )
 

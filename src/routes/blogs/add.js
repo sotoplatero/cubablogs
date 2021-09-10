@@ -64,7 +64,9 @@ export async function post(request) {
 				if (!logo) {
 					logo = $(selectors.logoSmall).attr('href') 
 				}
-				if (!logo) return null
+				if (!logo) {
+					return '/avatar.svg'
+				}
 				return getDomain(logo) ? logo : url + logo
 			})(),
 
