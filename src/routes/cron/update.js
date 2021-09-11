@@ -1,5 +1,7 @@
 import supabase from '$lib/supabase'
 import getPost from '$lib/post'
+import { notify } from '$lib/bot'
+
 
 export async function post() {
 
@@ -22,7 +24,7 @@ export async function post() {
     			) {
 					const { data, error } = await supabase
 					  .from('blogs')	
-					  .update({ post })
+					  .update({post})
 					  .eq('id', blog.id) 
 
 					if (error) {

@@ -29,7 +29,7 @@
 	<a href="/txt/{blog.id}/{blog.post.slug}">{ blog.post.title.trim() }</a>
 	{ !!blog.post.description ? `\n${blog.post.description.replace(/[\n\t\s]+/g,' ').trim()}` : ''}
 	{'\n'}
-	<a href="{blog.url}">{blog.title}</a> -- { new Date(blog.post.date).toLocaleDateString('es-ES', { month:"short", day:"numeric", year: "numeric"}) }
+	{ new Date(blog.post.date).toLocaleDateString('es-ES', { month:"short", day:"numeric", year: "numeric"}) } // <a href="{blog.url}">{blog.title}</a>
 	{'\n\n\n'}
 
 {/each}

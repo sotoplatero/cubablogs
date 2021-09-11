@@ -6,7 +6,7 @@
 		<a href="/" class="mr-auto flex-shrink-0">
 			<h1 class="brand flex items-center justify-center text-3xl text-gray-800 ">
 				<img src="/logo.png" alt="Logo Cubablog" class=" w-8 h-8">	
-				<span class="hidden sm:inline font-extrabold ml-1 tracking-wide bg-clip-text text-transparent bg-gradient-to-r from-[#FF2602] to-blue-500">
+				<span class="hidden sm:inline font-bold ml-1 tracking-wide bg-clip-text text-transparent bg-gradient-to-r from-[#FF2602] to-blue-500">
 					CubaBlog
 				</span>
 				<!-- <Logo class="h-10 fill-current text-black"/> -->

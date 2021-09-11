@@ -29,7 +29,7 @@ export async function post(request) {
 			title: 'meta[property="og:title"],meta[name="twitter:title"],meta[property="twitter:title"]',
 			description: 'meta[property="description"],meta[name="description"],meta[itemprop="description"],meta[property="og:description"]',
 			author: 'meta[name="author"],meta[property="article:author"],[itemprop*="author" i] [itemprop="name"],[itemprop*="author" i],[rel="author"]',
-			image: 'meta[property="og:image:secure_url"],meta[property="og:image:url"],meta[property="og:image"],meta[name="twitter:image:src"],meta[name="twitter:image"],meta[itemprop="image"]',
+			image: 'meta[property="og:image"],meta[name="twitter:image"],meta[property="og:image:secure_url"],meta[property="og:image:url"],meta[name="twitter:image:src"],meta[itemprop="image"]',
 			logoBig: 'link[rel="icon"][sizes="192x192"],link[rel="apple-touch-icon"][sizes="180x180"],link[rel="apple-touch-icon"]',
 			logoSmall: 'link[rel="icon"][sizes="32x32"],link[rel="icon"]',
 			rss: 'link[type="application/rss+xml"],link[type="application/atom+xml"]',
@@ -57,13 +57,19 @@ export async function post(request) {
 			author: $(selectors.author).attr('content'),
 
 			logo: await ( async function(){
-				let logo = $(selectors.logoBig).attr('href') 
+				let logo = ''
+					console.log(/medium\.com/.test(url))
+				if ( /medium\.com/.test(url) ) {
+					logo = $(selectors.image).attr('content') 
+				} else {
+					logo = $(selectors.logoBig).attr('href') 
+				}
 				if (!logo) {
 					logo = $('meta[name="msapplication-TileImage"]').attr('content') 
 				}
-				if (!logo) {
-					logo = $(selectors.logoSmall).attr('href') 
-				}
+				// if (!logo) {
+				// 	logo = $(selectors.logoSmall).attr('href') 
+				// }
 				if (!logo) {
 					return '/avatar.svg'
 				}
@@ -98,7 +104,8 @@ export async function post(request) {
 		let { data, error } = await supabase
 		  .from('blogs')
 		  .select('id,url')
-		  .like('url', '%'+getHostname(url)+'%')
+		  // .eq('url', url.replace(/\/$/,''))
+		  .like('url', url.replace(/\/$/,'')+'%')
 		  .single()
 
 		if (data) {

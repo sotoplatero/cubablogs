@@ -28,7 +28,8 @@
 
 	// export let metatags = {}
 	let metatags = {}
-	let url = ''
+	let mt = {}
+	let url = 'https://lugodev.medium.com'
 	let disabled = false
 	$: ({ 
 			title = '',
@@ -39,6 +40,7 @@
 			og_locale = '',
 			twitter_image = '',
 			apple_touch_icon = '',
+			icon180x180 = '',
 			icon32x32 = '',
 			icon16x16 = '',
 		} = metatags)
@@ -47,8 +49,9 @@
 		disabled = 1
 		const res = await fetch(`/metatags.json?url=${url}`)
 		disabled = 0
-		if (!res.ok) return
+		if (!res.ok) return null
 		metatags = await res.json()
+		mt=metatags
 	}
 
 	async function save(argument) {
@@ -66,10 +69,10 @@
 	</form>
 	<!-- https://ahrefs.com/blog/open-graph-meta-tags/ -->
 	{#if JSON.stringify(metatags) !== '{}'}
-		<div class="space-y-4 text-lg">
+		<div class="space-y-4 ">
 			<Rule 
 				condition={!!title} 
-				title="Titulo"7a1q1 
+				title="Titulo" 
 			/>
 			<Rule 
 				condition={ title.length > 4 && title.length <= 60 } 
@@ -85,8 +88,13 @@
 			/>
 			<Rule 
 				condition={ description === og_description } 
-				title="Descripción igual al Open Graph "
+				title="Descripción igual al Open Graph"
 			/>
+			<div>
+				<a href="https://moz.com/blog/the-ultimate-guide-to-seo-meta-tags">The Ultimate Guide to SEO Meta Tags</a>
+				<a href="https://moz.com/blog/meta-data-templates-123">Must-Have Social Meta Tags for Twitter, Google, Facebook, & More</a>
+				<a href="https://ahrefs.com/blog/open-graph-meta-tags/">Open Graph Meta Tags: Everything You Need to Know</a>
+			</div>
 			<Rule 
 				condition={ !!og_image } 
 				title="Imagen Open Graph"
@@ -95,13 +103,25 @@
 				condition={ !!twitter_image } 
 				title="Twitter Image"
 			/>
+			<div>
+				Icons
+				<p>https://github.com/audreyfeldroy/favicon-cheat-sheet</p>
+			</div>
 			<Rule 
 				condition={ !!apple_touch_icon } 
 				title="Apple Icon"
 			/>
 			<Rule 
+				condition={ !!icon180x180 } 
+				title="Icon 180x180"
+			/>
+			<Rule 
 				condition={ !!icon32x32 } 
-				title="Apple Icon"
+				title="Icon 32x32"
+			/>
+			<Rule 
+				condition={ !!icon16x16 } 
+				title="Icon 16x16"
 			/>
 		</div>
 		

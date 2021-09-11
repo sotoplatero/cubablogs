@@ -48,8 +48,7 @@
 		year: "numeric"
 	})
 }
-{'\n\n\n'}
-{ body }
+{ body.replace(/\n{2,}/g,'\n\n') }
 {'\n\n\n'}
 
 <a href="{post.link}" class="" target="_blank" rel="noopener nofollower">
