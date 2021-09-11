@@ -12,7 +12,6 @@ supabase
   .on('INSERT', ({ new: blog }) => {
     notify(`✨ Nuevo Blog\n\n [${blog.title}](${blog.url})`)
   })
-
   .subscribe()
 
 export default supabase
