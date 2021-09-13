@@ -39,6 +39,7 @@
 	"type": "module",
 	"dependencies": {
 		"cheerio": "^1.0.0-rc.10",
+		"himalaya": "^1.1.0",
 		"js-base64": "^3.7.0",
 		"node-telegram-bot-api": "^0.54.0",
 		"rss-parser": "^3.12.0",
