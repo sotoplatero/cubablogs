@@ -22,16 +22,16 @@
 					<Avatar {blog} class="w-7 h-7"/>
 				</span>
 				<span class="ml-2 font-medium">
-					<a href="/blogs/{blog.id}" class="text-gray-600 line-clamp-1" >
+					<a href="/blogs/{blog.id}/{blog.url.replace(/https?:\/\//,'')}" class="text-gray-600 line-clamp-1" >
 						{blog.title}
 					</a>
 				</span>
 			</div>		
 			<!-- <a href="/posts/{blog.id}">{blog.id}</a>		 -->
 				<h2 class="text-lg { featured ? 'sm:text-5xl' : 'sm:text-2xl'} font-bold !leading-tight transition text-gray-800 group-hover:text-gray-900">
-			<a href="/post/{blog.id}/{blog.post.slug}" >
-					{blog.post.title}
-			</a>
+					<a href="/post/{blog.id}/{blog.post.slug}" >
+							{blog.post.title}
+					</a>
 				</h2>	
 				<p class="mt-3 transition text-gray-500 group-hover:text-gray-600 text-base {featured ? 'sm:text-xl' :'sm:text-lg'} sm:text-justify hidden sm:block">
 					{blog.post.description.split('.').filter((el,idx)=>idx<3).join('.') + '.'}

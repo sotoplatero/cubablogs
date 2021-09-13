@@ -42,7 +42,7 @@
 	author={post.blog.title}
 	avatar={post.blog.logo}
 />
-<article class="post prose prose-xl mx-auto mt-10">
+<article class="post prose md:prose-lg xl:prose-xl mx-auto mt-10">
 	<div class="text-center mb-6">
 		<h1 class="post-title">
 			{post.title}
@@ -63,7 +63,7 @@
 		</div>				
 	</div>
 
-	<div  class="flex items-center justify-end print:hidden space-x-2 mb-4 !text-gray-600">
+	<div  class="flex items-center justify-end print:hidden space-x-2 mb-4 !text-gray-600 not-sr-only">
 		<div class="text-center">
 			<a href="{post.link}" class="text-sm" target="_blank" rel="noopener nofollower">
 				Leer el Original		
@@ -84,7 +84,7 @@
 	<div class="post-body text-justify">
 		{@html post['body'] }
 	</div>
-	<div class="text-center mt-8">
+	<div class="text-center mt-8 ">
 		<a href="{post.link}" class="" target="_blank" rel="noopener nofollower">
 			Leer el Original			
 		</a>			
