@@ -41,6 +41,7 @@
 			apple_touch_icon = '',
 			icon32x32 = '',
 			icon16x16 = '',
+			icon180x180 = '',
 		} = metatags)
 
 	async function getMetatag() {
@@ -66,10 +67,10 @@
 	</form>
 	<!-- https://ahrefs.com/blog/open-graph-meta-tags/ -->
 	{#if JSON.stringify(metatags) !== '{}'}
-		<div class="space-y-4 text-lg">
+		<div class="space-y-4 text">
 			<Rule 
 				condition={!!title} 
-				title="Titulo"7a1q1 
+				title="Titulo" 
 			/>
 			<Rule 
 				condition={ title.length > 4 && title.length <= 60 } 
@@ -101,7 +102,11 @@
 			/>
 			<Rule 
 				condition={ !!icon32x32 } 
-				title="Apple Icon"
+				title="Icon 32x32"
+			/>
+			<Rule 
+				condition={ !!icon180x180 } 
+				title="Icon 180x180"
 			/>
 		</div>
 		
