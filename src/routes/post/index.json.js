@@ -41,7 +41,8 @@ export async function get({query}) {
 		// }
 	}
 	const html = post['content:encoded'] ? post['content:encoded'] : post['content']
-	post['body'] = sanitizeHtml( html, options)
+	// post['body'] = sanitizeHtml( html, options)
+	post['body'] =html
 
 	return {
 		body: {

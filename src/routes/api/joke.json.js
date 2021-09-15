@@ -7,7 +7,7 @@ export async function get() {
     let urls = [
       'https://chistes.yavendras.com',
       // 'http://www.todo-chistes.com/chistes-al-azar',
-      // 'https://www.1000chistes.com/',
+      'https://www.1000chistes.com/',
     ] 
     let data = [], response, body, $, menu;
     let url = urls.random() 
@@ -39,6 +39,21 @@ export async function get() {
         url: 'http:' + $joke.find('.search-result-item-heading a').attr('href'),
         content: $joke.find('.description').html().trim(),
       }
+    }
+
+    if ( /1000chistes/g.test(url) ) {
+
+      const categoryUrl = $( $('[itemprop="itemListElement"] > a').toArray().random() ).attr('href')
+      const response1000chistes = await fetch(categoryUrl)
+      const body1000chistes = await response1000chistes.text()
+      $ = cheerio.load( body1000chistes );
+
+      $joke = $( $('.chiste').toArray().random() )
+      data = {
+        url: $joke.find('h2 > a').attr('href'),
+        content: $joke.find('[itemprop="articleBody"]').html(),
+      }
+      // 'itemprop="articleBody"'
     }
 
     if ( /todo-chistes/g.test(url) ) {

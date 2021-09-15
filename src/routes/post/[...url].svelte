@@ -43,6 +43,7 @@
 	avatar={post.blog.logo}
 	url={`https://cubablog.net${post.url}`}
 />
+
 <article class="post prose md:prose-lg xl:prose-xl mx-auto mt-10">
 	<div class="text-center mb-6">
 		<h1 class="post-title">

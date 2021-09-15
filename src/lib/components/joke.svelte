@@ -1,6 +1,10 @@
 <script>
 	import {onMount} from 'svelte'
+	import '$lib/random'
+
 	let promiseJoke = new Promise(r=>r)
+	let emojis = [ '😊','☺','🙂','😎','😄','🥲','😁','🤭','😃','😆' ]
+
 
 	onMount(()=>{
 		promiseJoke = getJoke()	
@@ -24,6 +28,7 @@
 	<!-- {#if joke} -->
 		<a href="{joke.url}" class="block mb-4" target="_blank" rel="noopener">
 			<p class="">{@html joke.content}</p>
+			{emojis.random()}
 		</a>
 		<button on:click={randomJoke} class="flex items-center text-gray-700 hover:text-gray-900 text-sm uppercase">
 <!-- 			<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
