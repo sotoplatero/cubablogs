@@ -46,15 +46,15 @@
 		<Post blog={blogFeatured} featured/>
 	</div>
 
-	<div class="grid grid-cols-3 gap-12">
+	<div class="grid grid-cols-1 md:grid-cols-3 gap-12">
 		<div class="posts col-span-2 space-y-8 sm:space-y-16 ">
 			{#each blogs.filter( (el, idx) => idx !== indexFeatured ) as blog (blog.post.url)}
 				<Post {blog} />
 			{/each}
 		</div>
 
-		<div class="space-y-8">
-			<div class="gaceta border py-4 px-5">
+		<div class="space-y-4">
+			<div class="gaceta w-full border py-4 px-5">
 				{#await promiseGaceta then gaceta}
 					<a href="{gaceta.url}" class="text-gray-500 " target="_blank">
 						<h2 class="mb-2">Gaceta {gaceta.number}: {gaceta.type}</h2>

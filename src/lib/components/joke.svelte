@@ -10,7 +10,7 @@
 		promiseJoke = getJoke()
 	}	
 </script>
-<div class="joke bg-gray-100 py-4 px-6">
+<div class="joke w-full bg-gray-100 py-4 px-6">
 	{#await promiseJoke}
 		<span class="text-gray-600">Cargando...</span>
 	{:then joke}
