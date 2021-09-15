@@ -26,10 +26,10 @@ export async function get({query}) {
 				.children
 				.filter( el => el.tagName==='head')[0]
 				.children,
-			content_type: $('meta[http-equiv="Content-Type"]')?.attr('content').trim(),
-			viewport: $('meta[name=viewport]')?.attr('content').trim(),
-			title: $('title')?.text().trim(),
-			description: $('meta[name="description"]')?.attr('content').trim(),
+			content_type: $('meta[http-equiv="Content-Type"]')?.attr('content'),
+			viewport: $('meta[name=viewport]')?.attr('content'),
+			title: $('title')?.text(),
+			description: $('meta[name="description"]')?.attr('content'),
 			creator: $('meta[name="twitter:creator"],meta[property="twitter:creator"]')?.attr('content'),
 			og_description: $('meta[property="og:description"],meta[name="og:description"]')?.attr('content'),
 			og_image: $('meta[property^="og:image"],meta[name^="og:image"]')?.attr('content'),

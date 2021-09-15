@@ -46,7 +46,7 @@ export async function post(request) {
 		rss = getDomain(rss) ? rss : url + rss
 
 		const post = await getPost(rss)
-
+		console.log(post)
 		blog = {
 			url,
 

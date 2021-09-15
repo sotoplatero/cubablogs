@@ -7,12 +7,11 @@ export async function get({query}) {
 
 	const p = query.get('page') || 1
 	const order = query.get('order') || 'date'
-	let limit = query.get('limit') || 12
+	let limit = query.get('limit') || 16
 	const q = query.get('q')
 
-	limit = limit - 1
 	const from = (p-1) * limit
-	const to = p * limit
+	const to = p * limit -1
 	let blogs = []
 	let error = null
 
