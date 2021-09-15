@@ -9,10 +9,10 @@
 		"format": "prettier --write --plugin-search-dir=. ."
 	},
 	"devDependencies": {
-		"@supabase/supabase-js": "^1.22.5",
+		"@supabase/supabase-js": "^1.22.6",
 		"@sveltejs/adapter-netlify": "^1.0.0-next.30",
 		"@sveltejs/adapter-vercel": "^1.0.0-next.28",
-		"@sveltejs/kit": "^1.0.0-next.165",
+		"@sveltejs/kit": "^1.0.0-next.167",
 		"@tailwindcss/aspect-ratio": "^0.2.1",
 		"@tailwindcss/line-clamp": "^0.2.1",
 		"@tailwindcss/typography": "^0.4.1",
@@ -21,7 +21,7 @@
 		"cssnano": "^5.0.6",
 		"eslint": "^7.22.0",
 		"eslint-config-prettier": "^8.1.0",
-		"eslint-plugin-svelte3": "^3.2.0",
+		"eslint-plugin-svelte3": "^3.2.1",
 		"html-to-text": "^8.0.0",
 		"image-size": "^1.0.0",
 		"lodash": "^4.17.21",
@@ -30,20 +30,20 @@
 		"postcss-load-config": "^3.1.0",
 		"prettier": "~2.2.1",
 		"prettier-plugin-svelte": "^2.4.0",
-		"sanitize-html": "^2.5.0",
-		"svelte": "^3.42.4",
+		"sanitize-html": "^2.5.1",
+		"svelte": "^3.42.5",
 		"svelte-preprocess": "^4.9.4",
-		"tailwindcss": "^2.2.14",
+		"tailwindcss": "^2.2.15",
 		"unreset-css": "^1.0.1"
 	},
 	"type": "module",
 	"dependencies": {
 		"cheerio": "^1.0.0-rc.10",
 		"himalaya": "^1.1.0",
-		"js-base64": "^3.7.0",
+		"js-base64": "^3.7.1",
 		"node-telegram-bot-api": "^0.54.0",
 		"rss-parser": "^3.12.0",
 		"tldts": "^5.7.43",
-		"typescript": "^4.4.2"
+		"typescript": "^4.4.3"
 	}
 }

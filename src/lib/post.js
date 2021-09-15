@@ -15,6 +15,7 @@ let parser = new Parser({
 });
 
 async function getOgImage(url) {
+	console.log(url)
 	const res = await fetch(url)
 	console.log(res)
 	if (!res.ok) return
@@ -34,17 +35,17 @@ export default async function (url) {
     		console.log('error' + e)
     		return {}
     	}
-		
+		console.log(feed)
 		let item = feed.items[0]
 
 		const extract = (string = '') => string.split('.').filter((el,idx)=>idx<3).join('.') + '.'
 		
-		return { 
+		const post = { 
 			title: item.title,
 			url: item.link,
 			date: item.isoDate,
 			author: item.creator || item.dcCreator,
-			description: (function(){
+			description: (function() {
 				if (!!item.description) return item.description
 
 				if (!!item.contentSnippet) {
@@ -77,5 +78,7 @@ export default async function (url) {
 
 			categories: item.categories,
 		}
+
+		return post
 
 }
