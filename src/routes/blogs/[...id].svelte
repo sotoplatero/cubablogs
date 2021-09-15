@@ -22,7 +22,7 @@
 	import Meta from '$lib/components/meta.svelte'
 	// export let feed
 	export let blog
-	// let post = feed.items[0]
+	let canonical = `https;//cubablog.net/blog/${blog.id}/${blog.url.replace(/^https?:\/\//,'')}`
 
 	function formatDate(d) {
 		return new Date(d).toLocaleDateString('es-ES', { month:"short", day:"numeric"})	
@@ -32,13 +32,14 @@
 <Meta
 	title={blog.title}
 	description={blog.description}
+	url={canonical}
 />
 <svelte:head>
 	<title>CubaBlog - {blog.title}</title>
 </svelte:head>
 
-<div class="relative aspect-w-16 aspect-h-7 sm:aspect-h-5 md:aspect-h-3 bg-gray-50 overflow-hidden pattern" >
-	<img src="{blog.image}" alt="" class="absolute h-full w-full object-cover blur">
+<div class="relative aspect-w-16 aspect-h-7 sm:aspect-h-5 md:aspect-h-5 bg-gray-50 overflow-hidden pattern" >
+	<img src="{blog.image}" alt="" class="absolute h-full w-full object-cover">
 </div>
 <div class="w-full max-w-2xl mx-auto relative  -mt-24">
 	<header class="mb-10 text-center">

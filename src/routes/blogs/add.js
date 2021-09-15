@@ -18,7 +18,6 @@ export async function post(request) {
 	try {
 
 		const response = await fetch(url)
-
 		if (!response.ok) {
 			return { body: response }
 		}
@@ -45,8 +44,9 @@ export async function post(request) {
 		}
 		rss = getDomain(rss) ? rss : url + rss
 
-		const post = await getPost(rss)
 
+		const post = await getPost(rss)
+	
 		blog = {
 			url,
 

@@ -16,6 +16,7 @@ let parser = new Parser({
 
 async function getOgImage(url) {
 	const res = await fetch(url)
+	console.log(res)
 	if (!res.ok) return
 	
 	const html = await res.text()

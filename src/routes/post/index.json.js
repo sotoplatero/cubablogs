@@ -46,7 +46,9 @@ export async function get({query}) {
 	return {
 		body: {
 			...post,
+			url: `/post/${blog.id}/${post.link.replace(/https?:\/\//,'')}`,
 			blog: {
+				id: blog.id,
 				title: feed.title,
 				url: feed.link,
 				logo: blog.logo || 'https://cubablog.net/avatar.svg',

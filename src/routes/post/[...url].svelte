@@ -37,10 +37,11 @@
 
 <Meta
 	title={post.title}
-	description=""
+	description="{post.description}"
 	isPost={1}
 	author={post.blog.title}
 	avatar={post.blog.logo}
+	url={`https://cubablog.net${post.url}`}
 />
 <article class="post prose md:prose-lg xl:prose-xl mx-auto mt-10">
 	<div class="text-center mb-6">

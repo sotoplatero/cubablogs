@@ -63,7 +63,7 @@
 	<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 2xl:grid-cols-5 gap-4 sm:gap-12">
 	{#each blogs as blog (blog.url)}
 		<div >
-			<a href="/blogs/{blog.id}" class="group mb-auto">
+			<a href="/blogs/{blog.id}/{blog.url.replace(/^https?:\/\//,'')}" class="group mb-auto">
 				<div class="overflow-hidden rounded-lg">
 					<Avatar blog={blog} class="w-32 h-32 mx-auto rounded-xl "/>
 				</div>	
@@ -102,6 +102,7 @@
 		</div>
 	{/each}
 	</div>
+
 	<div class="mt-10">
 		<Pagination {p}/>
 	</div>
