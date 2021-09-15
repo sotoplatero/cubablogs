@@ -31,7 +31,7 @@ const updateBlogSubscription = supabase
       const {title,url} = newRecord.post
       const link = `https://cubablog.net/post/${newRecord.id}/${url.replace(/https?:\/\//,'')}`
       sleep(1000)
-      notify(`✨ Nuevo Artículo\n\n [${title}](${link})`, channel)
+      notify(`✨ Nuevo Artículo\n\n [${title}](${link}) publicado en **${newRecord.title}**`, channel)
 
     }
     

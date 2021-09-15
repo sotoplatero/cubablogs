@@ -2,7 +2,7 @@
 	export async function load({ page, fetch }) {
 		const {id} = page.params
 
-		const res = await fetch(`/blogs/${id}.json`)
+		const res = await fetch(`/blogs/${parseInt(id)}.json`)
 		const blog = await res.json()
 		
 		if ( !res.ok ) {
