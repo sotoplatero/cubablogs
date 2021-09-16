@@ -11,12 +11,14 @@ export async function get() {
   const { parse } = await fetch( url ).then( res => res.json() )
 
   const $ = cheerio.load( parse['text']['*'] )
-  const ephemeris = $( $('.mw-parser-output > ul > li').toArray().slice(0,4) ).map((i,el)=>$(el).html()).get()
+  const ephemeris = $('.mw-parser-output > ul > li').map( (i,el) => $(el).text() ).get()
+
+  const randomEphemeris = [1,2,3,4].map( () => ephemeris[ Math.floor(Math.random()*ephemeris.length) ] )
 
   return {
     body: { 
       url: `https://www.ecured.cu/${today}`, 
-      ephemeris 
+      days: randomEphemeris,
     }
   }
 

@@ -1,5 +1,7 @@
 <script>
 	import {onMount} from 'svelte'
+	import Loading from '$lib/ui/loading.svelte'
+
 	import '$lib/random'
 
 	let promiseJoke = new Promise(r=>r)
@@ -21,23 +23,20 @@
 		} catch (e) { console.log(e)}
 	}	
 </script>
-<div class="joke w-full border-2 border-yellow-400 py-4 px-6">
+<div class="joke w-full py-4 px-6">
 	{#await promiseJoke}
-		<span class="text-gray-600">Cargando...</span>
+
+		<Loading />
+
 	{:then joke}
-	<!-- {#if joke} -->
+
+		<h2 class="mb-2 font-bold">Chiste {emojis.random()}</h2>
 		<a href="{joke.url}" class="block mb-4" target="_blank" rel="noopener">
 			<p class="">{@html joke.content}</p>
-			{emojis.random()}
 		</a>
 		<button on:click={randomJoke} class="flex items-center text-gray-700 hover:text-gray-900 text-sm uppercase">
-<!-- 			<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-			  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-			</svg> -->			
 			<strong>Actualizar</strong>
 		</button>
 		
-	<!-- {/if} -->
-
 	{/await}				
 </div>

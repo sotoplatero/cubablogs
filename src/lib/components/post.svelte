@@ -41,16 +41,18 @@
 				<Share post={blog.post} class=""/>
 			</div>
 		</div>
-		{#if image}
-			<a href={blog.post.url} target="_blank" rel="noopener nofollower" class="w-1/3 { featured ? 'sm:w-1/2' : 'sm:w-1/4'}  flex-shrink-0 ml-2 sm:ml-10">
-				<div class="aspect-w-4 { featured ? 'aspect-h-3' : 'aspect-h-4'} overflow-hidden rounded-lg">
-					<Image 
-						url={blog.post.image} 
-						alt={blog.post.title} 
-						class="object-center object-cover"/>
-					<!-- <img src="{ image }" alt="{blog.post.title}" class="object-center object-cover"> -->
-				</div>			
-			</a>
-		{/if}
+		<a href={blog.post.url} target="_blank" rel="noopener nofollower" class="w-1/3 { featured ? 'sm:w-1/2' : 'sm:w-1/4'}  flex-shrink-0 ml-2 sm:ml-10">
+
+			<div class="aspect-w-4 { featured ? 'aspect-h-3' : 'aspect-h-4'} overflow-hidden rounded-lg">
+			{#if image}
+				<Image 
+					url={blog.post.image} 
+					alt={blog.post.title} 
+					class="object-center object-cover"/>
+				<!-- <img src="{ image }" alt="{blog.post.title}" class="object-center object-cover"> -->
+			{/if}
+			</div>			
+			
+		</a>
 	</div>
 </article>

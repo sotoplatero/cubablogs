@@ -23,9 +23,10 @@
 <script>
     import Meta from '$lib/components/meta.svelte'
 	import Post from '$lib/components/post.svelte'
-	import Quote from '$lib/components/quote.svelte'
-	import Joke from '$lib/components/joke.svelte'
-	import Gaceta from '$lib/components/gaceta.svelte'
+	import Quote from '$lib/gadgets/quote.svelte'
+	import Joke from '$lib/gadgets/joke.svelte'
+	import Gaceta from '$lib/gadgets/gaceta.svelte'
+	import Ephemeris from '$lib/gadgets/ephemeris.svelte'
 	
 	export let blogs = []
 
@@ -41,7 +42,7 @@
 		<Post blog={blogFeatured} featured/>
 	</div>
 
-	<div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+	<div class="grid grid-cols-1 md:grid-cols-3 gap-8 divide-x">
 
 		<div class="md:col-span-2">
 			<div class="posts space-y-8 sm:space-y-16 ">
@@ -58,10 +59,11 @@
 			</a>
 		</div>
 
-		<aside class="sidebar space-y-4">
+		<aside class="sidebar space-y-6 divide-y pl-8">
 			<Gaceta/>
 			<Quote/>
 			<Joke/>
+			<Ephemeris/>
 		</aside>
 
 	</div>
