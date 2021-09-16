@@ -23,7 +23,7 @@
 		} catch (e) { console.log(e)}
 	}	
 </script>
-<div class="joke w-full py-4 px-6">
+<div class="joke w-full py-6 px-6">
 	{#await promiseJoke}
 
 		<Loading />
@@ -35,7 +35,7 @@
 			<p class="">{@html joke.content}</p>
 		</a>
 		<button on:click={randomJoke} class="flex items-center text-gray-700 hover:text-gray-900 text-sm uppercase">
-			<strong>Actualizar</strong>
+			<strong>Más &rarr;</strong>
 		</button>
 		
 	{/await}				

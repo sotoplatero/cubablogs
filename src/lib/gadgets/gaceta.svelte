@@ -15,23 +15,23 @@
 
 </script>
 
-<div class="gaceta w-full py-4 px-5">
+<div class="gaceta w-full py-6 px-5">
 	{#await promiseGaceta }
 		<Loading/>
 	{:then gaceta}
 
 		<a href="{gaceta.url}" class=" " target="_blank">
-			<h2 class="mb-2 text-medium font-semibold">Gaceta {gaceta.number}: {gaceta.type}</h2>
+			<h2 class="mb-2 font-semibold">Gaceta {gaceta.number}: {gaceta.type}</h2>
 		</a>
 		<div class="space-y-3">
 			{#each gaceta.items as item, index}
 			<div>
-				<strong>{item.title}</strong>
-				<p class="text-gray-600">{item.content}</p>
+				<div class="font-semibold">{item.title}</div>
+				<p class="">{item.content}</p>
 			</div>
 			{/each}
 		</div>
-		<a href="{gaceta.file}" download class="mt-4 inline-block text-sm uppercase">
+		<a href="{gaceta.file}" download class="mt-4 inline-block font-semibold text-sm uppercase">
 		PDF &darr;</a>
 	{/await}
 	

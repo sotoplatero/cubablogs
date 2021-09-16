@@ -17,7 +17,7 @@
 		promiseQuote = getQuote()
 	}	
 </script>
-<div class="quote py-4 px-6">
+<div class="quote py-6 px-6">
 	{#await promiseQuote }
 		<Loading/>
 	{:then quote}
@@ -25,8 +25,8 @@
 			<p class="italic">{quote.content}</p>
 			<p class="text-right text-sm"><em>{quote.author}</em></p>
 		</a>
-		<button on:click={randomQuote} class="text-gray-700 hover:text-gray-900 text-sm uppercase">
-			Actualizar
+		<button on:click={randomQuote} class="text-gray-700 text-sm uppercase font-semibold">
+			Más &rarr;
 		</button>
 
 	{/await}				

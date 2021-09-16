@@ -32,7 +32,8 @@ export async function post(request) {
 			logoBig: 'link[rel="icon"][sizes="192x192"],link[rel="apple-touch-icon"][sizes="180x180"],link[rel="apple-touch-icon"]',
 			logoSmall: 'link[rel="icon"][sizes="32x32"],link[rel="icon"]',
 			rss: 'link[type="application/rss+xml"],link[type="application/atom+xml"]',
-			twitter: 'meta[name="twitter:creator"],meta[property="twitter:creator"]',
+			twitterUser: 'meta[name="twitter:creator"],meta[property="twitter:creator"],meta[property="twitter:site"]',
+			twitterSite: 'meta[name="twitter:site"],meta[property="twitter:site"]',
 			github: 'a[href*="github.com"]',
 			keywords: 'meta[name="keywords"]',
 		}
@@ -58,8 +59,7 @@ export async function post(request) {
 
 			logo: await ( async function(){
 				let logo = ''
-					console.log(/medium\.com/.test(url))
-				if ( /medium\.com/.test(url) ) {
+				if ( /medium\.com|getrevue\.co/.test(url) ) {
 					logo = $(selectors.image).attr('content') 
 				} else {
 					logo = $(selectors.logoBig).attr('href') 
@@ -79,11 +79,13 @@ export async function post(request) {
 			image: $(selectors.image).attr('content'),
 
 			twitter: ( function() {
-				let user = $(selectors.twitter).attr('content')
+				let user = $(selectors.twitterUser)?.attr('content') || $(selectors.twitterSite)?.attr('content')
+
 				if ( !user ) {
 					let url = $('[href*="twitter.com"]').attr('href')
-					if ( !url || !/\@?w{1,15}$/.test(url) ) return 
-					user = url.split('/').pop().split('?')[0]
+					if ( url || /\@?w{1,15}$/.test(url) ) {
+						user = url.split('/').pop().split('?')[0]
+					} 
 				}
 				let username = user.replace(/@/g,'')
 

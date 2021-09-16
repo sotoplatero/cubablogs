@@ -26,7 +26,7 @@ export async function get() {
 			<atom:link href="https://cubablog.net/rss" rel="self" type="application/rss+xml" />
 			<link>https://cubablog.net</link>
 			<description>Descubre Cuba por su blogueros</description>
-			${items}
+			${items.join('')}
 		</channel>
 	</rss>`;
 

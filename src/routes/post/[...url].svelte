@@ -49,7 +49,7 @@
 		<h1 class="post-title">
 			{post.title}
 		</h1>
-		<a href="{post.blog.url}" class="post-author flex items-center justify-center  text-lg font-semibold" target="_blank" rel="noopener nofollower" >
+		<a href="/blogs/{post.blog.id}/{post.blog.url.replace(/^https?:\/\//,'')}" class="post-author flex items-center justify-center  text-lg font-semibold" >
 			<Avatar blog={post.blog} class="w-7 h-7 mr-2 rounded-full"/>
 			{post.blog.title}
 		</a>

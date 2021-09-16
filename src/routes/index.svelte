@@ -42,7 +42,7 @@
 		<Post blog={blogFeatured} featured/>
 	</div>
 
-	<div class="grid grid-cols-1 md:grid-cols-3 gap-8 divide-x">
+	<div class="grid grid-cols-1 md:grid-cols-3 gap-12 divide-x">
 
 		<div class="md:col-span-2">
 			<div class="posts space-y-8 sm:space-y-16 ">
@@ -59,7 +59,7 @@
 			</a>
 		</div>
 
-		<aside class="sidebar space-y-6 divide-y pl-8">
+		<aside class="sidebar divide-y pl-8">
 			<Gaceta/>
 			<Quote/>
 			<Joke/>
