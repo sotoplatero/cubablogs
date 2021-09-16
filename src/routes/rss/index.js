@@ -20,7 +20,7 @@ export async function get() {
     )
 
 	const rssFeed = `<?xml version="1.0"?>
-	<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
 		<channel>
 			<title>CubaBlog » Últimas Noticias de Cuba por sus Blogueros</title>
 			<atom:link href="https://cubablog.net/rss" rel="self" type="application/rss+xml" />
