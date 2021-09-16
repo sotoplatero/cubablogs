@@ -47,16 +47,12 @@ export async function post(request) {
 
 
 		const post = await getPost(rss)
-	
+
 		blog = {
 			url,
-
 			title: $('title').text() || $(selectors.title).attr('content'),
-
 			description: $(selectors.description).attr('content'),
-
 			author: $(selectors.author).attr('content'),
-
 			logo: await ( async function(){
 				let logo = ''
 				if ( /medium\.com|getrevue\.co/.test(url) ) {
@@ -75,17 +71,15 @@ export async function post(request) {
 				}
 				return getDomain(logo) ? logo : url + logo
 			})(),
-
 			image: $(selectors.image).attr('content'),
-
 			twitter: ( function() {
 				let user = $(selectors.twitterUser)?.attr('content') || $(selectors.twitterSite)?.attr('content')
 
 				if ( !user ) {
 					let url = $('[href*="twitter.com"]').attr('href')
-					if ( url || /\@?w{1,15}$/.test(url) ) {
-						user = url.split('/').pop().split('?')[0]
-					} 
+					if ( !url && !/\@?w{1,15}$/.test(url) ) return
+
+					user = url.split('/').pop().split('?')[0]
 				}
 				let username = user.replace(/@/g,'')
 
@@ -95,13 +89,13 @@ export async function post(request) {
 					avatar: `https://unavatar.io/twitter/${username}`
 				}
 			})(),
-
 			github: { 
 				url: $(selectors.github)?.attr('href'),
 			},
 			rss,
 			post,
 		}
+
 
 		let { data, error } = await supabase
 		  .from('blogs')
@@ -123,6 +117,7 @@ export async function post(request) {
 
 	} catch (e) {
 		return {
+			status: 500,
 			body: e
 		};		
 	}

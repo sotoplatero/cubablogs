@@ -15,9 +15,7 @@ let parser = new Parser({
 });
 
 async function getOgImage(url) {
-	console.log(url)
 	const res = await fetch(url)
-	console.log(res)
 	if (!res.ok) return
 	
 	const html = await res.text()
@@ -35,7 +33,6 @@ export default async function (url) {
     		console.log('error' + e)
     		return {}
     	}
-		console.log(feed)
 		let item = feed.items[0]
 
 		const extract = (string = '') => string.split('.').filter((el,idx)=>idx<3).join('.') + '.'
