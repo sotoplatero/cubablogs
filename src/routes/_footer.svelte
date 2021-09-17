@@ -14,7 +14,7 @@
 			</a>	
 		</div>
 		<div class="w-3/4 mx-auto text-center">
-			<p class="mb-4 w-full sm:w-1/2 mx-auto text-gray-700">Si ❤️ <b>Cubablog</b> apoyanos y compranos café para estar despiertos y seguir mejorandolo 🚀</p>
+			<p class="mb-4 w-full sm:w-1/2 mx-auto text-gray-700">Si ❤️ <b>Cubablog</b> apóyanos y cómpranos café para estar despiertos y seguir mejorandolo 🚀</p>
 			<Kofi label="Compranos Café" />
 		</div>
 		

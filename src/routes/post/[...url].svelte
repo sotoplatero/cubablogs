@@ -45,6 +45,7 @@
 />
 
 <article class="post prose md:prose-lg xl:prose-xl mx-auto mt-10">
+	<img src="{post.image}" alt="">
 	<div class="text-center mb-6">
 		<h1 class="post-title">
 			{post.title}
@@ -95,10 +96,13 @@
 
 </article>
 
-<div class="flex justify-between text-xl max-w-[64ch] mx-auto mt-8">
-	{#each post.related as {url,title}, index}
-		<h3 class="m-0 text-xl font-semibold {index===0 ? 'text-left' : 'text-right'}">
-			<a href="{url}">{title}</a>
-		</h3>
-	{/each}
+<div class=" max-w-[64ch] mx-auto text-xl mt-16">
+	<div class="line-clamp-1 text-lg">Más en <strong>{post.blog.title}</strong></div>
+	<div class="grid grid-cols-2 gap-8  border-t pt-4">
+		{#each post.related as {url,title}, index}
+			<h3 class="m-0 text-xl font-semibold {index===0 ? 'text-left' : 'text-right'}">
+				<a href="{url}">{title}</a>
+			</h3>
+		{/each}
+	</div>
 </div>
