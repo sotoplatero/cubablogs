@@ -3,6 +3,8 @@ import slugify from '$lib/slug'
 import sanitizeHtml from 'sanitize-html'
 import supabase from '$lib/supabase'
 import { getHostname } from 'tldts'
+
+import '$lib/random'
 let parser = new Parser()
 /**
  * @type {import('@sveltejs/kit').Load}
@@ -27,6 +29,17 @@ export async function get({query}) {
 	const link = url.replace(/^\d+\//,'')
 	const feed = await parser.parseURL( blog.rss );
 	let post = feed.items.find( el => el.link.indexOf(link) >= 0 )
+
+	const related = feed.items
+		.filter( el => el.link.indexOf(link) === -1 )
+		.shuffle()
+		.slice(0,2)
+		.map( el => ({
+			title: el.title,
+			url: `/post/${blog.id}/${el.link.replace(/https?:\/\//,'')}`
+		}))
+
+
 	const options = {
 	  	allowedTags: sanitizeHtml.defaults.allowedTags.concat([ 'img' ]),
 		allowedAttributes: {
@@ -48,6 +61,7 @@ export async function get({query}) {
 		body: {
 			...post,
 			url: `/post/${blog.id}/${post.link.replace(/https?:\/\//,'')}`,
+			related,
 			blog: {
 				id: blog.id,
 				title: feed.title,

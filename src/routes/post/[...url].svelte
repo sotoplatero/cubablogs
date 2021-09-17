@@ -92,4 +92,13 @@
 		</a>			
 	</div>
 
+
 </article>
+
+<div class="flex justify-between text-xl max-w-[64ch] mx-auto mt-8">
+	{#each post.related as {url,title}, index}
+		<h3 class="m-0 text-xl font-semibold {index===0 ? 'text-left' : 'text-right'}">
+			<a href="{url}">{title}</a>
+		</h3>
+	{/each}
+</div>
