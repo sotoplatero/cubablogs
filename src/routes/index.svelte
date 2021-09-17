@@ -27,10 +27,12 @@
 	import Joke from '$lib/gadgets/joke.svelte'
 	import Gaceta from '$lib/gadgets/gaceta.svelte'
 	import Ephemeris from '$lib/gadgets/ephemeris.svelte'
+	import '$lib/isToday'
+	import '$lib/random'
 	
 	export let blogs = []
 
-	let blogFeatured = blogs.find( el => !!el.post.image )
+	let blogFeatured = blogs.filter( el => !!el.post.image && el.post.date.isToday() ).random()
 	$: indexFeatured = blogs.findIndex( el => el.url == blogFeatured.url )
 
 </script>
