@@ -41,21 +41,35 @@ export async function get({query}) {
 
 
 	const options = {
-	  	allowedTags: sanitizeHtml.defaults.allowedTags.concat([ 'img' ]),
+	  	allowedTags: sanitizeHtml.defaults.allowedTags.concat([ 'img','script' ]),
+	  	allowVulnerableTags: true,
 		allowedAttributes: {
-		  a: [ 'href', 'name', 'target' ],
-		  img: [ 'src' ]
+			a: [ 'href', 'name', 'target' ],
+			img: [ 'src', 'data-*' ],
+			script: ['src'],
+			blockquote: ['class','data-*']
 		},	 
-	    exclusiveFilter: function(frame) {
-	      return /p|table/.test(frame.tag) && !frame.text.trim();
-	    }		 	
-	 //  	transformTags: {
-		// 	'img': sanitizeHtml.simpleTransform('ul', {class: 'foo'}),
-		// }
+		allowedScriptDomains: ['twitter.com'],
+	  //   exclusiveFilter: function(frame) {
+			// return /p|table/.test(frame.tag) && !frame.text.trim();
+	  //   },	 	
+	  	transformTags: {
+			'img': function(tagName, attribs) {
+				// console.log(attribs['data-srcset'])
+			    return {
+			        tagName: 'img',
+			        attribs: {
+			          src: attribs['data-srcset'] || attribs['src'],
+			          alt: attribs['alt']
+			        }
+		        }		      	
+		     }
+		}
 	}
 	const html = post['content:encoded'] ? post['content:encoded'] : post['content']
-	// post['body'] = sanitizeHtml( html, options)
-	post['body'] = html
+	// console.log(post['content:encoded'])
+	post['body'] = sanitizeHtml( html, options)
+	// post['body'] = html
 
 	return {
 		body: {

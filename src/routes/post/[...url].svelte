@@ -50,20 +50,22 @@
 		<h1 class="post-title">
 			{post.title}
 		</h1>
-		<a href="/blogs/{post.blog.id}/{post.blog.url.replace(/^https?:\/\//,'')}" class="post-author flex items-center justify-center  text-lg font-semibold" >
-			<Avatar blog={post.blog} class="w-7 h-7 mr-2 rounded-full"/>
-			{post.blog.title}
-		</a>
-		<div class="post-date" datetime="{new Date(post.pubDate).getTime()}">
-			{new Date(post.pubDate).toLocaleDateString(
-				'es-ES', 
-				{ 
-					month:"short", 
-					day:"numeric", 
-					year: "numeric"
-				})
-			}
-		</div>				
+		<div class="text-center">
+			<a href="/blogs/{post.blog.id}/{post.blog.url.replace(/^https?:\/\//,'')}" class="post-author flex items-center justify-center" >
+				<Avatar blog={post.blog} class="w-8 h-8 !m-0 rounded-full"/>
+				<span class="ml-2">{post.blog.title}</span>
+			</a>
+			<div class="post-date" datetime="{new Date(post.pubDate).getTime()}">
+				{new Date(post.pubDate).toLocaleDateString(
+					'es-ES', 
+					{ 
+						month:"short", 
+						day:"numeric", 
+						year: "numeric"
+					})
+				}
+			</div>				
+		</div>
 	</div>
 
 	<div  class="flex items-center justify-end print:hidden space-x-2 mb-4 !text-gray-600 not-sr-only">
