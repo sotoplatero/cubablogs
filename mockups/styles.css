@@ -1,0 +1,54 @@
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+body {
+  background: #f9f9f9;
+}
+main > .container {
+  padding: 60px 15px 0;
+  font-weight: 300;
+}
+.card {
+  border: none;
+  box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important;
+}
+.card-title {
+  font-weight: 300!important;
+}
+
+.card blockquote {
+  font-style: italic;
+  color: grey;
+  font-size: 1rem;
+}
+
+.img-wrap {
+  position: relative;
+  display: block;
+}
+.card-img-overlay {
+  position: absolute;
+  top: auto;
+  bottom: -.5rem;
+  font-size: .85rem;
+  font-weight: 400;
+  color: #f9f9f9;
+  /* color: #FAF8BE; */
+  text-shadow: 2px 2px 2px black;
+}
+
+.card .badge {
+  background: #f9f9f9;
+  box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important;
+  font-weight: 400;
+  color: currentColor!important;
+  border-radius: 50rem!important
+}
+
+.card .badge.filter {
+  background: #FAF8BE;
+}
+
+.card .badge.filter.out {
+  text-decoration: line-through;
+}
