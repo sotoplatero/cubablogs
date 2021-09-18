@@ -1,4 +1,6 @@
 <script context="module">
+	import '$lib/isToday'
+	import '$lib/random'	
 	/**
 	 * @type {import('@sveltejs/kit').Load}
 	 */
@@ -13,9 +15,14 @@
 			};
 		}
 
+		const allBlogs = await res.json()
+		const blogFeatured = allBlogs.filter( el => !!el.post.image && el.post.date.isToday() ).random()
+		const blogs = allBlogs.filter( el => el.url !== blogFeatured.url )
+	// $: indexFeatured = blogs.findIndex( el => el.url == blogFeatured.url )
+
 		return {
 			// props: { blogs: blogs.filter(el=>!!el.post.description) }
-			props: { blogs: await res.json() }
+			props: { blogs,	blogFeatured }
 		};
 
 	}
@@ -27,11 +34,14 @@
 	import Joke from '$lib/gadgets/joke.svelte'
 	import Gaceta from '$lib/gadgets/gaceta.svelte'
 	import Ephemeris from '$lib/gadgets/ephemeris.svelte'
+	import '$lib/isToday'
+	import '$lib/random'
 	
 	export let blogs = []
+	export let blogFeatured = {}
 
-	let blogFeatured = blogs.find( el => !!el.post.image )
-	$: indexFeatured = blogs.findIndex( el => el.url == blogFeatured.url )
+	// $: blogFeatured = blogs.filter( el+ => !!el.post.image && el.post.date.isToday() ).random()
+	// $: indexFeatured = blogs.findIndex( el => el.url == blogFeatured.url )
 
 </script>
 
@@ -46,7 +56,7 @@
 
 		<div class="md:col-span-2">
 			<div class="posts space-y-8 sm:space-y-16 ">
-				{#each blogs.filter( (el, idx) => idx !== indexFeatured ) as blog (blog.post.url)}
+				{#each blogs as blog (blog.post.url)}
 					<Post {blog} />
 				{/each}
 			</div>

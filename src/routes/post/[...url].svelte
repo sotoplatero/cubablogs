@@ -45,24 +45,27 @@
 />
 
 <article class="post prose md:prose-lg xl:prose-xl mx-auto mt-10">
+	<img src="{post.image}" alt="">
 	<div class="text-center mb-6">
 		<h1 class="post-title">
 			{post.title}
 		</h1>
-		<a href="/blogs/{post.blog.id}/{post.blog.url.replace(/^https?:\/\//,'')}" class="post-author flex items-center justify-center  text-lg font-semibold" >
-			<Avatar blog={post.blog} class="w-7 h-7 mr-2 rounded-full"/>
-			{post.blog.title}
-		</a>
-		<div class="post-date" datetime="{new Date(post.pubDate).getTime()}">
-			{new Date(post.pubDate).toLocaleDateString(
-				'es-ES', 
-				{ 
-					month:"short", 
-					day:"numeric", 
-					year: "numeric"
-				})
-			}
-		</div>				
+		<div class="text-center">
+			<a href="/blogs/{post.blog.id}/{post.blog.url.replace(/^https?:\/\//,'')}" class="post-author flex items-center justify-center" >
+				<Avatar blog={post.blog} class="w-8 h-8 !m-0 rounded-full"/>
+				<span class="ml-2">{post.blog.title}</span>
+			</a>
+			<div class="post-date" datetime="{new Date(post.pubDate).getTime()}">
+				{new Date(post.pubDate).toLocaleDateString(
+					'es-ES', 
+					{ 
+						month:"short", 
+						day:"numeric", 
+						year: "numeric"
+					})
+				}
+			</div>				
+		</div>
 	</div>
 
 	<div  class="flex items-center justify-end print:hidden space-x-2 mb-4 !text-gray-600 not-sr-only">
@@ -92,4 +95,16 @@
 		</a>			
 	</div>
 
+
 </article>
+
+<div class=" max-w-[64ch] mx-auto text-xl mt-16">
+	<div class="line-clamp-1 text-base sm:text-lg">Más en <strong>{post.blog.title}</strong></div>
+	<div class="sm:grid sm:grid-cols-2 space-y-6 sm:space-y-0 sm:gap-8 text-lg sm:text-xl border-t pt-4">
+		{#each post.related as {url,title}, index}
+			<h3 class="m-0 font-semibold text-center {index===0 ? 'sm:text-left' : 'sm:text-right'}">
+				<a href="{url}">{title}</a>
+			</h3>
+		{/each}
+	</div>
+</div>

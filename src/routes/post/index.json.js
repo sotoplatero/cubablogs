@@ -3,6 +3,8 @@ import slugify from '$lib/slug'
 import sanitizeHtml from 'sanitize-html'
 import supabase from '$lib/supabase'
 import { getHostname } from 'tldts'
+
+import '$lib/random'
 let parser = new Parser()
 /**
  * @type {import('@sveltejs/kit').Load}
@@ -27,27 +29,53 @@ export async function get({query}) {
 	const link = url.replace(/^\d+\//,'')
 	const feed = await parser.parseURL( blog.rss );
 	let post = feed.items.find( el => el.link.indexOf(link) >= 0 )
+
+	const related = feed.items
+		.filter( el => el.link.indexOf(link) === -1 )
+		.shuffle()
+		.slice(0,2)
+		.map( el => ({
+			title: el.title,
+			url: `/post/${blog.id}/${el.link.replace(/https?:\/\//,'')}`
+		}))
+
+
 	const options = {
-	  	allowedTags: sanitizeHtml.defaults.allowedTags.concat([ 'img' ]),
+	  	allowedTags: sanitizeHtml.defaults.allowedTags.concat([ 'img','script' ]),
+	  	allowVulnerableTags: true,
 		allowedAttributes: {
-		  a: [ 'href', 'name', 'target' ],
-		  img: [ 'src' ]
+			a: [ 'href', 'name', 'target' ],
+			img: [ 'src', 'data-*' ],
+			script: ['src'],
+			blockquote: ['class','data-*']
 		},	 
-	    exclusiveFilter: function(frame) {
-	      return /p|table/.test(frame.tag) && !frame.text.trim();
-	    }		 	
-	 //  	transformTags: {
-		// 	'img': sanitizeHtml.simpleTransform('ul', {class: 'foo'}),
-		// }
+		allowedScriptDomains: ['twitter.com'],
+	  //   exclusiveFilter: function(frame) {
+			// return /p|table/.test(frame.tag) && !frame.text.trim();
+	  //   },	 	
+	  	transformTags: {
+			'img': function(tagName, attribs) {
+				// console.log(attribs['data-srcset'])
+			    return {
+			        tagName: 'img',
+			        attribs: {
+			          src: attribs['data-srcset'] || attribs['src'],
+			          alt: attribs['alt']
+			        }
+		        }		      	
+		     }
+		}
 	}
 	const html = post['content:encoded'] ? post['content:encoded'] : post['content']
-	// post['body'] = sanitizeHtml( html, options)
-	post['body'] = html
+	// console.log(post['content:encoded'])
+	post['body'] = sanitizeHtml( html, options)
+	// post['body'] = html
 
 	return {
 		body: {
 			...post,
 			url: `/post/${blog.id}/${post.link.replace(/https?:\/\//,'')}`,
+			related,
 			blog: {
 				id: blog.id,
 				title: feed.title,
