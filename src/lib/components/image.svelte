@@ -4,13 +4,13 @@
 	export { klass as class }
 	let klass = ''
 
-	$: [domain,path] = url
+	$: urlCleared = url.split('?')[0]
+	$: urlArr = urlCleared 
 		.replace(/^https?:\/\//,'')
-		.replace(/\//,'|')
-		.split('|')
+		.split('/')
 
-	$: src = /\.(jpg|jpeg|png|gif|webp)$/i.test(url) 
-		? `https://cdn.statically.io/img/${domain}/f=auto,w=600/${path}`
+	$: src = /\.(jpg|jpeg|png|gif|webp)$/i.test(urlCleared) 
+		? `https://cdn.statically.io/img/${urlArr[0]}/f=auto,w=600/${urlArr.slice(1).join('/')}`
 		: url
 
 </script>
