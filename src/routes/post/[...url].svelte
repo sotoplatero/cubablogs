@@ -42,6 +42,7 @@
 	author={post.blog.title}
 	avatar={post.blog.logo}
 	url={`https://cubablog.net${post.url}`}
+	image={post.image}
 />
 
 <article class="post prose md:prose-lg xl:prose-xl mx-auto mt-10">

@@ -15,7 +15,7 @@
 
 </script>
 
-<div class="gaceta w-full py-6 px-5">
+<div class="gaceta w-full py-6 ">
 	{#await promiseGaceta }
 		<Loading/>
 	{:then gaceta}

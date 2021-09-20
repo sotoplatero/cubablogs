@@ -14,6 +14,9 @@ const config = {
 		  	}
 		}
 	},
+    corePlugins: {
+	    container: false,
+    },
 	plugins: [
 		require('@tailwindcss/aspect-ratio'),
 		require('@tailwindcss/line-clamp'),

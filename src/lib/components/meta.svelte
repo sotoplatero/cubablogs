@@ -8,7 +8,7 @@
 	export let isPost = 0
 	export let avatar = ''
 
-	$: image = `https://og.beyondco.de/${title}.png?theme=dark&md=0&showLogo=0&body=${description}&fontSize=150px&isPost=${isPost}&author=${author}&authorAvatar=${avatar}`
+	$: image = image || `https://og.beyondco.de/${title}.png?theme=dark&md=0&showLogo=0&body=${description}&fontSize=150px&isPost=${isPost}&author=${author}&authorAvatar=${avatar}`
 </script>
 
 <svelte:head>

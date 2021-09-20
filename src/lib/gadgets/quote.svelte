@@ -17,7 +17,7 @@
 		promiseQuote = getQuote()
 	}	
 </script>
-<div class="quote py-6 px-6">
+<div class="quote py-6 ">
 	{#await promiseQuote }
 		<Loading/>
 	{:then quote}

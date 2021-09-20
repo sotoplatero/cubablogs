@@ -23,7 +23,7 @@
 		} catch (e) { console.log(e)}
 	}	
 </script>
-<div class="joke w-full py-6 px-6">
+<div class="joke w-full py-6">
 	{#await promiseJoke}
 
 		<Loading />
