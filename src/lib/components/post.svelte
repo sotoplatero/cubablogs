@@ -44,7 +44,7 @@
 		<a href={blog.post.url} target="_blank" rel="noopener nofollower" class="w-1/3 { featured ? 'sm:w-1/2' : 'sm:w-2/6'}  flex-shrink-0 ml-2 sm:ml-6">
 
 			<div class="aspect-w-4 { featured ? 'aspect-h-3' : 'aspect-h-4'} overflow-hidden rounded">
-			{#if image}
+			{#if blog.post.image}
 				<Image 
 					url={blog.post.image} 
 					alt={blog.post.title} 

@@ -2,6 +2,7 @@ import Parser from 'rss-parser';
 import slugify from '$lib/slug'	
 import sanitizeHtml from 'sanitize-html'
 import supabase from '$lib/supabase'
+import getOgImage from '$lib/ogimage'
 import { getHostname } from 'tldts'
 
 import '$lib/random'
@@ -29,6 +30,7 @@ export async function get({query}) {
 	const link = url.replace(/^\d+\//,'')
 	const feed = await parser.parseURL( blog.rss );
 	let post = feed.items.find( el => el.link.indexOf(link) >= 0 )
+
 
 	const related = feed.items
 		.filter( el => el.link.indexOf(link) === -1 )
@@ -76,6 +78,7 @@ export async function get({query}) {
 			...post,
 			url: `/post/${blog.id}/${post.link.replace(/https?:\/\//,'')}`,
 			related,
+			image: await getOgImage(post.link),
 			blog: {
 				id: blog.id,
 				title: feed.title,

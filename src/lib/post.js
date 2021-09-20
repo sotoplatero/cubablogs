@@ -30,7 +30,6 @@ export default async function (url) {
     	try	{
 			feed = await parser.parseURL( url );
     	} catch (e) {
-    		console.log('error' + e)
     		return {}
     	}
 		let item = feed.items[0]

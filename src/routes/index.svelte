@@ -16,7 +16,8 @@
 		}
 
 		const allBlogs = await res.json()
-		const blogsWithImage = allBlogs.filter( el => !!el.post.image )
+		console.log(allBlogs)
+		const blogsWithImage = allBlogs.filter( el => !!el.post?.image )
 		const blogFeatured = blogsWithImage.filter( el => el.post.date.isToday() ).random() ?? blogsWithImage[0]
 		const blogs = allBlogs.filter( el => el.url !== blogFeatured.url )
 	// $: indexFeatured = blogs.findIndex( el => el.url == blogFeatured.url )

@@ -45,8 +45,8 @@
 	image={post.image}
 />
 
+<img src="{post.image}" alt="">
 <article class="post prose md:prose-lg xl:prose-xl mx-auto mt-10">
-	<img src="{post.image}" alt="">
 	<div class="text-center mb-6">
 		<h1 class="post-title">
 			{post.title}
