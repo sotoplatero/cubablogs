@@ -42,9 +42,6 @@
 	export let blogs = []
 	export let blogFeatured = {}
 
-	// $: blogFeatured = blogs.filter( el+ => !!el.post.image && el.post.date.isToday() ).random()
-	// $: indexFeatured = blogs.findIndex( el => el.url == blogFeatured.url )
-
 </script>
 
 <Meta/>

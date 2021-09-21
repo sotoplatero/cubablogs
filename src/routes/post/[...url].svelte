@@ -18,7 +18,6 @@
 	}
 </script>
 <script>
-	import { page } from '$app/stores';
 	import { browser } from '$app/env';
 	import Avatar from '$lib/components/avatar.svelte'	
 	import Meta from '$lib/components/meta.svelte'	
@@ -54,7 +53,9 @@
 		<div class="text-center">
 			<a href="/blogs/{post.blog.id}/{post.blog.url.replace(/^https?:\/\//,'')}" class="post-author flex items-center justify-center" >
 				<Avatar blog={post.blog} class="w-8 h-8 !m-0 rounded-full"/>
-				<span class="ml-2">{post.blog.title}</span>
+				<span class="ml-2">
+					{post.blog.title}
+				</span>
 			</a>
 			<div class="post-date" datetime="{new Date(post.pubDate).getTime()}">
 				{new Date(post.pubDate).toLocaleDateString(

@@ -27,13 +27,12 @@ export async function get({query}) {
 		}		
 	}
 
-	const link = url.replace(/^\d+\//,'')
+	const link = url.replace(/^\d+\//,'').toLowerCase()
 	const feed = await parser.parseURL( blog.rss );
 	let post = feed.items.find( el => el.link.indexOf(link) >= 0 )
 
-
 	const related = feed.items
-		.filter( el => el.link.indexOf(link) === -1 )
+		.filter( el => el.link.toLowerCase().indexOf(link) === -1 )
 		.shuffle()
 		.slice(0,2)
 		.map( el => ({
@@ -49,7 +48,7 @@ export async function get({query}) {
 			a: [ 'href', 'name', 'target' ],
 			img: [ 'src', 'data-*' ],
 			script: ['src'],
-			blockquote: ['class','data-*']
+			blockquote: ['class','data-*'],
 		},	 
 		allowedScriptDomains: ['twitter.com'],
 	  //   exclusiveFilter: function(frame) {
