@@ -31,6 +31,8 @@ export async function get({query}) {
 	const feed = await parser.parseURL( blog.rss );
 	let post = feed.items.find( el => el.link.indexOf(link) >= 0 )
 
+	if (!post) return {}
+
 	const related = feed.items
 		.filter( el => el.link.toLowerCase().indexOf(link) === -1 )
 		.shuffle()
