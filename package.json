@@ -39,6 +39,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@mozilla/readability": "^0.4.1",
 		"@postlight/mercury-parser": "^2.2.1",
 		"cheerio": "^1.0.0-rc.10",
 		"js-base64": "^3.7.2",

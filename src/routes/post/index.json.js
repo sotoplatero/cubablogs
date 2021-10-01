@@ -3,7 +3,9 @@ import slugify from '$lib/slug'
 import supabase from '$lib/supabase'
 import getOgImage from '$lib/ogimage'
 import { getHostname } from 'tldts'
-import Mercury from '@postlight/mercury-parser';
+// import Mercury from '@postlight/mercury-parser';
+import { Readability } from '@mozilla/readability'
+import { JSDOM } from 'jsdom'
 
 import '$lib/random'
 let parser = new Parser()
@@ -30,7 +32,12 @@ export async function get({query}) {
 	const link = url.replace(/^\d+\//,'').toLowerCase()
 	const feed = await parser.parseURL( blog.rss );
 	const post = feed.items.find( el => el.link.indexOf(link) >= 0 )
-	const article = await Mercury.parse(post.link)
+	// const article = await Mercury.parse(post.link)
+
+	const html = await fetch('https://' +link).then(res=>res.text())
+	var doc = new JSDOM(html);
+	let reader = new Readability(doc.window.document);
+	let article = reader.parse();	
 
    //  const article = await extract('https://' + link,{
    //  	wordsPerMinute: 250,
@@ -90,9 +97,8 @@ export async function get({query}) {
 			article,
 			title: article.title,
 			pubDate: post.pubDate,
-			link: article.url,
-			url: `/post/${blog.id}/${article.url.replace(/https?:\/\//,'')}`,
-			body: article.content,
+			link: post.link,
+			url: `/post/${blog.id}/${post.link.replace(/https?:\/\//,'')}`,
 			blog: {
 				id: blog.id,
 				title: feed.title,
