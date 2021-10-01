@@ -13,8 +13,8 @@ export async function get() {
 	        <title>${post.title}</title>
 	        <description>${post.description}</description>
 	        <author>${post.author}</author>
-	        <link>${post.url}</link>
-	        <guid>${post.url}</guid>
+	        <link>${post.url.split('?')[0]}</link>
+	        <guid>${post.url.split('?')[0]}</guid>
 	        <pubDate>${post.date}</pubDate>
         </item>`
     )

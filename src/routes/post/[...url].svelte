@@ -52,7 +52,7 @@
 		</h1>
 		<div class="text-center">
 			<a href="/blogs/{post.blog.id}/{post.blog.url.replace(/^https?:\/\//,'')}" class="post-author flex items-center justify-center" >
-				<Avatar blog={post.blog} class="w-8 h-8 !m-0 rounded-full"/>
+				<Avatar blog={post.blog} class="w-12 h-12 !m-0 rounded-full"/>
 				<span class="ml-2">
 					{post.blog.title}
 				</span>
@@ -89,7 +89,7 @@
 	</div>
 
 	<div class="post-body text-justify">
-		{@html post['body'] }
+		{@html post.article.content }
 	</div>
 	<div class="text-center mt-8 ">
 		<a href="{post.link}" class="" target="_blank" rel="noopener nofollower">
