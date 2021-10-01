@@ -30,7 +30,7 @@ export async function get({query}) {
 	const link = url.replace(/^\d+\//,'').toLowerCase()
 	const feed = await parser.parseURL( blog.rss );
 	const post = feed.items.find( el => el.link.indexOf(link) >= 0 )
-	const article = await Mercury.parse(post.link).then(res=>res)
+	const article = await Mercury.parse(post.link)
 
    //  const article = await extract('https://' + link,{
    //  	wordsPerMinute: 250,
