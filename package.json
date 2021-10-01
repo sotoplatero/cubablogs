@@ -9,7 +9,6 @@
 		"format": "prettier --write --plugin-search-dir=. ."
 	},
 	"devDependencies": {
-		"@postlight/mercury-parser": "^2.2.1",
 		"@supabase/supabase-js": "^1.22.6",
 		"@sveltejs/adapter-netlify": "^1.0.0-next.30",
 		"@sveltejs/adapter-vercel": "^1.0.0-next.28",
@@ -40,6 +39,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@postlight/mercury-parser": "^2.2.1",
 		"cheerio": "^1.0.0-rc.10",
 		"js-base64": "^3.7.1",
 		"node-telegram-bot-api": "^0.54.0",
