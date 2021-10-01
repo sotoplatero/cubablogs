@@ -1,12 +1,9 @@
 import Parser from 'rss-parser';
 import slugify from '$lib/slug'	
-import sanitizeHtml from 'sanitize-html'
 import supabase from '$lib/supabase'
 import getOgImage from '$lib/ogimage'
 import { getHostname } from 'tldts'
 import Mercury from '@postlight/mercury-parser';
-
-import { extract } from 'article-parser';
 
 import '$lib/random'
 let parser = new Parser()
@@ -33,7 +30,7 @@ export async function get({query}) {
 	const link = url.replace(/^\d+\//,'').toLowerCase()
 	const feed = await parser.parseURL( blog.rss );
 	const post = feed.items.find( el => el.link.indexOf(link) >= 0 )
-	const article = await Mercury.parse(post.link)
+	const article = await Mercury.parse(post.link).then(res=>res)
 
    //  const article = await extract('https://' + link,{
    //  	wordsPerMinute: 250,
