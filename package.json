@@ -42,6 +42,7 @@
 		"@postlight/mercury-parser": "^2.2.1",
 		"cheerio": "^1.0.0-rc.10",
 		"js-base64": "^3.7.2",
+		"jsdom": "^17.0.0",
 		"node-telegram-bot-api": "^0.54.0",
 		"request-promise-native": "^1.0.9",
 		"rss-parser": "^3.12.0",
