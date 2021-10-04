@@ -4,7 +4,8 @@ import supabase from '$lib/supabase'
 import getOgImage from '$lib/ogimage'
 import { getHostname } from 'tldts'
 // import Mercury from '@postlight/mercury-parser';
-import { Readability } from '@mozilla/readability'
+// import { Readability } from '@mozilla/readability'
+import {extract} from 'article-parser'
 import { JSDOM } from 'jsdom'
 
 import '$lib/random'
@@ -35,25 +36,22 @@ export async function get({query}) {
 	// const article = await Mercury.parse(post.link)
 
 	const html = await fetch('https://' +link).then(res=>res.text())
-	var doc = new JSDOM(html);
-	let reader = new Readability(doc.window.document);
-	let article = reader.parse();	
 
-   //  const article = await extract('https://' + link,{
-   //  	wordsPerMinute: 250,
-   //  	sanitizeHtmlOptions: {
-		 //  	transformTags: {
-			// 	'img': function(tagName, attribs) {
-			// 	    return {
-			// 	        // tagName: 'img',
-			// 	        attribs: {
-			// 	          src: attribs['data-srcset'] || attribs['src'] || '',
-			// 	        }
-			//         }		      	
-			//      }
-			// }    		
-   //  	}
-   //  });
+    const article = await extract('https://' + link,{
+    	wordsPerMinute: 250,
+    	sanitizeHtmlOptions: {
+		  	transformTags: {
+				'img': function(tagName, attribs) {
+				    return {
+				        // tagName: 'img',
+				        attribs: {
+				          src: attribs['data-srcset'] || attribs['src'] || '',
+				        }
+			        }		      	
+			     }
+			}    		
+    	}
+    });
 	  // try {
 	  //   console.log(article);
 	  // } catch (err) {
