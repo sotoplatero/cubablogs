@@ -5,8 +5,8 @@ import getOgImage from '$lib/ogimage'
 import { getHostname } from 'tldts'
 // import Mercury from '@postlight/mercury-parser';
 // import { Readability } from '@mozilla/readability'
-import pkg from 'article-parser';
-const { extract } = pkg;
+import articleParser from 'article-parser';
+const { extract } = articleParser;
 
 import '$lib/random'
 let parser = new Parser()

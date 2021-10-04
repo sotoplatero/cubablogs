@@ -35,6 +35,7 @@
 		"svelte": "^3.43.1",
 		"svelte-preprocess": "^4.9.8",
 		"tailwindcss": "^2.2.16",
+		"node-telegram-bot-api": "^0.54.0",
 		"unreset-css": "^1.0.1"
 	},
 	"type": "module",
@@ -42,8 +43,6 @@
 		"article-parser": "^4.2.10",
 		"cheerio": "^1.0.0-rc.10",
 		"js-base64": "^3.7.2",
-		"node-telegram-bot-api": "^0.54.0",
-		"request-promise-native": "^1.0.9",
 		"rss-parser": "^3.12.0",
 		"tldts": "^5.7.47",
 		"typescript": "^4.4.3"

@@ -6,7 +6,6 @@
 	import Share from '$lib/components/share.svelte'
 	import Avatar from '$lib/components/avatar.svelte'
 	export let blog
-	export let featured = false
 
 	// let image = blog.post.image ?? `https://cdn.statically.io/screenshot/${blog.post.url.replace(/^https?:\/\//,'')}`
 	let image = blog.post.image 
