@@ -5,6 +5,7 @@ export async function get() {
 	const { data: blogs, error } = await supabase
 		.from('blogs')
 		.select('*')
+		.neq('post->>title','')
 		.order('post->>date', { ascending: false })
 		.limit(10)
 
@@ -16,6 +17,7 @@ export async function get() {
 	        <link>${post.url}</link>
 	        <guid>${post.url}</guid>
 	        <pubDate>${post.date}</pubDate>
+	        <media:content url="${post.image}" medium="image">
         </item>`
     )
 
