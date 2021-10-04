@@ -4,10 +4,6 @@ import sanitizeHtml from 'sanitize-html'
 import supabase from '$lib/supabase'
 // import getOgImage from '$lib/ogimage'
 import { getHostname } from 'tldts'
-import Mercury from '@postlight/mercury-parser';
-
-
-// import { extract } from 'article-parser';
 
 import '$lib/random'
 let parser = new Parser()

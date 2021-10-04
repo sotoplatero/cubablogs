@@ -7,6 +7,7 @@ const db = {
 			.from('blogs')
 			.select('*')
 			.not('post','is', null)
+			.neq('post->>title', '')
 			.eq('trashed',false)
 			.order('post->>date', { ascending: false })
 			.limit(limit)
