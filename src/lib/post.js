@@ -1,5 +1,4 @@
 // import {Telegram} from 'telegraf'
-import TelegramBot from 'node-telegram-bot-api';
 import cheerio from 'cheerio'
 import Parser from 'rss-parser';
 
