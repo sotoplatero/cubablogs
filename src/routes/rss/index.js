@@ -13,8 +13,8 @@ export async function get() {
 	        <title>${post.title}</title>
 	        <description>${post.description}</description>
 	        <author>${post.author}</author>
-	        <link>${post.url}</link>
-	        <guid>${post.url}</guid>
+	        <guid><![CDATA[${post.url}]]></guid>
+	        <link><![CDATA[${post.url}]]></link>
 	        <pubDate>${post.date}</pubDate>
         </item>`
     )
