@@ -13,7 +13,7 @@
 		"@sveltejs/adapter-netlify": "^1.0.0-next.32",
 		"@sveltejs/adapter-vercel": "^1.0.0-next.30",
 		"@sveltejs/kit": "^1.0.0-next.179",
-		"@tailwindcss/aspect-ratio": "^0.2.1",
+		"@tailwindcss/aspect-ratio": "^0.2.2",
 		"@tailwindcss/line-clamp": "^0.2.2",
 		"@tailwindcss/typography": "^0.4.1",
 		"autoprefixer": "^10.3.6",
@@ -33,7 +33,7 @@
 		"prettier-plugin-svelte": "^2.4.0",
 		"sanitize-html": "^2.5.1",
 		"svelte": "^3.43.1",
-		"svelte-preprocess": "^4.9.7",
+		"svelte-preprocess": "^4.9.8",
 		"tailwindcss": "^2.2.16",
 		"unreset-css": "^1.0.1"
 	},
@@ -41,7 +41,6 @@
 	"dependencies": {
 		"article-parser": "^4.2.10",
 		"cheerio": "^1.0.0-rc.10",
-		"cosine": "0.0.1",
 		"js-base64": "^3.7.2",
 		"node-telegram-bot-api": "^0.54.0",
 		"request-promise-native": "^1.0.9",

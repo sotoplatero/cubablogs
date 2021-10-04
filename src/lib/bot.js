@@ -1,4 +1,3 @@
-process.env.NTBA_FIX_319 = 1;
 import TelegramBot from 'node-telegram-bot-api';
 
 const CHANNEL_PUBLIC_ID = -1001518905562 

@@ -1,7 +1,6 @@
 <script context="module">
 	export async function load({ page, fetch }) {
 		const {url} = page.params
-
 		const res = await fetch(`/post.json?url=${url}`)	
 
 		if ( !res.ok ) {
