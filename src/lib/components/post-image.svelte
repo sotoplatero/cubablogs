@@ -30,7 +30,7 @@
 				<span class="flex-shrink-0 rounded-full shadow overflow-hidden ">
 					<Avatar {blog} class="w-7 h-7"/>
 				</span>
-				<span class="ml-2 font-medium text-gray-600 line-clamp-1">
+				<span class="ml-2 font-medium text-gray-600 line-clamp-1 break-all">
 					{blog.post.author || blog.hostname}
 				</span>
 			</div>		

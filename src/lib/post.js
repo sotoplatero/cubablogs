@@ -74,6 +74,6 @@ export default async function (url) {
 			categories: item.categories,
 		}
 
-		return {post, link: feed.link}
+		return post
 
 }

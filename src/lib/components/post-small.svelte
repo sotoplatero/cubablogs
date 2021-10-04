@@ -24,8 +24,8 @@
 			</div>
 
 			<div class="sm:flex-grow">
-				<div class='flex items-center mb-1 mt-2 md:mt-0 line-clamp-1'>
-					<span class="font-sm">{blog.title}</span>
+				<div class='flex items-center mb-1 mt-2 md:mt-0  font-sm break-all line-clamp-1 '>
+					{blog.title}
 				</div>		
 
 				<h2 class="text-sm text-normal font-semibold !leading-snug transition text-gray-700 group-hover:text-gray-900">

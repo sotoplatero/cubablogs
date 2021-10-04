@@ -21,4 +21,4 @@
 
 </script>
 
-<img src={src} {alt} class="object-center object-cover transition duration-500 group-hover:scale-105  {klass} ">
+<img src={src} {alt} class="object-center object-cover transition duration-500 group-hover:scale-105 bg-gray-100 {klass} ">

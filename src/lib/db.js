@@ -2,7 +2,7 @@ import supabase from '$lib/supabase'
 import { getHostname } from 'tldts'
 
 const db = {
-	async home({limit=24}) {
+	async home({limit=25}) {
 		let { data: blogs, error } = await supabase
 			.from('blogs')
 			.select('*')
