@@ -1,12 +1,13 @@
 import Parser from 'rss-parser';
-import slugify from '$lib/slug'	
+// import slugify from '$lib/slug'	
+import sanitizeHtml from 'sanitize-html'
 import supabase from '$lib/supabase'
-import getOgImage from '$lib/ogimage'
+// import getOgImage from '$lib/ogimage'
 import { getHostname } from 'tldts'
-// import Mercury from '@postlight/mercury-parser';
-// import { Readability } from '@mozilla/readability'
-import articleParser from 'article-parser';
-const { extract } = articleParser;
+import Mercury from '@postlight/mercury-parser';
+
+
+// import { extract } from 'article-parser';
 
 import '$lib/random'
 let parser = new Parser()
@@ -33,70 +34,39 @@ export async function get({query}) {
 	const link = url.replace(/^\d+\//,'').toLowerCase()
 	const feed = await parser.parseURL( blog.rss );
 	const post = feed.items.find( el => el.link.indexOf(link) >= 0 )
-	// const article = await Mercury.parse(post.link)
 
-	const html = await fetch('https://' +link).then(res=>res.text())
+	if (!post) return {}
 
-    const article = await extract('https://' + link,{
-    	wordsPerMinute: 250,
-    	sanitizeHtmlOptions: {
-		  	transformTags: {
-				'img': function(tagName, attribs) {
-				    return {
-				        // tagName: 'img',
-				        attribs: {
-				          src: attribs['data-srcset'] || attribs['src'] || '',
-				        }
-			        }		      	
-			     }
-			}    		
-    	}
-    });
-	  // try {
-	  //   console.log(article);
-	  // } catch (err) {
-	  //   console.trace(err);
-	  // }
-
-	// const text = await fetch(blog.rss).then(res=>res.text())
-	// console.log(text)
-
-	// if (!post) return {}
-
-
-
-
-	// const options = {
-	//   	allowedTags: sanitizeHtml.defaults.allowedTags.concat([ 'img','script' ]),
-	//   	allowVulnerableTags: true,
-	// 	allowedAttributes: {
-	// 		a: [ 'href', 'name', 'target' ],
-	// 		img: [ 'src', 'data-*', 'alt' ],
-	// 		script: ['src'],
-	// 		blockquote: ['class','data-*'],
-	// 	},	 
-	// 	allowedScriptDomains: ['twitter.com'],
-	//   	transformTags: {
-	// 		'img': function(tagName, attribs) {
-	// 		    return {
-	// 		        tagName: 'img',
-	// 		        attribs: {
-	// 		          src: attribs['data-srcset'] || attribs['src'] || '',
-	// 		          alt: attribs['alt'] || ''
-	// 		        }
-	// 	        }		      	
-	// 	     }
-	// 	}
-	// }
-	// const content = post['content:encoded'] ? post['content:encoded'] : post['content']
+	const options = {
+	  	allowedTags: sanitizeHtml.defaults.allowedTags.concat([ 'img','script' ]),
+	  	allowVulnerableTags: true,
+		allowedAttributes: {
+			a: [ 'href', 'name', 'target' ],
+			img: [ 'src', 'data-*', 'alt' ],
+			script: ['src'],
+			blockquote: ['class','data-*'],
+		},	 
+		allowedScriptDomains: ['twitter.com'],
+	  	transformTags: {
+			'img': function(tagName, attribs) {
+			    return {
+			        tagName: 'img',
+			        attribs: {
+			          src: attribs['data-srcset'] || attribs['src'] || '',
+			          alt: attribs['alt'] || ''
+			        }
+		        }		      	
+		     }
+		}
+	}
+	const content = post['content:encoded'] ? post['content:encoded'] : post['content']
+	const body = sanitizeHtml(content,options);
 
 	return {
 		body: { 
-			article,
-			title: article.title,
-			pubDate: post.pubDate,
-			link: post.link,
+			...post,
 			url: `/post/${blog.id}/${post.link.replace(/https?:\/\//,'')}`,
+			body,
 			blog: {
 				id: blog.id,
 				title: feed.title,

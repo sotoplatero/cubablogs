@@ -1,6 +1,7 @@
 <script context="module">
 	export async function load({ page, fetch }) {
 		const {url} = page.params
+
 		const res = await fetch(`/post.json?url=${url}`)	
 
 		if ( !res.ok ) {
@@ -88,7 +89,7 @@
 	</div>
 
 	<div class="post-body text-justify">
-		{@html post.article.content }
+		{@html post.body }
 	</div>
 	<div class="text-center mt-8 ">
 		<a href="{post.link}" class="" target="_blank" rel="noopener nofollower">
