@@ -10,7 +10,7 @@ function notify(msg, channel = 'public') {
 
 	CHANNEL_ID = (channel === 'public')  ? CHANNEL_PUBLIC_ID : CHANNEL_ADMIN_ID
 
-	const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHANNEL_ID}&text=${encodeURIComponent(msg)}`
+	const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHANNEL_ID}&text=${encodeURIComponent(msg)}&parse_mode=Markdown`
 	try {
 		fetch(url)
 		  .then(response => response.json())

@@ -12,6 +12,7 @@ export async function get() {
 		.select('*')
 		.neq('post->>title','')
 		.neq('post->>image','')
+		.eq('trashed',false)
 		.order('post->>date', { ascending: false })
 		.limit(10)
 
