@@ -2,10 +2,16 @@ import supabase from '$lib/supabase'
 
 export async function get() {
 
+	const translate_re = /(\&|=)/g;
+    const translate = {
+		'&': '38',
+		'=': '61',
+    };
 	const { data: blogs, error } = await supabase
 		.from('blogs')
 		.select('*')
 		.neq('post->>title','')
+		.neq('post->>image','')
 		.order('post->>date', { ascending: false })
 		.limit(10)
 
@@ -17,7 +23,7 @@ export async function get() {
 	        <guid><![CDATA[${post.url}]]></guid>
 	        <link><![CDATA[${post.url}]]></link>
 	        <pubDate>${post.date}</pubDate>
-	        <media:content url="${post.image}" medium="image"/>
+	        <media:content url="${post.image.replace(translate_re, (match, entity) => `&#${translate[entity]};`)}" medium="image"/>
         </item>`
     )
 
