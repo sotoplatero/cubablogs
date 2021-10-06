@@ -39,7 +39,7 @@
 		
 </script>
 
-<div class="prose prose-lg mx-auto">
+<div class="prose prose-xl mx-auto">
 <!-- 	<div class="mb-6">
 		<input type="text" bind:value={search} class="border border-gray-300 p-3 w-full focus:outline-none focus:border-gray-400 text-xl">
 	</div> -->

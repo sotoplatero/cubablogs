@@ -5,7 +5,7 @@ import slug from '$lib/slug'
 
 export async function get() {
 
-	const { blogs, error } = await db.home({ limit: 25 })
+	const { blogs, error } = await db.home({ limit: 10 })
 	return {
 		body: blogs.map( el => ({
 			...el, 
