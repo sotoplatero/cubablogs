@@ -54,30 +54,26 @@
 				{/if}
 
 
-				<div class="flex justify-between items-center p-4">
-					<div class="flex-grow">
-						<!-- <a href="/posts/{blog.id}">{blog.id}</a>		 -->
-						<h2 class="font-semibold transition text-gray-700 group-hover:text-gray-900 !mb-2">
-							{blog.post.title}
-						</h2>	
-						<div class='flex items-center mb-1'>
-							<span class="flex-shrink-0 rounded-full shadow overflow-hidden ">
-								<Avatar {blog} class="w-9 h-9"/>
-							</span>
-							<span class="ml-2 font-medium text-gray-600 line-clamp-1 break-all">
-								{blog.hostname}
-							</span>
-						</div>		
-						<div class="h-96 overflow-hidden" use:removeimage={blog.post.image}>
-							{@html blog.post.content}
-						</div>
-						<div class="text-center mt-4">
-							<a href="{blog.post.url}" class="" target="_blank" rel="noopener nofollower">
-								Leer el Original		
-							</a>			
-						</div>	
+				<div class="p-4">
+					<h2 class="font-semibold transition text-gray-700 group-hover:text-gray-900 !mb-2">
+						{blog.post.title}
+					</h2>	
+					<div class='flex items-center mb-1'>
+						<span class="flex-shrink-0 rounded-full shadow overflow-hidden ">
+							<Avatar {blog} class="w-9 h-9"/>
+						</span>
+						<span class="ml-2 font-medium text-gray-600 line-clamp-1 break-all">
+							{blog.hostname}
+						</span>
+					</div>		
+					<div class="h-96 overflow-hidden" use:removeimage={blog.post.image}>
+						{@html blog.post.content}
 					</div>
-
+					<div class="text-center mt-4">
+						<a href="{blog.post.url}" class="" target="_blank" rel="noopener nofollower">
+							Leer el Original		
+						</a>			
+					</div>	
 				</div>
 			</article>
 			<div class="text-center text-4xl my-12">***</div>
