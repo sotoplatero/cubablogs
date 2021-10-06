@@ -14,7 +14,7 @@
 		return (!!blog.post && blog.post.image) 
 			? /\.(jpg|jpeg|png|gif|webp)$/i.test( blog.post.image ) 
 				? `https://cdn.statically.io/img/${urlArr[0]}/f=auto,w=600/${urlArr.slice(1).join('/')}`
-				: `/api/img/${blog.post.image.replace(/https?:\/\//,'')}` 
+				: blog.post.image
 			: `https://cdn.statically.io/screenshot/${blog.hostname}`
 	} 
 

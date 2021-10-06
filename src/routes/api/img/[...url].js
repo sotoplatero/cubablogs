@@ -9,14 +9,15 @@ export async function get({params}) {
 	if (res.ok) {
         // const resImage = await fetch(src)
         const buffer = await res.arrayBuffer()
-
+        const uint = new Uint8Array(buffer)
+        console.log(uint)
         return {
             headers: { 
                 'Content-Disposition': `attachment; filename="${params.url.replace('/','-')}"`,
                 'content-type': res.headers.get('content-type'),
                 'Cache-Control': `public, immutable, no-transform, s-maxage=31536000, max-age=31536000`,
             },
-            body: new Uint8Array(buffer)
+            body: uint
         }; 
     }
     
