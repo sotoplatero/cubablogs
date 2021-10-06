@@ -20,7 +20,7 @@
 
 			<div class="text-gray-500">
 				<div class='mb-1 mt-2 md:mt-0 line-clamp-1 break-all font-sm'>
-					{blog.title}
+					{blog.post.author}
 				</div>		
 
 				<h2 class="text-normal sm:text-lg font-semibold !leading-snug transition text-gray-700 group-hover:text-gray-900">
