@@ -30,6 +30,10 @@ export async function get({query}) {
 	const link = url.replace(/^\d+\//,'').toLowerCase()
 	const feed = await parser.parseURL( blog.rss );
 	const post = feed.items.find( el => el.link.toLowerCase().indexOf(link) >= 0)
+
+	const articleRes = await fetch(`crawl.cubablog.net/api/article?url=${encodeURIComponent(post.link)}`)
+	const article = articleRes.ok ? await articleRes.json() : {}
+
 	if (!post) return {}
 
 	const options = {
@@ -61,7 +65,7 @@ export async function get({query}) {
 		body: { 
 			...post,
 			url: `/post/${blog.id}/${post.link.replace(/https?:\/\//,'')}`,
-			body,
+			body: article.content ?? body,
 			blog: {
 				id: blog.id,
 				title: feed.title,

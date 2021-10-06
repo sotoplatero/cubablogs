@@ -14,13 +14,13 @@
 	$: url = `/post/${blog.id}/${blog.post.slug}`	
 </script>
 
-<a href={url} target="_blank" rel="noopener nofollower" class="block">
-	<article class="group" >
+<article class="group" >
+	<a href={url} target="_blank" rel="noopener nofollower" >
 		<div class="flex flex-col-reverse sm:flex-row justify-between items-center ">
 
-			<div class="sm:flex-grow text-gray-500">
-				<div class='flex items-center mb-1 mt-2 md:mt-0 line-clamp-1'>
-					<span class="font-sm">{blog.title}</span>
+			<div class="text-gray-500">
+				<div class='mb-1 mt-2 md:mt-0 line-clamp-1 break-all font-sm'>
+					{blog.title}
 				</div>		
 
 				<h2 class="text-normal sm:text-lg font-semibold !leading-snug transition text-gray-700 group-hover:text-gray-900">
@@ -36,5 +36,5 @@
 			</div>
 
 		</div>
-	</article>
-</a>
+	</a>
+</article>
