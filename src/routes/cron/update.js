@@ -17,7 +17,7 @@ export async function post() {
 
 	    		const post = await getPost( blog.rss )
 
-    				console.log(post?.url + '\n' + blog.post?.url + '\n\n' )
+    				// console.log(post?.url + '\n' + blog.post?.url + '\n\n' )
 	    		if ( 
 	    			JSON.stringify(post) !== '{}' &&
 	    			post?.url !== blog.post?.url
@@ -31,6 +31,10 @@ export async function post() {
 						notify(JSON.stringify(error,null,2),'admin')
 					}
 	    		}
+				const { data, error } = await supabase
+				  .from('blogs')	
+				  .update({post})
+				  .eq('id', blog.id) 
 
 
 	    	})
