@@ -24,11 +24,11 @@
 			</div>
 
 			<div class="sm:flex-grow">
-				<div class='flex items-center mb-1 mt-2 md:mt-0 font-sm text-gray-600 break-all line-clamp-1 '>
+				<div class='flex items-center mb-1 mt-2 md:mt-0 text-sm text-gray-600 break-all line-clamp-1 '>
 					{blog.post.author || blog.hostname}
 				</div>		
 
-				<h2 class="text-sm sm:text-normal font-semibold !leading-snug transition text-gray-700 group-hover:text-gray-900">
+				<h2 class="text-sm sm:text-base font-semibold !leading-snug transition text-gray-700 group-hover:text-gray-900">
 					{blog.post.title}
 				</h2>	
 				<span class="text-sm sm:text-normal sm:font-medium whitespace-nowrap text-gray-600">{date}</span>
