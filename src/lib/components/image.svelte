@@ -11,10 +11,10 @@
 		const urlWithoutQueryString = url && url.split('?')[0]
 		const urlArr = urlWithoutQueryString && urlWithoutQueryString.replace(/^https?:\/\//,'').split('/')
 
-		return (!!url) 
-			? /\.(jpg|jpeg|png|gif|webp)$/i.test( urlWithoutQueryString ) 
+		return (!!blog.post && blog.post.image) 
+			? /\.(jpg|jpeg|png|gif|webp)$/i.test( blog.post.image ) 
 				? `https://cdn.statically.io/img/${urlArr[0]}/f=auto,w=600/${urlArr.slice(1).join('/')}`
-				: url 
+				: `/api/img/${blog.post.image.replace(/https?:\/\//,'')}` 
 			: `https://cdn.statically.io/screenshot/${blog.hostname}`
 	} 
 

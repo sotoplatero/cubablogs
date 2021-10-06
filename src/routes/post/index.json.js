@@ -66,6 +66,7 @@ export async function get({query}) {
 			...post,
 			url: `/post/${blog.id}/${post.link.replace(/https?:\/\//,'')}`,
 			body: article.content ?? body,
+			image: article.image ?? post.image,
 			blog: {
 				id: blog.id,
 				title: feed.title,
