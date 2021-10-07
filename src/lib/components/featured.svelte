@@ -18,7 +18,7 @@
 <article class="group" >
 	<div class="flex-shrink-0 block">
 
-		<div class="aspect-w-4 aspect-h-3 overflow-hidden rounded-lg bg-gray-100 -mx-6 sm:mx-0">
+		<div class="aspect-w-16 aspect-h-9 overflow-hidden rounded-lg bg-gray-100 -mx-6 sm:mx-0">
 			<Image {blog} class="object-center object-cover "/>
 		</div>			
 
@@ -36,7 +36,7 @@
 				<span class="font-medium whitespace-nowrap">{date}</span>
 			</div>		
 			<!-- <a href="/posts/{blog.id}">{blog.id}</a>		 -->
-			<h2 class="text-xl sm:text-2xl font-semibold leading-normal transition text-gray-700 group-hover:text-gray-900">
+			<h2 class="text-xl sm:text-3xl font-semibold leading-normal transition text-gray-700 group-hover:text-gray-900">
 				{blog.post.title}
 			</h2>	
 			<div class="flex items-center justify-between mt-1 text-gray-400">

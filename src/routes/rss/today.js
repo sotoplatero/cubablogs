@@ -31,7 +31,13 @@ export async function get() {
 	</rss>`;
 
 	return {
-		headers: { 'Content-Type': "application/xml" },
+		headers: { 
+			'Cache-Control': `s-maxage=1, stale-while-revalidate`,
+			'Content-Type': "application/xml" 
+		},
 		body: rssFeed
 	};
 }
+
+const feed = () =>`
+`

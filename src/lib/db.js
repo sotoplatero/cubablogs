@@ -34,6 +34,11 @@ const db = {
 			.order('post->>date', { ascending: false })
 			.limit(10)
 
+		let { data, error:e } = await supabase.rpc('blogs_today')
+
+		if (e) console.error(e)
+		else console.log(data)
+
 		blogs = blogs.map( blog => ({...blog, hostname: getHostname(blog.url) }))
 
 		return { blogs , error }	
