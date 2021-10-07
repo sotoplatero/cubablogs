@@ -7,22 +7,23 @@
 	export let author = ''
 	export let isPost = 0
 	export let avatar = ''
+	export let image = ''
 
-	$: image = image || `https://og.beyondco.de/${title}.png?theme=dark&md=0&showLogo=0&body=${description}&fontSize=150px&isPost=${isPost}&author=${author}&authorAvatar=${avatar}`
+	$: src = image || `https://og.beyondco.de/${title}.png?theme=dark&md=0&showLogo=0&body=${description}&fontSize=150px&isPost=${isPost}&author=${author}&authorAvatar=${avatar}`
 </script>
 
 <svelte:head>
 	<meta property="og:title" content="{title}">
 	<meta property="og:description" content="{description}">
-	<meta property="og:image" content="{image}">
+	<meta property="og:image" content="{src}">
 
 	<meta name="twitter:title" content="{title}">
 	<meta name="twitter:description" content="{description}">
-	<meta name="twitter:image" content="{image}">
+	<meta name="twitter:image" content="{src}">
 	<meta property="og:url" content="{url}">
 
-	<link rel="canonical" href="{url}" />
-	<link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet"> 		
+<!-- 	<link rel="canonical" href="{url}" />
+	<link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet"> 		 -->
 	{#if !dev }
 		<script async defer data-website-id="5ff24f90-78df-49be-8d3f-54e5fb8d00bf" src="https://umami.dsoto.dev/umami.js"></script>		
 	{/if}

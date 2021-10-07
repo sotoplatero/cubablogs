@@ -32,8 +32,8 @@
 		adding = false
 
 		if (!res.ok) {
-			error = (res.status === 400) 
-				? 'La web no parece ser un blog'
+			error = (res.status === 404) 
+				? 'No se encuentra la fuente RSS del blog'
 				: "Ha ocurrido un error, intentelo más tarde";
 			return
 		}

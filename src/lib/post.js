@@ -1,5 +1,4 @@
 // import {Telegram} from 'telegraf'
-import TelegramBot from 'node-telegram-bot-api';
 import cheerio from 'cheerio'
 import Parser from 'rss-parser';
 
@@ -30,52 +29,57 @@ export default async function (url) {
     	try	{
 			feed = await parser.parseURL( url );
     	} catch (e) {
-    		console.log('error' + e)
     		return {}
     	}
 		let item = feed.items[0]
 
 		const extract = (string = '') => string.split('.').filter((el,idx)=>idx<3).join('.') + '.'
-		
-		const post = { 
+
+		const articleRes = await fetch(`https://crawl.cubablog.net/api/article?url=${encodeURIComponent(item.link)}`)
+		const article = articleRes.ok ? await articleRes.json() : {}
+
+		return { 
 			title: item.title,
 			url: item.link,
 			date: item.isoDate,
-			author: item.creator || item.dcCreator,
-			description: (function() {
-				if (!!item.description) return item.description
-
-				if (!!item.contentSnippet) {
-					return extract( item.contentSnippet ) 
-				} 
-				const content = item.content || item.contentEncoded
-
-				if (!content) return
-				const $ = cheerio.load( content )
-
-				return extract( $.text() )
-			})(),
-
-			image: await ( async function(){
-
-				let image = item.media?.find( el => !/gravatar/g.test( el['$']['url'] ) )
-				// console.log(image)
-				if (image) return image['$']['url']
-
-				const ogImage = await getOgImage(item.link)
-				if (ogImage) return ogImage
-
-				if (item.contentEncoded) {
-					const $ = cheerio.load( item.contentEncoded )
-					const img = $('img')
-					return img.length ? img.attr('data-src') || img.attr('src') : null
-				}
-				return
-			})(),
-
+			author: item.creator || item.dcCreator || article.author,
+			image: article.image,
+			content: article.content,
+			description: article.excerpt,
 			categories: item.categories,
+			// description: (function() {
+			// 	if (!!item.description) return item.description
+
+			// 	if (!!item.contentSnippet) {
+			// 		return extract( item.contentSnippet ) 
+			// 	} 
+			// 	const content = item.content || item.contentEncoded
+
+			// 	if (!content) return
+			// 	const $ = cheerio.load( content )
+
+			// 	return extract( $.text() )
+			// })(),
+			// image: await ( async function(){
+
+			// 	let image = item.media?.find( el => !/gravatar/g.test( el['$']['url'] ) )
+			// 	console.log(image)
+			// 	if (image) return image['$']['url']
+
+			// 	const ogImage = await getImage(item.link)
+			// 	console.log(image)
+			// 	if (ogImage) return ogImage
+
+			// 	if (item.contentEncoded) {
+			// 		const $ = cheerio.load( item.contentEncoded )
+			// 		const img = $('img')
+			// 	console.log(image)
+			// 		return img.length ? img.attr('data-src') || img.attr('src') : null
+			// 	}
+			// 	return
+			// })(),
+
 		}
 
-		return post
 
 }

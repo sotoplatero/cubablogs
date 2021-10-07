@@ -18,7 +18,6 @@
 	}
 </script>
 <script>
-	import { page } from '$app/stores';
 	import { browser } from '$app/env';
 	import Avatar from '$lib/components/avatar.svelte'	
 	import Meta from '$lib/components/meta.svelte'	
@@ -45,16 +44,18 @@
 	image={post.image}
 />
 
+<!-- <img src="{post.image}" alt=""> -->
 <article class="post prose md:prose-lg xl:prose-xl mx-auto mt-10">
-	<img src="{post.image}" alt="">
 	<div class="text-center mb-6">
 		<h1 class="post-title">
 			{post.title}
 		</h1>
 		<div class="text-center">
 			<a href="/blogs/{post.blog.id}/{post.blog.url.replace(/^https?:\/\//,'')}" class="post-author flex items-center justify-center" >
-				<Avatar blog={post.blog} class="w-8 h-8 !m-0 rounded-full"/>
-				<span class="ml-2">{post.blog.title}</span>
+				<Avatar blog={post.blog} class="w-12 h-12 !m-0 rounded-full"/>
+				<span class="ml-2">
+					{post.blog.title}
+				</span>
 			</a>
 			<div class="post-date" datetime="{new Date(post.pubDate).getTime()}">
 				{new Date(post.pubDate).toLocaleDateString(
@@ -88,7 +89,7 @@
 	</div>
 
 	<div class="post-body text-justify">
-		{@html post['body'] }
+		{@html post.body }
 	</div>
 	<div class="text-center mt-8 ">
 		<a href="{post.link}" class="" target="_blank" rel="noopener nofollower">

@@ -11,7 +11,7 @@
 {#if $navigating }
     <Navigator/>
 {/if}
-<div class="font-serif antialiased">
+<div class="antialiased">
 	<Header/>
 	<div class="container">
 		<slot></slot>
