@@ -11,9 +11,12 @@ export async function get() {
 		.limit(10)
 
 	var feed = new RSS({
-		title: 'CubaBlog » Últimas Noticias de Cuba por sus Blogueros',
+		title: 'Noticias del Día',
 		feed_url: 'https://cubablog.net/rss/today',
 		site_url: 'https://cubablog.net/',
+	    custom_namespaces: {
+	      'media': 'http://search.yahoo.com/mrss/'
+	    },		
 	});
 	blogs
 		.filter( b => b.post.date.isToday() )
@@ -26,6 +29,16 @@ export async function get() {
 				url: url,
 				guid: url,
 				date: post.date,
+				custom_elements: post.image ? [
+					{
+						'media:content': {
+							_attr: {
+								medium:"image",
+								url: post.image,
+							}
+						}
+					}
+				] : undefined
 			})	
 		})
 

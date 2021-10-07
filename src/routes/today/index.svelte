@@ -44,6 +44,7 @@
 		<input type="text" bind:value={search} class="border border-gray-300 p-3 w-full focus:outline-none focus:border-gray-400 text-xl">
 	</div> -->
 	<!-- <div class="w-full max-w-screen-md mx-auto space-y-8 sm:space-y-24"> -->
+		<h1 class="text-center">Lectura Rápida del Día</h1>
 		{#each blogs as blog (blog.id)}
 
 			<article class="" >

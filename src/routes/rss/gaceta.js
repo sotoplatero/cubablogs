@@ -13,13 +13,10 @@ export async function get(request) {
 	feed.item({
 		title: `Gaceta ${gaceta.type} No.${gaceta.number}`,
 		description: gaceta.items.map( i => `
-			<ul>
-				<li>
-					<h2>${i.title}</h2>
-					<p>${i.content}</p>
-				</li>
-			</ul>
-		`),
+			<h2>${i.title}</h2>
+			<p>${i.content}</p>
+			<br/>
+		`).join(''),
 		url: gaceta.url,
 		guid: gaceta.url,
 	})

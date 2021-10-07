@@ -45,7 +45,7 @@
 />
 
 <!-- <img src="{post.image}" alt=""> -->
-<article class="post prose md:prose-lg xl:prose-xl mx-auto mt-10">
+<article class="post prose md:prose-lg xl:prose-xl mx-auto mt-10 min-h-screen">
 	<div class="text-center mb-6">
 		<h1 class="post-title">
 			{post.title}
