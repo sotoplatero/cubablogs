@@ -10,7 +10,7 @@
 		.split('/')
 
 	$: src = /\.(jpg|jpeg|png|gif|webp)$/i.test(urlCleared) 
-		? `https://cdn.statically.io/img/${urlArr[0]}/f=auto,w=600/${urlArr.slice(1).join('/')}`
+		? `https://cdn.statically.io/img/${urlArr[0]}/f=auto,w=500/${urlArr.slice(1).join('/')}`
 		: url
 
 </script>
