@@ -26,7 +26,7 @@ export async function get() {
 			feed.item({
 				title: post.title,
 				description: post.content,
-				url: post.url,
+				url: url,
 				guid: url,
 				date: post.date,
 				custom_elements: post.image ? [
