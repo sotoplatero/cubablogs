@@ -11,7 +11,7 @@ export async function get(request) {
 		site_url: 'https://cubablog.net/',
 	});
 	feed.item({
-		title: domain,
+		title: joke.title,
 		description: joke.content,
 		url: joke.url,
 		guid: joke.url,

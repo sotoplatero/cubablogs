@@ -50,26 +50,29 @@
 
 <div class="mb-12 space-y-24">
 
-	<div class="md:flex space-y-6 md:space-x-8">
-
-		<div class="flex-shrink-0 w-full md:w-3/5"> 
-			<Featured blog={blogFeatured} featured/>
-		</div>
-
-		<div class="flex justify-center">
-			<div class="space-y-6">
-				{#each blogs.slice(0,3) as blog (blog.post.url)}
-					<FeaturedSmall {blog} />
-				{/each}
-			</div>
-		</div>
+	<div>
 		
-	</div>
+		<div class="group text-center bg-gray-100 py-4 mb-4 hover:bg-red-500 hover:text-white transition duration-300">
+			<a href="/today">
+				<h2 class="text-xl sm:text-2xl font-bold group-hover:text-white">Lectura Rápida del Día</h2>
+			</a>
+		</div>
 
-	<div class="text-center bg-gray-100 py-6">
-		<a href="/today">
-			<h2 class="text-xl sm:text-3xl font-bold">Lectura Rápida del Día</h2>
-		</a>
+		<div class="md:flex space-y-6 md:space-x-8">
+
+			<div class="flex-shrink-0 w-full md:w-3/5"> 
+				<Featured blog={blogFeatured} featured/>
+			</div>
+
+			<div class="flex justify-center">
+				<div class="space-y-6">
+					{#each blogs.slice(0,3) as blog (blog.post.url)}
+						<FeaturedSmall {blog} />
+					{/each}
+				</div>
+			</div>
+			
+		</div>
 	</div>
 
 	<div>
