@@ -1,10 +1,24 @@
 <script>
 	export let blog = {}
+	export let width = 600
 	export { klass as class }
 	let klass = ''
+	let hostname
+	let path
+	let src
 
 	$: alt = blog.post && blog.post.title
-	$: src = setSrc()
+	// $: src = setSrc()
+
+	$: if (blog.post && blog.post.image) {
+		const url = new URL(blog.post.image)
+		hostname = url.hostname
+		path = url.pathname + url.search
+		console.log(path)
+		src = /\.(jpg|jpeg|png|gif|webp)$/i.test( url.pathname ) 
+				? `https://cdn.statically.io/img/${hostname}/f=auto,w=600${path}`
+				: blog.post.image
+	}
 
 	function setSrc() {
 		const url = blog.post && blog.post.image
