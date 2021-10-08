@@ -1,5 +1,6 @@
 import cheerio from 'cheerio'
 import '$lib/random'
+import './_urls_jokes.js'
 
 export async function get() {
   try {
