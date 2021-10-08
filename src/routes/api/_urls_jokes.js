@@ -1,4 +1,4 @@
-export default urls = [
+export default [
 	"http://www.todo-chistes.com/chistes-al-azar?page=1" ,
 	"http://www.todo-chistes.com/chistes-al-azar?page=2" ,
 	"http://www.todo-chistes.com/chistes-al-azar?page=3" ,

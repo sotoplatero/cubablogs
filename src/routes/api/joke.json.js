@@ -10,7 +10,7 @@ export async function get() {
     response = await fetch( url );
     body = await response.text();
     $ = cheerio.load( body );
-    console.log(url)
+
     if ( /yavendras/g.test(url) ) {
       // seleccionar una de las paginas
       let pageTo = $( $('.pagination a').toArray().random() ).attr('href')
