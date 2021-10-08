@@ -16,14 +16,14 @@
 
 <article class="group" >
 	<a href={url} target="_blank" rel="noopener nofollower" >
-		<div class="flex flex-col-reverse sm:flex-row justify-between items-center ">
+		<div class="flex flex-col-reverse sm:flex-row justify-between items-center sm:space-x-2">
 
-			<div class="text-gray-500">
+			<div class="text-gray-500 ">
 				<div class='mb-1 mt-2 md:mt-0 line-clamp-1 break-all font-sm'>
 					{blog.post.author || blog.hostname}
 				</div>		
 
-				<h2 class="text-base font-semibold !leading-snug transition text-gray-700 group-hover:text-gray-900 line-clamp-3">
+				<h2 class="text-base sm:text-xl font-semibold !leading-snug transition text-gray-700 group-hover:text-gray-900 line-clamp-3">
 					{blog.post.title}
 				</h2>	
 				<span class="text-sm sm:text-normal sm:font-medium whitespace-nowrap text-gray-500">{date}</span>

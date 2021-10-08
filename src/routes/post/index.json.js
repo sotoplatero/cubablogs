@@ -33,7 +33,6 @@ export async function get({query}) {
 
 	const articleRes = await fetch(`https://crawl.cubablog.net/api/article?url=${encodeURIComponent(post.link)}`)
 	const article = articleRes.ok ? await articleRes.json() : {}
-
 	if (!post) return {}
 
 	const options = {
@@ -66,7 +65,7 @@ export async function get({query}) {
 			...post,
 			url: `/post/${blog.id}/${post.link.replace(/https?:\/\//,'')}`,
 			body: article.content ?? body,
-			image: article.image ?? post.image,
+			image: article.image,
 			blog: {
 				id: blog.id,
 				title: feed.title,

@@ -19,7 +19,7 @@ export async function get() {
 	const items = blogs.map( ({post}) =>`
         <item>
 	        <title>${post.title}</title>
-	        <description>${post.description}</description>
+	        <description><![CDATA[${post.description}]]</description>
 	        <author>${post.author}</author>
 	        <guid><![CDATA[${post.url}]]></guid>
 	        <link><![CDATA[${post.url}]]></link>
@@ -40,7 +40,10 @@ export async function get() {
 	</rss>`;
 
 	return {
-		headers: { 'Content-Type': "application/xml" },
+		headers: { 
+			'Cache-Control': `s-maxage=1, stale-while-revalidate`,
+			'Content-Type': "application/xml" 
+		},
 		body: rssFeed
 	};
 }

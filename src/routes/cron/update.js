@@ -31,11 +31,6 @@ export async function post() {
 						notify(JSON.stringify(error,null,2),'admin')
 					}
 	    		}
-				const { data, error } = await supabase
-				  .from('blogs')	
-				  .update({post})
-				  .eq('id', blog.id) 
-
 
 	    	})
 	    )

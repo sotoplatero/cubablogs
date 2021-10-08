@@ -49,6 +49,7 @@
 <Meta/>
 
 <div class="mb-12 space-y-24">
+
 	<div class="md:flex space-y-6 md:space-x-8">
 
 		<div class="flex-shrink-0 w-full md:w-3/5"> 
@@ -63,6 +64,12 @@
 			</div>
 		</div>
 		
+	</div>
+
+	<div class="text-center bg-gray-100 py-6">
+		<a href="/today">
+			<h2 class="text-xl sm:text-3xl font-bold">Lectura Rápida del Día</h2>
+		</a>
 	</div>
 
 	<div>

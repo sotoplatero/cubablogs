@@ -1,4 +1,6 @@
 import supabase from '$lib/supabase'
+import RSS from 'rss';
+import isToday from '$lib/isToday'
 
 export async function get() {
 
@@ -8,30 +10,47 @@ export async function get() {
 		.order('post->>date', { ascending: false })
 		.limit(10)
 
-	const items = blogs.map( ({post}) =>`
-        <item>
-	        <title>${post.title}</title>
-	        <description>${post.description}</description>
-	        <author>${post.author}</author>
-	        <link>${post.url.split('?')[0]}</link>
-	        <guid>${post.url.split('?')[0]}</guid>
-	        <pubDate>${post.date}</pubDate>
-        </item>`
-    )
+	var feed = new RSS({
+		title: 'Noticias del Día',
+		feed_url: 'https://cubablog.net/rss/today',
+		site_url: 'https://cubablog.net/',
+	    custom_namespaces: {
+	      'media': 'http://search.yahoo.com/mrss/'
+	    },		
+	});
+	blogs
+		.filter( b => b.post.date.isToday() )
+		.forEach( (blog) => {
+			const post = blog.post
+			const url = `http://cubablog.net/post/${blog.id}/${blog.post.url.replace(/https?:\/\//,'')}`
+			feed.item({
+				title: post.title,
+				description: post.content,
+				url: url,
+				guid: url,
+				date: post.date,
+				custom_elements: post.image ? [
+					{
+						'media:content': {
+							_attr: {
+								medium:"image",
+								url: post.image,
+							}
+						}
+					}
+				] : undefined
+			})	
+		})
 
-	const rssFeed = `<?xml version="1.0"?>
-	<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-		<channel>
-			<title>CubaBlog » Últimas Noticias de Cuba por sus Blogueros</title>
-			<atom:link href="https://cubablog.net/rss" rel="self" type="application/rss+xml" />
-			<link>https://cubablog.net</link>
-			<description>Descubre Cuba por su blogueros</description>
-			${items}
-		</channel>
-	</rss>`;
 
 	return {
-		headers: { 'Content-Type': "application/xml" },
-		body: rssFeed
+		headers: { 
+			'Cache-Control': `s-maxage=1, stale-while-revalidate`,
+			'Content-Type': "application/xml" 
+		},
+		body: feed.xml()
 	};
 }
+
+const feed = () =>`
+`
