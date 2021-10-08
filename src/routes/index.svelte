@@ -58,7 +58,7 @@
 			</a>
 		</div>
 
-		<div class="md:flex space-y-6 md:space-x-8">
+		<div class="md:flex md:items-center md:space-x-8">
 
 			<div class="flex-shrink-0 w-full md:w-3/5"> 
 				<Featured blog={blogFeatured} featured/>

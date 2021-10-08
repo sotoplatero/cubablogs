@@ -15,7 +15,7 @@
 </script>
 
 <article class="group" >
-	<a href={url} target="_blank" rel="noopener nofollower" >
+	<a href={url}  >
 		<div class="flex flex-col-reverse sm:flex-row justify-between items-center sm:space-x-2">
 
 			<div class="text-gray-500 ">

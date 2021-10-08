@@ -14,7 +14,7 @@
 		const url = new URL(blog.post.image)
 		hostname = url.hostname
 		path = url.pathname + url.search
-		console.log(path)
+
 		src = /\.(jpg|jpeg|png|gif|webp)$/i.test( url.pathname ) 
 				? `https://cdn.statically.io/img/${hostname}/f=auto,w=600${path}`
 				: blog.post.image

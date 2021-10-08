@@ -13,7 +13,7 @@
 		<img 
 			src={ blog.logo }
 			alt="{blog.title}" 
-			class="{_class} mt-0 mb-0 object-center object-cover  " style="margin-top: 0; margin-bottom: 0;">
+			class="{_class} mt-0 mb-0 object-center object-cover overflow-hidden" style="margin-top: 0; margin-bottom: 0;">
 <!-- 	{:else}
 
 		<svg xmlns="http://www.w3.org/2000/svg" class="{_class} {color}" viewBox="0 0 20 20" fill="currentColor">
