@@ -52,9 +52,9 @@
 
 	<div>
 		
-		<div class="group text-center bg-gray-100 py-4 mb-4 hover:bg-red-500 hover:text-white transition duration-300">
+		<div class="group text-center bg-gray-100 py-4 mb-4 hover:bg-red-500 hover:text-white transition duration-300 rounded-lg">
 			<a href="/today">
-				<h2 class="text-xl sm:text-2xl font-bold group-hover:text-white">Lectura Rápida del Día</h2>
+				<h2 class="text-lg sm:text-xl font-bold group-hover:text-white">Lectura Rápida del Día</h2>
 			</a>
 		</div>
 
