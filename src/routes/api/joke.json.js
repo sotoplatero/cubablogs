@@ -10,7 +10,7 @@ export async function get() {
     response = await fetch( url );
     body = await response.text();
     $ = cheerio.load( body );
-    console.log(url)
+
     if ( /yavendras/g.test(url) ) {
       // seleccionar una de las paginas
       let pageTo = $( $('.pagination a').toArray().random() ).attr('href')
@@ -47,7 +47,7 @@ export async function get() {
     if ( /todo-chistes/g.test(url) ) {
       console.log($('article.node h2'))
       data = {
-        title: $('article.node h2').text().trim(),
+        title: $('article.node h2').first().text().trim(),
         url: 'http://www.todo-chistes.com' + $('article.node h2 a').attr('href'),
         content: $('article.node .field-chistes,article.node .field-chiste').html().trim()
       }

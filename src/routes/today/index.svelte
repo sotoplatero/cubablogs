@@ -50,7 +50,8 @@
 			<article class="" >
 				{#if blog.post.image}
 					<div class="aspect-w-16 aspect-h-9 overflow-hidden rounded-lg overflow-hidden">
-						<img src="{blog.post.image}" alt="{blog.post.title}" class="object-cover !m-0" loading="lazy">
+						<!-- <img src="{blog.post.image}" alt="{blog.post.title}" class="object-cover !m-0" loading="lazy"> -->
+						<Image {blog} width="800"/>
 					</div>			
 				{/if}
 

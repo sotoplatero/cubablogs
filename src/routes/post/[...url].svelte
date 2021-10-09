@@ -52,7 +52,7 @@
 		</h1>
 		<div class="text-center">
 			<a href="/blogs/{post.blog.id}/{post.blog.url.replace(/^https?:\/\//,'')}" class="post-author flex items-center justify-center" >
-				<Avatar blog={post.blog} class="w-12 h-12 !m-0 rounded-full"/>
+				<Avatar blog={post.blog} class="w-12 h-12 !m-0 rounded-full overflow-hidd"/>
 				<span class="ml-2">
 					{post.blog.title}
 				</span>
@@ -91,7 +91,7 @@
 	<div class="post-body text-justify">
 		{@html post.body }
 	</div>
-	<div class="text-center mt-8 ">
+	<div class="text-center mt-8 print:hidden">
 		<a href="{post.link}" class="" target="_blank" rel="noopener nofollower">
 			Leer el Original			
 		</a>			
@@ -100,7 +100,7 @@
 
 </article>
 
-<div class=" max-w-[64ch] mx-auto text-xl mt-16">
+<div class=" max-w-[64ch] mx-auto text-xl mt-16 print:hidden">
 	<div class="line-clamp-1 text-base sm:text-lg">Más en <strong>{post.blog.title}</strong></div>
 	<div class="sm:grid sm:grid-cols-2 space-y-6 sm:space-y-0 sm:gap-8 text-lg sm:text-xl border-t pt-4">
 		{#each post.related as {url,title}, index}
