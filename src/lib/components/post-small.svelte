@@ -25,7 +25,7 @@
 
 			<div class="sm:flex-grow">
 				<div class='flex items-center mb-1 mt-2 md:mt-0 text-sm text-gray-600 break-all line-clamp-1 '>
-					{blog.post.author || blog.hostname}
+					{blog.hostname.replace(/^www\./,'')}
 				</div>		
 
 				<h2 class="text-sm sm:text-base font-semibold !leading-snug transition text-gray-700 group-hover:text-gray-900 line-clamp-3">

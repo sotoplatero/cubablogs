@@ -31,18 +31,17 @@ export async function get({query}) {
 	const feed = await parser.parseURL( blog.rss );
 	const post = feed.items.find( el => el.link.toLowerCase().indexOf(link) >= 0)
 
-	console.log(post.link)
 	const articleRes = await fetch(`https://crawl.cubablog.net/api/article?url=${encodeURIComponent(post.link)}`)
 	const article = articleRes.ok ? await articleRes.json() : {}
 	if (!post) return {}
 
 	const options = {
-	  	allowedTags: sanitizeHtml.defaults.allowedTags.concat([ 'img','script' ]),
+	  	allowedTags: sanitizeHtml.defaults.allowedTags.concat([ 'img' ]),
 	  	allowVulnerableTags: true,
 		allowedAttributes: {
 			a: [ 'href', 'name', 'target' ],
 			img: [ 'src', 'data-*', 'alt' ],
-			script: ['src'],
+			// script: ['src'],
 			blockquote: ['class','data-*'],
 		},	 
 		allowedScriptDomains: ['twitter.com'],
@@ -51,15 +50,18 @@ export async function get({query}) {
 			    return {
 			        tagName: 'img',
 			        attribs: {
-			          src: attribs['data-srcset'] || attribs['src'] || '',
+			          src: attribs['data-srcset'] || attribs['data-src'] || attribs['src'] || '',
 			          alt: attribs['alt'] || ''
 			        }
 		        }		      	
 		     }
 		}
 	}
+	
 	const content = post['content:encoded'] ? post['content:encoded'] : post['content']
-	const body = sanitizeHtml(content,options);
+	const body = article.content.length > content.length 
+		? sanitizeHtml(article.content,options) 
+		: sanitizeHtml(content,options)
 
 	return {
 		body: { 
