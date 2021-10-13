@@ -26,14 +26,14 @@
 
 	<div class="flex justify-between items-center mt-4">
 		<div class="flex-grow">
-			<div class='text-gray-500 flex items-center mb-1'>
+			<div class='text-gray-400 flex items-center mb-1'>
 				<span class="flex-shrink-0 rounded-full shadow overflow-hidden rounded-0 sm:rounded-lg">
 					<Avatar {blog} class="w-7 h-7 "/>
 				</span>
-				<span class="ml-2 font-medium line-clamp-1">
-					{blog.post.author || blog.hostname}
+				<span class="ml-2 font-semibold line-clamp-1">
+					{ blog.hostname}
 				</span>
-				<span class="font-medium whitespace-nowrap">{date}</span>
+				<!-- <span class="font-medium whitespace-nowrap">{date}</span> -->
 			</div>		
 			<!-- <a href="/posts/{blog.id}">{blog.id}</a>		 -->
 			<h2 class="text-xl sm:text-3xl font-semibold leading-normal transition text-gray-700 group-hover:text-gray-900">
