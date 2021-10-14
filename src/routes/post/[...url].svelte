@@ -12,7 +12,9 @@
 		}
 
 		return {
-			props: {post: await res.json()}
+			props: { 
+				post: await res.json() 
+			}
 		};
 
 	}

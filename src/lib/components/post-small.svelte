@@ -14,7 +14,7 @@
 	$: url = `/post/${blog.id}/${blog.post.slug}`	
 </script>
 
-<a href={url} target="_blank" rel="noopener nofollower" class="">
+<a href={url} class="">
 	<article class="group" >
 		<div class="flex flex-col sm:flex-row justify-between items-center ">
 			<div class="w-full sm:w-1/3 flex-shrink-0 mr-4">
