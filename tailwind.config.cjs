@@ -14,6 +14,15 @@ const config = {
 		  	}
 		}
 	},
+	// variants: {
+	// 	extend: {
+	// 	  textColor: ['visited'],
+	// 	}
+	// },	
+	// extend: {
+
+	// 	opacity: ['visited'],
+	// },
     corePlugins: {
 	    container: false,
     },

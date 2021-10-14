@@ -1,11 +1,8 @@
 <script >
 	import { session } from '$app/stores';	
 	import Image from '$lib/components/image.svelte'
-	import SaveToPocket from '$lib/components/saveToPocket.svelte'
-	import IntentTweet from '$lib/components/IntentTweet.svelte'
-	import Share from '$lib/components/share.svelte'
-	import Avatar from '$lib/components/avatar.svelte'
 	import Author from '$lib/components/author.svelte'	
+	import Details from '$lib/components/details.svelte'	
 	export let blog
 
 	// let image = blog.post.image ?? `https://cdn.statically.io/screenshot/${blog.post.url.replace(/^https?:\/\//,'')}`
@@ -25,7 +22,7 @@
 				<h2 class="text-base sm:text-xl font-semibold !leading-snug transition text-gray-700 group-hover:text-gray-900 line-clamp-3">
 					{blog.post.title}
 				</h2>	
-				<span class="text-sm sm:text-normal sm:font-medium whitespace-nowrap text-gray-500">{date}</span>
+				<Details {blog} class="font-normal" />
 
 			</div>
 			<div class="w-full sm:w-1/3 flex-shrink-0 mr-0 sm:mr-4">

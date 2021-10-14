@@ -1,10 +1,8 @@
 <script >
 	import { session } from '$app/stores';	
 	import Image from '$lib/components/image.svelte'
-	import SaveToPocket from '$lib/components/saveToPocket.svelte'
-	import IntentTweet from '$lib/components/IntentTweet.svelte'
-	import Share from '$lib/components/share.svelte'
-	import Avatar from '$lib/components/avatar.svelte'
+	import Author from '$lib/components/author.svelte'
+	import Details from '$lib/components/details.svelte'	
 	export let blog
 
 	// let image = blog.post.image ?? `https://cdn.statically.io/screenshot/${blog.post.url.replace(/^https?:\/\//,'')}`
@@ -23,15 +21,13 @@
 				</div>			
 			</div>
 
-			<div class="sm:flex-grow">
-				<div class='flex items-center mb-1 mt-2 md:mt-0 text-sm text-gray-600 break-all line-clamp-1 '>
-					{blog.hostname.replace(/^www\./,'')}
-				</div>		
+			<div class="sm:flex-grow text-sm sm:text-base">
+				<Author {blog} size="6" class=""/>
 
-				<h2 class="text-sm sm:text-base font-semibold !leading-snug transition text-gray-700 group-hover:text-gray-900 line-clamp-3">
+				<h2 class=" font-semibold !leading-snug transition text-gray-700 group-hover:text-gray-900 line-clamp-3">
 					{blog.post.title}
 				</h2>	
-				<span class="text-sm sm:text-normal sm:font-medium whitespace-nowrap text-gray-600">{date}</span>
+				<Details {blog}/>
 
 			</div>
 

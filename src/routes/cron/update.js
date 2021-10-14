@@ -9,9 +9,8 @@ export async function post() {
 		let { data: blogs, error } = await supabase
 			.from('blogs')
 			.select('*')
+			.eq('trashed',false)
 			.order('updated_at', { ascending: true })
-			.limit()
-
 	    await Promise.all( 
 	    	blogs.map( async blog => {
 
@@ -30,6 +29,16 @@ export async function post() {
 					if (error) {
 						notify(JSON.stringify(error,null,2),'admin')
 					}
+	    		}
+	    		if (JSON.stringify(post) === '{}'){
+		    		console.log(blog.rss)
+	    		}
+	    		if (JSON.stringify(post) !== '{}') {
+					const { data, error } = await supabase
+					  .from('blogs')	
+					  .update({post})
+					  .eq('id', blog.id) 
+
 	    		}
 
 	    	})

@@ -7,12 +7,12 @@
 
 	let color = colors[ Math.floor( Math.random() * colors.length ) ] 
 	function fallback(evt) {
-		evt.img.src = '/img/avatar.svg'
+		evt.target.src = '/avatar.svg'
 	}
 </script>
 
 <img 
 	src={ blog.logo }
 	alt="{ blog.title }" 
-	on:error={fallback}
+	on:error={()=>fallback(event)}
 	class="{_class} mt-0 mb-0 object-center object-cover overflow-hidden" >

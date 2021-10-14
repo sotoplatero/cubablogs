@@ -33,7 +33,7 @@ export default async function (url) {
     	}
 		let item = feed.items[0]
 
-		const extract = (string = '') => string.split('.').filter((el,idx)=>idx<3).join('.') + '.'
+		// const extract = (string = '') => string.split('.').filter((el,idx)=>idx<3).join('.') + '.'
 
 		const articleRes = await fetch(`https://crawl.cubablog.net/api/article?url=${encodeURIComponent(item.link)}`)
 		const article = articleRes.ok ? await articleRes.json() : {}
@@ -47,6 +47,7 @@ export default async function (url) {
 			content: article.content,
 			description: article.excerpt,
 			categories: item.categories,
+			words: article.words,
 			// description: (function() {
 			// 	if (!!item.description) return item.description
 

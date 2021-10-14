@@ -11,11 +11,12 @@
 		8: 'w-8 h-8',
 	}[size]
 </script>
-<div class='text-gray-400 flex items-center mb-1 font-medium {_class}'>
+
+<div class='flex items-center mb-1 uppercase text-sm text-gray-400 tracking-wider {_class}'>
 	<span class="flex-shrink-0 rounded-full shadow overflow-hidden rounded-0 ">
 		<Avatar {blog} class="{sizeAvatar}"/>
 	</span>
-	<span class="ml-2 line-clamp-1">
-		{ blog.hostname}
+	<span class="ml-1 break-all line-clamp-1">
+		{ blog.hostname.replace(/^www\./,'')}
 	</span>
 </div>	
