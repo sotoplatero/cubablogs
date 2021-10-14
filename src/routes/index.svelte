@@ -17,8 +17,10 @@
 
 		const allBlogs = await res.json()
 		const blogsWithImage = allBlogs.filter( el => !!el.post?.image  )
-		const blogFeatured = blogsWithImage.filter( el => el.post.date.isToday() ).random() ?? blogsWithImage[0]
-		const blogs = allBlogs.filter( el => el.url !== blogFeatured.url  )
+		const blogFeatured = allBlogs[0]
+		const blogs = allBlogs.slice(1)
+		// const blogFeatured = blogsWithImage.filter( el => el.post.date.isToday() ).random() ?? blogsWithImage[0]
+		// const blogs = allBlogs.filter( el => el.url !== blogFeatured.url  )
 	// $: indexFeatured = blogs.findIndex( el => el.url == blogFeatured.url )
 
 		return {
@@ -58,7 +60,7 @@
 			</a>
 		</div>
 
-		<div class="md:flex md:items-center md:space-x-8">
+		<div class="md:flex md:items-center space-y-6 md:space-y-0 md:space-x-8">
 
 			<div class="flex-shrink-0 w-full md:w-3/5"> 
 				<Featured blog={blogFeatured} featured/>

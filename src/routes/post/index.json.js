@@ -47,17 +47,20 @@ export async function get({query}) {
 			    return {
 			        tagName: 'img',
 			        attribs: {
-			          src: attribs['data-srcset'] || attribs['src'] || '',
-			          alt: attribs['alt'] || post.title
+			          src: attribs['data-srcset'] || attribs['data-src'] || attribs['src'] || '',
+			          alt: attribs['alt'] || ''
 			        }
 		        }		      	
 		     }
 		}
 	}
+	
 	const content = post['content:encoded'] ? post['content:encoded'] : post['content']
-	const body =  (article.content) 
-		? sanitizeHtml(article.content,options) 
-		: sanitizeHtml(content,options)
+
+	const body = article.content.length > content.length 
+		? article.content 
+		: content
+	const wpm = 250
 
 	return {
 		headers: { 
@@ -66,7 +69,8 @@ export async function get({query}) {
 		body: { 
 			...post,
 			url: `/post/${blog.id}/${post.link.replace(/https?:\/\//,'')}`,
-			body,
+			body: sanitizeHtml(body,options),
+			time: Math.ceil(article.words/wpm),
 			image: article.image,
 			blog: {
 				id: blog.id,
