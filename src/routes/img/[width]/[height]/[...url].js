@@ -13,8 +13,8 @@ export async function get({params}) {
           .resize({
             width: parseInt(params.width),
             height: parseInt(params.height),
-            fit: 'contain',
-            position: sharp.strategy.entropy
+            fit: 'outside',
+            // position: sharp.strategy.entropy
           })
           .toBuffer()  
 
@@ -24,7 +24,6 @@ export async function get({params}) {
         return {
             headers: { 
                 // 'Content-Disposition': `attachment; filename="${params.url.replace('/','-')}"`,
-                // 'content-type': 'application/octet-stream',
                 'content-type': res.headers.get('content-type'),
                 'Cache-Control': 's-maxage=1, stale-while-revalidate',
             },
