@@ -3,22 +3,13 @@
 	export let width = 600
 	export { klass as class }
 	let klass = ''
-	let hostname
-	let path
 	let src
+	const gray = 'data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='
 
-	$: alt = blog.post && blog.post.title
-	// $: src = setSrc()
-
-	$: if (blog.post && blog.post.image) {
-		const url = new URL(blog.post.image)
-		hostname = url.hostname
-		path = url.pathname + url.search
-
-		src = /\.(jpg|jpeg|png|gif|webp)$/i.test( url.pathname ) 
-				? `/img/600/450/${blog.post.image.replace(/https?:\/\//,'')}`
-				: blog.post.image
-	}
+	const alt = blog.post && blog.post.title
+	$: src = (blog.post && blog.post.image) 
+		? `/img/600/450/${blog.post.image.replace(/https?:\/\//,'')}`
+		: gray
 
 </script>
 

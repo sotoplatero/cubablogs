@@ -13,7 +13,7 @@ export async function get({params}) {
           .resize({
             width: parseInt(params.width),
             height: parseInt(params.height),
-            fit: 'outside',
+            fit: 'inside',
             // position: sharp.strategy.entropy
           })
           .toBuffer()  
