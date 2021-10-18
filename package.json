@@ -6,7 +6,8 @@
 		"build": "svelte-kit build",
 		"preview": "svelte-kit preview",
 		"lint": "prettier --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
-		"format": "prettier --write --plugin-search-dir=. ."
+		"format": "prettier --write --plugin-search-dir=. .",
+		"postbuild": "cp node_modules/sharp/build/Release/*.node .vercel_build_output/functions/node/render/;cp node_modules/sharp/vendor/8.11.3/linux-x64/lib/libvips-cpp.so.42 .vercel_build_output/functions/node/render/;sed -i 's#\\.\\./build/Release#\\.#g' .vercel_build_output/functions/node/render/index.js"
 	},
 	"devDependencies": {
 		"@supabase/supabase-js": "^1.24.0",
