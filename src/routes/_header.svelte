@@ -13,9 +13,9 @@
 			</h1>
 		</a>
 		<div class="flex items-center space-x-2 sm:space-x-6">
-			<a href="/posts" class="font-bold transition text-gray-600 hover:text-gray-800">
+<!-- 			<a href="/posts" class="font-bold transition text-gray-600 hover:text-gray-800">
 				Artículos
-			</a>
+			</a> -->
 			<a href="/blogs" class="font-bold transition text-gray-600 hover:text-gray-800">
 				Blogs
 			</a>

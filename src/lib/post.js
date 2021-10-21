@@ -1,6 +1,7 @@
 // import {Telegram} from 'telegraf'
 import cheerio from 'cheerio'
 import Parser from 'rss-parser';
+import sanitizeHtml from 'sanitize-html'
 
 let parser = new Parser({
 	// timeout: 5000,
@@ -13,30 +14,38 @@ let parser = new Parser({
 	}
 });
 
-async function getOgImage(url) {
-	const res = await fetch(url)
-	if (!res.ok) return
-	
-	const html = await res.text()
-	const $ = cheerio.load(html)
-	const selector = 'meta[property="og:image:secure_url"],meta[property="og:image:url"],meta[property="og:image"],meta[name="og:image"],meta[name="twitter:image:src"],meta[name="twitter:image"],meta[itemprop="image"]'
-	return !/blank.jpg$/.test($(selector)?.attr('content')) ? $(selector)?.attr('content') : null
+const optionsSanitizeHtml = {
+  	allowedTags: sanitizeHtml.defaults.allowedTags.concat([ 'img' ]),
+  	allowVulnerableTags: true,
+	allowedAttributes: {
+		a: [ 'href', 'name', 'target' ],
+		img: [ 'src', 'data-*', 'alt' ],
+	},	 
+  	transformTags: {
+		img: function(tagName, attribs) {
+		    return {
+		        tagName: 'img',
+		        attribs: {
+		          src: attribs['data-srcset'] || attribs['data-src'] || attribs['src'] || '',
+		          alt: attribs['alt'] || ''
+		        }
+	        }		      	
+	     },
+	     a: sanitizeHtml.simpleTransform('a', { target: '_blank', rel: 'noopener nofollower' }),
+	}
 }
 
-export default async function (url) {
+export default async function (rss, link = null) {
 
-    	let feed
-    	try	{
-			feed = await parser.parseURL( url );
-    	} catch (e) {
-    		return {}
-    	}
-		let item = feed.items[0]
-
-		// const extract = (string = '') => string.split('.').filter((el,idx)=>idx<3).join('.') + '.'
+	try {
+		const feed = await parser.parseURL( rss );
+		const item = link 
+			? feed.items.find( el => el.link.toLowerCase().indexOf(link) >= 0)
+			: feed.items[0]
 
 		const articleRes = await fetch(`https://crawl.cubablog.net/api/article?url=${encodeURIComponent(item.link)}`)
 		const article = articleRes.ok ? await articleRes.json() : {}
+		const wpm = 250
 
 		return { 
 			title: item.title,
@@ -44,43 +53,17 @@ export default async function (url) {
 			date: item.isoDate,
 			author: item.creator || item.dcCreator || article.author,
 			image: article.image,
-			content: article.content,
+			content: sanitizeHtml( article.content, optionsSanitizeHtml ),
 			description: article.excerpt,
 			categories: item.categories,
 			words: article.words,
-			// description: (function() {
-			// 	if (!!item.description) return item.description
-
-			// 	if (!!item.contentSnippet) {
-			// 		return extract( item.contentSnippet ) 
-			// 	} 
-			// 	const content = item.content || item.contentEncoded
-
-			// 	if (!content) return
-			// 	const $ = cheerio.load( content )
-
-			// 	return extract( $.text() )
-			// })(),
-			// image: await ( async function(){
-
-			// 	let image = item.media?.find( el => !/gravatar/g.test( el['$']['url'] ) )
-			// 	console.log(image)
-			// 	if (image) return image['$']['url']
-
-			// 	const ogImage = await getImage(item.link)
-			// 	console.log(image)
-			// 	if (ogImage) return ogImage
-
-			// 	if (item.contentEncoded) {
-			// 		const $ = cheerio.load( item.contentEncoded )
-			// 		const img = $('img')
-			// 	console.log(image)
-			// 		return img.length ? img.attr('data-src') || img.attr('src') : null
-			// 	}
-			// 	return
-			// })(),
-
+			time: article.words / wpm,
 		}
+
+	} catch (err) {
+		console.log(err)
+		return {}
+	}
 
 
 }

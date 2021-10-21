@@ -51,7 +51,7 @@
 				{#if blog.post.image}
 					<div class="aspect-w-16 aspect-h-9 overflow-hidden rounded-lg overflow-hidden">
 						<!-- <img src="{blog.post.image}" alt="{blog.post.title}" class="object-cover !m-0" loading="lazy"> -->
-						<Image {blog} width="800"/>
+						<Image {blog} />
 					</div>			
 				{/if}
 
@@ -62,7 +62,7 @@
 					</h2>	
 					<div class='flex items-center mb-1'>
 						<span class="flex-shrink-0 rounded-full shadow overflow-hidden ">
-							<Avatar {blog} class="w-9 h-9"/>
+							<Avatar {blog} class="w-9 h-9 !m-0"/>
 						</span>
 						<span class="ml-2 font-medium text-gray-600 line-clamp-1 break-all">
 							{blog.hostname}

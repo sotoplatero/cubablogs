@@ -12,14 +12,17 @@ const db = {
 			.order('post->>date', { ascending: false })
 			.limit(limit)
 
-		blogs = blogs.map( blog => ({
-			...blog, 
-			hostname: getHostname(blog.url),
-			post: {
-				...blog.post,
-				time: blog.post.words / 250
-			}
-		}))
+		if (blogs.length) {
+			blogs = blogs.map( blog => ({
+				...blog, 
+				hostname: getHostname(blog.url),
+				post: {
+					...blog.post,
+					time: blog.post.words / 250
+				}
+			}))
+			
+		}
 
 		return { blogs , error }	
 	},
