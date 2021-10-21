@@ -1,29 +1,18 @@
-import supabase from '$lib/supabase'
+import {db} from '$lib/db'
 
 export async function post() {
 
-	let blogs = await db.all()
-	blogs = blogs.map( el => ({ 
-		title: el.title,
-		url: el.url,
-		description: el.description,
-		logo: el.logo,
-		image: el.image,
-		twitter: el.twitter,
-		github: el.github,
-		rss: el.rss,
-		scheduled_at: el.scheduled_at,
-		created_at: el.created_at ?? new Date,
-		post: el.post,
-	}))
-	console.log(blogs)
-	const { data, error } = await supabase
-	  .from('blogs')
-	  .insert(blogs)	
+	const {data: blogs} = await db.all()
 
-	console.log(error)
-    // await db.save(blogs)
-	// notify(`Nuevo Blog: ${data.title} ${data.url}`)
+	blogs.map( blog => {
+		fetch(`http://localhost:3000/blogs/add`,{
+			method: 'post',
+			body: JSON.stringify({ url: blog.url })
+		}).then(res=>{
+			console.log(res.json())
+		})
+	})
+
 
 	return {
 		body: 'ok'

@@ -2,6 +2,12 @@ import supabase from '$lib/supabase'
 import { getHostname } from 'tldts'
 
 const db = {
+	async all() {
+		return { data: blogs, error } = await supabase
+			.from('blogs')
+			.select('*')
+			.eq('trashed',false)
+	},	
 	async home({limit=25}) {
 		let { data: blogs, error } = await supabase
 			.from('blogs')
@@ -18,10 +24,10 @@ const db = {
 				hostname: getHostname(blog.url),
 				post: {
 					...blog.post,
-					time: blog.post.words / 250
+					time: blog.post.time || blog.post.words / 250
 				}
 			}))
-			
+
 		}
 
 		return { blogs , error }	
@@ -33,6 +39,7 @@ const db = {
 		const month = today.getMonth() + 1
 		const day = today.getDate() -1
 		const d = `${year}-${month}-${day}`
+
 		let { data: blogs, error } = await supabase
 			.from('blogs')
 			.select('*')
