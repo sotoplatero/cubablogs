@@ -24,6 +24,7 @@
 	import Avatar from '$lib/components/avatar.svelte'	
 	import Meta from '$lib/components/meta.svelte'	
 	import Image from '$lib/components/image.svelte'	
+	import Share from '$lib/components/share.svelte'	
 
 	export let post
 	let loading = false
@@ -91,7 +92,8 @@
 			<a href="{post.url}" class="text-sm" target="_blank" rel="noopener nofollower">
 				Leer el Original		
 			</a>			
-		</div>			
+		</div>		
+
 		<button on:click={print} >
 			<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 			  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
@@ -107,8 +109,9 @@
 	<div class="post-body" use:removeimage={post.image}>
 		{@html post.content }
 	</div>
+	<Share {post} class="justify-center"/>	
 	<div class="text-center mt-8 print:hidden">
-		<a href="{post.link}" class="" target="_blank" rel="noopener nofollower">
+		<a href="{post.url}" class="" target="_blank" rel="noopener nofollower">
 			Leer el Original			
 		</a>			
 	</div>

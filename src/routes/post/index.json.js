@@ -23,7 +23,7 @@ export async function get({query}) {
 
 	const link = url.replace(/^\d+\//,'').toLowerCase()
 	const post = ( blog.post.url.toLowerCase().indexOf(link) < 0 ) 
-		? getPost( blog.rss, link )
+		? await getPost( blog.rss, link )
 		: blog.post
 
 	return {
