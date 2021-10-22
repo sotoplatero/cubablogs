@@ -3,16 +3,14 @@
 	export let alt = ''
 	export let width = 600
 	export let height = 450
-	export { klass as class }
-	let klass = ''
 	let loading = true;	
 
-	$: src = (src) ? `/img/${width}/${height}/${src.replace(/https?:\/\//,'')}`	: gray
+	// $: resizedSrc = !!src ? `/img/${width}/${height}/${src.replace(/https?:\/\//,'')}` : gray
 
   function handleImg(img) {
   	img.onload = () => loading = false
     img.onerror = () => {
-    	// img.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='
+    	img.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='
     	loading = false
     }
   }
@@ -21,16 +19,17 @@
 
 <img 
 	use:handleImg
-	src={src} 
+	src={ `/img/${width}/${height}/${src.replace(/https?:\/\//,'')}` } 
 	{alt} 
-	class="object-center object-cover transition duration-500 group-hover:scale-105 bg-gray-100 shadow {klass} !m-0"
+	class="object-center object-cover transition duration-500 group-hover:scale-105 bg-gray-100 shadow !m-0"
 >
-{#if loading}
+<!-- {#if loading}
 
-	<div class="absolute inset-0 flex items-center justify-center bg-gray-100">
+	<div class="absolute inset-0 flex items-center justify-center bg-gray-100">	
+		{loading}
 		<svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
       <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
       <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
     </svg>		
 	</div>
-{/if}
+{/if} -->
