@@ -6,9 +6,11 @@
 	let loading = true;	
 
 	// $: resizedSrc = !!src ? `/img/${width}/${height}/${src.replace(/https?:\/\//,'')}` : gray
-
   function handleImg(img) {
-  	img.onload = () => loading = false
+  	img.onload = () => {
+  		loading = false
+		 console.log(loading + '->' + `/img/${width}/${height}/${src.replace(/https?:\/\//,'')}`)
+  	}
     img.onerror = () => {
     	img.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='
     	loading = false
