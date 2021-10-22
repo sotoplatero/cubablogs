@@ -5,8 +5,6 @@
 	import Details from '$lib/components/details.svelte'
 	export let blog
 
-	// let image = blog.post.image ?? `https://cdn.statically.io/screenshot/${blog.post.url.replace(/^https?:\/\//,'')}`
-	let image = blog.post.image 
 	let avatar = (blog.twitter ? blog.twitter.avatar : blog.logo) 
 	let date = new Date(blog.post.date).toLocaleDateString('es-ES', { month:"short", day:"numeric", year: "numeric"})
 	$: url = `/post/${blog.id}/${blog.post.slug}`

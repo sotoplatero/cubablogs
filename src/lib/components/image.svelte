@@ -5,28 +5,27 @@
 	export let height = 450
 	export { klass as class }
 	let klass = ''
-	let loaded = false;	
+	let loading = true;	
 
 	$: src = (src) ? `/img/${width}/${height}/${src.replace(/https?:\/\//,'')}`	: gray
 
-  function load(img) {
-    // img.onload = () => loaded = true
+  function handleImg(img) {
+  	img.onload = () => loading = false
     img.onerror = () => {
-    	img.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='
-    	loaded = true
+    	// img.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='
+    	loading = false
     }
   }
 
 </script>
 
 <img 
-	on:load={() => loaded = true}
-	use:load
+	use:handleImg
 	src={src} 
 	{alt} 
 	class="object-center object-cover transition duration-500 group-hover:scale-105 bg-gray-100 shadow {klass} !m-0"
 >
-{#if !loaded}
+{#if loading}
 
 	<div class="absolute inset-0 flex items-center justify-center bg-gray-100">
 		<svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
