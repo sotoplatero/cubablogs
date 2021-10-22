@@ -18,7 +18,6 @@ export async function get({params}) {
           })
           .toBuffer()  
 
-        // const imageArray = new Uint8Array(imageBufferResize)
         const img = Buffer.from(imageBufferResize, 'binary')
 
         return {

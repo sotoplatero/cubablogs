@@ -30,7 +30,7 @@ export async function get({query}) {
 	const link = url.replace(/^\d+\//,'').toLowerCase()
 	const feed = await parser.parseURL( blog.rss );
 	const post = feed.items.find( el => el.link.toLowerCase().indexOf(link) >= 0)
-
+	
 	const articleRes = await fetch(`https://crawl.cubablog.net/api/article?url=${encodeURIComponent(post.link)}`)
 	const article = articleRes.ok ? await articleRes.json() : {}
 	if (!post) return {}

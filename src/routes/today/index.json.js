@@ -8,6 +8,7 @@ export async function get() {
 
 	const { blogs, error } = await db.today()
 	return {
+		headers: { 'Cache-Control': `s-maxage=1, stale-while-revalidate`, },
 		body: blogs
 			.filter( el => el.post.date.isToday())
 			.map( el => ({

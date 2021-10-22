@@ -31,7 +31,6 @@
 	let reading = ''
 
 	function removeimage(node,src) {
-		console.log(src)
 		const image = node.querySelector(`img[src^="${src}"]`)
 		if (image) image.remove()
 	}
@@ -45,6 +44,11 @@
 	</div> -->
 	<!-- <div class="w-full max-w-screen-md mx-auto space-y-8 sm:space-y-24"> -->
 		<h1 class="text-center">Lectura Rápida del Día</h1>
+		{#if blogs.length === 0}
+			<p class="text-center">
+				Todavía no se han publicado articulos en el día de hoy, vuelva en un ratico
+			</p>
+		{/if}
 		{#each blogs as blog (blog.id)}
 
 			<article class="" >
