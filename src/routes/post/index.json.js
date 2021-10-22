@@ -38,6 +38,7 @@ export async function get({query}) {
 				title: blog.title,
 				url: blog.url,
 				logo: blog.logo,
+				publisher: blog.author || blog.title,
 			},
 			// related: blog.items
 			// 	.filter( el => el.link.toLowerCase().indexOf(link) === -1 )

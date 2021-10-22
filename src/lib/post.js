@@ -20,6 +20,7 @@ const optionsSanitizeHtml = {
 	allowedAttributes: {
 		a: [ 'href', 'name', 'target' ],
 		img: [ 'src', 'data-*', 'alt' ],
+		'*': [ 'style' ],
 	},	 
   	transformTags: {
 		img: function(tagName, attribs) {

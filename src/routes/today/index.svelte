@@ -31,7 +31,10 @@
 	let reading = ''
 
 	function removeimage(node,src) {
-		const image = node.querySelector(`img[src^="${src}"]`)
+		const url = new URL(src);
+		const imageName = url.pathname.split('/').pop()
+		console.log(imageName)
+		const image = node.querySelector(`img[src~="${imageName}"]`)
 		if (image) image.remove()
 	}
 		

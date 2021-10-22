@@ -23,6 +23,7 @@
 	import { browser } from '$app/env';
 	import Avatar from '$lib/components/avatar.svelte'	
 	import Meta from '$lib/components/meta.svelte'	
+	import Image from '$lib/components/image.svelte'	
 
 	export let post
 	let loading = false
@@ -32,6 +33,13 @@
 	}
 
 	$: title = post ? post.title : ''
+
+	function removeimage(node,src) {
+		const url = new URL(src);
+		const imageName = url.pathname.split('/').pop()
+		const image = node.querySelector(`img[src*="${imageName}"]`)
+		if (image) image.remove()
+	}
 
 </script>
 
@@ -45,17 +53,24 @@
 	image={post.image}
 />
 
-<!-- <img src="{post.image}" alt=""> -->
+{#if !!post.image && !/blank/.test(post.image)}
+	<div class="aspect-h-7 aspect-w-16">
+		<Image src={post.image} alt="{post.title}" width="1300" height="570" />
+		<!-- <img src="{post.image}" alt="{post.title}" class="w-full object-cover"> -->
+	</div>
+{/if}
+
 <article class="post prose md:prose-lg xl:prose-xl mx-auto mt-10 min-h-screen">
+
 	<div class="text-center mb-6">
 		<h1 class="post-title">
 			{post.title}
 		</h1>
 		<div class="text-center">
 			<a href="/blogs/{post.blog.id}/{post.blog.url.replace(/^https?:\/\//,'')}" class="post-author flex items-center justify-center" >
-				<Avatar blog={post.blog} class="w-12 h-12 !m-0 rounded-full overflow-hidd"/>
+				<Avatar blog={post.blog} class="w-8 h-8 !m-0 rounded-full overflow-hidd"/>
 				<span class="ml-2">
-					{post.blog.title}
+					{post.blog.publisher}
 				</span>
 			</a>
 			<div class="post-date" datetime="{new Date(post.date).getTime()}">
@@ -89,7 +104,7 @@
 		</a>
 	</div>
 
-	<div class="post-body text-justify">
+	<div class="post-body" use:removeimage={post.image}>
 		{@html post.content }
 	</div>
 	<div class="text-center mt-8 print:hidden">
@@ -101,6 +116,6 @@
 
 </article>
 
-<style>
+<!-- <style>
 	:empty { display: none;  }
-</style>
+</style> -->

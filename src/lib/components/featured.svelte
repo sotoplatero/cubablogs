@@ -17,7 +17,7 @@
 	<div class="relative overflow-hidden rounded-lg ">
 
 		<div class="aspect-w-4 aspect-h-3 overflow-hidden rounded-lg bg-gray-100 -mx-6 sm:mx-0">
-			<Image {blog} class="object-center object-cover "/>
+			<Image src={blog.post.image} alt={blog.post.title} />
 		</div>			
 
 		<div class="relative sm:absolute w-full bottom-0 p-6 text-gray-800 bg-gray-700 bg-opacity-50 drop-shadow-lg">

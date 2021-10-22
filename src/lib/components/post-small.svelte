@@ -17,7 +17,7 @@
 		<div class="flex flex-col sm:flex-row justify-between items-center ">
 			<div class="w-full sm:w-1/3 flex-shrink-0 mr-4">
 				<div class="aspect-w-4 aspect-h-3 sm:aspect-h-4 overflow-hidden rounded-lg">
-					<Image {blog} />
+					<Image src={blog.post.image} alt={blog.post.title} />
 				</div>			
 			</div>
 

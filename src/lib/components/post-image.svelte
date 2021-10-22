@@ -16,7 +16,7 @@
 	<div class="flex-shrink-0 block">
 
 		<div class="aspect-w-4 aspect-h-3 overflow-hidden rounded-lg bg-gray-100">
-			<Image {blog} class="object-center object-cover"/>
+			<Image src={blog.post.image} alt={blog.post.title} />
 		</div>			
 
 	</div>
