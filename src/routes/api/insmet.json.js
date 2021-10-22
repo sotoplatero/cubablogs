@@ -15,12 +15,12 @@ export async function get() {
       // html: $table.html().trim(),
       title: $table.find('b').first().html(),
       content: $table.find('p[align="justify"]').html(),
-      author: $table.find('[id^="name"] ').text(),
+      author: $table.find('[id^="name"] ').map(el=>$(el).html()).get(),
       // avatar: `http://www.insmet.cu` + $table.find('#autor1').attr('src').replace(/^\.\./,''),
       map: $(selectorMap).html().trim(),
-      tmax: $('#tmax').text().replace(/\D/g,''),
-      tmin: $('#tmin').text().replace(/\D/g,''),
-      state: $('#estado').text(),
+      // tmax: $('#tmax').text().replace(/\D/g,''),
+      // tmin: $('#tmin').text().replace(/\D/g,''),
+      // state: $('#estado').text(),
       icon: `http://www.insmet.cu` + $('table[summary] #icono').attr('src').replace(/^\.\./,''),
     }
     console.log(data)

@@ -6,12 +6,14 @@ import slug from '$lib/slug'
 export async function get() {
 
 	const { blogs, error } = await db.home({ limit: 25 })
+
 	return {
-		headers: { 'Cache-Control': `s-maxage=1, stale-while-revalidate`, },
+		headers: { 
+			'Cache-Control': `s-maxage=1, stale-while-revalidate`,
+		},
 		body: blogs.map( el => ({
 			...el, 
 			logo: el.logo || 'https://cubablog.net/avatar.svg',
-			hostname: getHostname(el.url),
 			post: { 
 				...el.post,
 				slug: slug(el.post?.url),

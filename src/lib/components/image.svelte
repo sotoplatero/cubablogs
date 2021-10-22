@@ -16,5 +16,5 @@
 <img 
 	src={src} 
 	{alt} 
-	class="object-center object-cover transition duration-500 group-hover:scale-105 bg-gray-100 shadow {klass}"
+	class="object-center object-cover transition duration-500 group-hover:scale-105 bg-gray-100 shadow {klass} !m-0"
 >

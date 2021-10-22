@@ -25,7 +25,7 @@ const updateBlogSubscription = supabase
     if (
       !isEmpty(newRecord.post) &&
       has(newRecord, 'post.url') &&
-      newRecord.post.url != oldRecord.post.url
+      newRecord.post.url != oldRecord?.post?.url
     ) {
 
       const {title,url} = newRecord.post
