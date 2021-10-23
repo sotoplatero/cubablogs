@@ -16,10 +16,10 @@
 <!-- 			<a href="/posts" class="font-bold transition text-gray-600 hover:text-gray-800">
 				Artículos
 			</a> -->
-			<a href="/blogs" class="font-bold transition text-gray-600 hover:text-gray-800">
+			<a href="/blogs" class="font-bold transition text-gray-600 visited:text-gray-600 hover:text-gray-800">
 				Blogs
 			</a>
-			<a href="/add" class="flex items-center py-2 px-2 sm:px-6 bg-red-500 text-white font-semibold whitespace-nowrap rounded-xl" >
+			<a href="/add" class="flex items-center py-2 px-2 sm:px-6 bg-red-500 text-white font-semibold whitespace-nowrap rounded-xl visited:text-white" >
 				<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
 				  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd" />
 				</svg>				
