@@ -14,10 +14,10 @@
 	<a href={url}  >
 		<div class="flex flex-col-reverse sm:flex-row justify-between items-center sm:space-x-2">
 
-			<div class="text-gray-500 ">
+			<div class="">
 				<Author {blog} class="font-normal" />
 
-				<h2 class="text-base sm:text-xl font-semibold !leading-snug transition text-gray-700 group-hover:text-gray-900 line-clamp-3">
+				<h2 class="text-base sm:text-xl font-semibold !leading-snug transition group-hover:text-gray-900 line-clamp-3">
 					{blog.post.title}
 				</h2>	
 				<Details {blog} class="font-normal" />

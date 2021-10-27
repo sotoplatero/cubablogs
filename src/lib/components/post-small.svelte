@@ -22,7 +22,7 @@
 			<div class="sm:flex-grow text-sm sm:text-base">
 				<Author {blog} size="6" class=""/>
 
-				<h2 class=" font-semibold !leading-snug transition text-gray-700 group-hover:text-gray-900 line-clamp-3">
+				<h2 class=" font-semibold !leading-snug transition group-hover:text-gray-900 line-clamp-3">
 					{blog.post.title}
 				</h2>	
 				<Details {blog}/>
