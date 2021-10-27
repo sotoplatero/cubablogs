@@ -63,10 +63,10 @@
 
 <article class="post prose md:prose-lg xl:prose-xl mx-auto mt-10 min-h-screen">
 
+	<h1 class="post-title text-center ">
+		{post.title}
+	</h1>
 	<div class="text-center mb-6">
-		<h1 class="post-title">
-			{post.title}
-		</h1>
 		<div class="text-center">
 			<a href="/blogs/{post.blog.id}/{post.blog.url.replace(/^https?:\/\//,'')}" class="post-author flex items-center justify-center" >
 				<Avatar blog={post.blog} class="w-8 h-8 !m-0 rounded-full overflow-hidd"/>
