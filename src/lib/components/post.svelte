@@ -1,8 +1,6 @@
 <script >
 	import { session } from '$app/stores';	
 	import Image from '$lib/components/image.svelte'
-	import SaveToPocket from '$lib/components/saveToPocket.svelte'
-	import IntentTweet from '$lib/components/IntentTweet.svelte'
 	import Share from '$lib/components/share.svelte'
 	import Avatar from '$lib/components/avatar.svelte'
 	export let blog
