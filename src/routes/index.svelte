@@ -19,9 +19,6 @@
 		const blogsWithImage = allBlogs.filter( el => !!el.post?.image  )
 		const blogFeatured = allBlogs[0]
 		const blogs = allBlogs.slice(1)
-		// const blogFeatured = blogsWithImage.filter( el => el.post.date.isToday() ).random() ?? blogsWithImage[0]
-		// const blogs = allBlogs.filter( el => el.url !== blogFeatured.url  )
-	// $: indexFeatured = blogs.findIndex( el => el.url == blogFeatured.url )
 
 		return {
 			// props: { blogs: blogs.filter(el=>!!el.post.description) }
@@ -36,10 +33,7 @@
 	import Featured from '$lib/components/featured.svelte'
 	import FeaturedSmall from '$lib/components/featured-small.svelte'
 	import PostSmall from '$lib/components/post-small.svelte'
-	import Quote from '$lib/gadgets/quote.svelte'
-	import Joke from '$lib/gadgets/joke.svelte'
-	import Gaceta from '$lib/gadgets/gaceta.svelte'
-	import Ephemeris from '$lib/gadgets/ephemeris.svelte'
+	import Weather from '$lib/gadgets/weather.svelte'
 	import '$lib/isToday'
 	import '$lib/random'
 	
@@ -50,6 +44,9 @@
 
 <Meta/>
 
+<div>
+	<Weather/>
+</div>
 <div class="mb-12 space-y-28">
 
 
@@ -63,7 +60,7 @@
 
 			<div class="flex justify-center">
 				<div class="space-y-6">
-					{#each blogs.slice(0,3) as blog (blog.post.url)}
+					{#each blogs.slice(0,3) as blog (blog.id)}
 						<FeaturedSmall {blog} />
 					{/each}
 				</div>
