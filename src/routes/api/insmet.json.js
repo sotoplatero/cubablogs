@@ -8,14 +8,15 @@ export async function get() {
     const decoder = new TextDecoder("iso-8859-1");   
     const url  = 'http://www.insmet.cu/asp/genesis.asp?TB0=PLANTILLAS&TB1=PTM&TB2=/Pronostico/Ptm.txt'
     const res = await fetch( url )
-    let html = await res.text()
-    // console.log(html)
+    const buffer = await res.arrayBuffer()
+    const html = decoder.decode(buffer)
+    
     const $ = cheerio.load( html );
     const $table = $('.contenidoPagina[valign="top"]')
 
     const data = {
       url,
-      title: $table.find('b').first().html(),
+      title: $table.find('b').first().text(),
       content: $table.find('p[align="justify"]').html(),
       author: $table.find('[id^="name"] ').map(el=>$(el).html()).get(),
       // avatar: `http://www.insmet.cu` + $table.find('#autor1').attr('src').replace(/^\.\./,''),
