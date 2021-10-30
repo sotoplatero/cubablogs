@@ -19,20 +19,24 @@ const optionsSanitizeHtml = {
   	allowVulnerableTags: true,
 	allowedAttributes: {
 		a: [ 'href', 'name', 'target' ],
-		img: [ 'src', 'alt' ],
+		img: [ 'src', 'alt', 'srcset', 'data-*' ],
 		'*': [ 'style' ],
 	},	 
   	transformTags: {
-		// img: function(tagName, attribs) {
-		//     return {
-		//         tagName: 'img',
-		//         attribs: {
-		//           src: attribs['data-srcset'] || attribs['data-src'] || attribs['src'] || '',
-		//           alt: attribs['alt'] || ''
-		//         }
-	 //        }		      	
-	 //     },
-	     a: sanitizeHtml.simpleTransform('a', { target: '_blank', rel: 'noopener nofollower' }),
+		img: function(tagName, attribs) {
+		    return {
+		        tagName: 'img',
+		        attribs: {
+		          src: attribs['data-src'] || attribs['src'] || '',
+		          srcset: attribs['data-srcset'] || '',
+		          alt: attribs['alt'] || ''
+		        }
+	        }		      	
+	     },
+	     a: sanitizeHtml.simpleTransform('a', { 
+	     	target: '_blank', 
+	     	rel: 'noopener nofollower' 
+	     }),
 	}
 }
 

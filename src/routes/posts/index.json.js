@@ -3,9 +3,11 @@ import {db} from '$lib/db'
 import { getHostname } from 'tldts'
 import slug from '$lib/slug'
 
-export async function get() {
+export async function get({query}) {
 
-	const { blogs, error } = await db.home({ limit: 25 })
+	const from = query.get('from') || 0
+	const to = query.get('to') || 15
+	const { blogs, error } = await db.home({ from, to })
 
 	return {
 		headers: { 

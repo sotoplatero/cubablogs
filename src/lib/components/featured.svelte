@@ -20,12 +20,10 @@
 
 		<div class="relative sm:absolute w-full bottom-0 p-6 text-gray-800 bg-gray-700 bg-opacity-50 drop-shadow-lg">
 			<div class="space-y-2">
-				<Author {blog} class="text-gray-200"/>	
-				<!-- <a href="/posts/{blog.id}">{blog.id}</a>		 -->
 				<h2 class="text-xl sm:text-3xl font-semibold leading-normal transition text-white group-hover:text-gray-900 ">
 					{blog.post.title}
 				</h2>	
-				<Details {blog} class="text-gray-200"/>	
+				<Author {blog} class="text-gray-200"/>	
 			</div>
 
 		</div>

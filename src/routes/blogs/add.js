@@ -28,6 +28,8 @@ export async function post(request) {
 			? blog.rss 
 			: `${blog.url.match(/https?/)}://${getHostname(blog.url)}/${blog.rss}`
 
+		blog.post = getPost(blog.rss)
+
 		let { data, error } = await supabase
 			.from('blogs')
 			.select('id')

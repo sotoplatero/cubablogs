@@ -20,13 +20,12 @@
 
 	</div>
 
-	<div class="mt-5">
-		<div class="space-y-1">
-			<Author {blog}/>
+	<div class="mt-3">
+		<div class="space-y-2">
 			<h2 class="text-lg sm:text-lg font-semibold leading-normal transition ">
 				{blog.post.title}
 			</h2>	
-			<Details {blog}/>
+			<Author {blog}/>
 		</div>
 
 	</div>

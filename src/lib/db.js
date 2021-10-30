@@ -8,7 +8,8 @@ const db = {
 			.select('*')
 			.eq('trashed',false)
 	},	
-	async home({limit=25}) {
+	async home({from = 0, to = 25}) {
+		console.log(to)
 		let { data: blogs, error } = await supabase
 			.from('blogs')
 			.select('*')
@@ -16,7 +17,8 @@ const db = {
 			.neq('post->>title', '')
 			.eq('trashed',false)
 			.order('post->>date', { ascending: false })
-			.limit(limit)
+			.range(from,to)
+
 		if (blogs.length) {
 			blogs = blogs.map( blog => ({
 				...blog, 

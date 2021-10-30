@@ -34,7 +34,7 @@
 	}
 
 	$: title = post ? post.title : ''
-
+	$: console.log(post.image)
 	function removeimage(node,src) {
 		const url = new URL(src);
 		const imageName = url.pathname.split('/').pop()
@@ -57,7 +57,6 @@
 {#if !!post.image && !/blank/.test(post.image)}
 	<div class="aspect-h-7 aspect-w-16">
 		<Image src={post.image} alt="{post.title}" width="1300" height="570" />
-		<!-- <img src="{post.image}" alt="{post.title}" class="w-full object-cover"> -->
 	</div>
 {/if}
 

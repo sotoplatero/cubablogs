@@ -3,16 +3,18 @@
 	export let alt = ''
 	export let width = 600
 	export let height = 450
-	let loading = true;	
 
-	// $: resizedSrc = !!src ? `/img/${width}/${height}/${src.replace(/https?:\/\//,'')}` : gray
+	let loading = true;	
+	let defaultSrc = 'data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='
+
+	$: src = !!src ? `/img/${width}/${height}/${src.replace(/https?:\/\//,'')}` : defaultSrc
+
   function handleImg(img) {
   	img.onload = () => {
   		loading = false
-		 console.log(loading + '->' + `/img/${width}/${height}/${src.replace(/https?:\/\//,'')}`)
   	}
     img.onerror = () => {
-    	img.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='
+    	img.src = defaultSrc
     	loading = false
     }
   }
@@ -21,7 +23,7 @@
 
 <img 
 	use:handleImg
-	src={ `/img/${width}/${height}/${src.replace(/https?:\/\//,'')}` } 
+	{src} 
 	{alt} 
 	class="object-center object-cover transition duration-500 group-hover:scale-105 bg-gray-100 shadow !m-0"
 >

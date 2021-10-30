@@ -2,7 +2,7 @@ import sharp from 'sharp'
 
 export async function get({params}) {
 
-    const res = await fetch(`https://${params.url}`)
+    const res = await fetch(`http://${params.url}`)
 
 	if (res.ok) {
         // const resImage = await fetch(src)
