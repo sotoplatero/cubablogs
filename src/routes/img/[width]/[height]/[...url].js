@@ -1,9 +1,8 @@
 import sharp from 'sharp'
 
-export async function get({params}) {
+export async function get({params, query}) {
 
-    const res = await fetch(`http://${params.url}`)
-
+    const res = await fetch(`https://${params.url}`)
 	if (res.ok) {
         // const resImage = await fetch(src)
         const imageResponse = await res.arrayBuffer()
@@ -33,7 +32,7 @@ export async function get({params}) {
     return {
         headers: { 
             'Cache-Control': `public, immutable, no-transform, s-maxage=31536000, max-age=31536000`,
-        },        
+        }, 
         body: ''
     }
 
