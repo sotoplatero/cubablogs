@@ -1,6 +1,4 @@
 <script context="module">
-	import '$lib/isToday'
-	import '$lib/random'	
 	/**
 	 * @type {import('@sveltejs/kit').Load}
 	 */
@@ -16,9 +14,6 @@
 		}
 
 		const blogs = await res.json()
-		// const blogsWithImage = allBlogs.filter( el => !!el.post?.image  )
-		// const blogFeatured = allBlogs[0]
-		// const blogs = allBlogs.slice(1)
 
 		return {
 			props: { blogs }
@@ -31,30 +26,10 @@
 	import Post from '$lib/components/post-image.svelte'
 	import Featured from '$lib/components/featured.svelte'
 	import FeaturedSmall from '$lib/components/featured-small.svelte'
-	// import PostSmall from '$lib/components/post-small.svelte'
+	import PaginationPosts from '$lib/components/PaginationPosts.svelte'
 	// import Weather from '$lib/gadgets/weather.svelte'
-	import '$lib/isToday'
-	import '$lib/random'
 	
 	export let blogs = []
-	// let blogFeatured = {}
-	let from = 0
-	let to = 15
-	let showPagination = !!blogs.length
-
-	async function more(){
-		const amount = 12
-		from = blogs.length 
-		to = to + amount
-		const res = await fetch(`/posts.json?from=${from}&to=${to}`)
-
-		if (res.ok) {
-			const moreBlogs = await res.json()
-			blogs = [ ...blogs, ...moreBlogs ]
-			showPagination = moreBlogs.length === amount
-		}
-
-	}
 
 </script>
 
@@ -99,12 +74,6 @@
 		{/each}
 	</div>
 
-	{#if showPagination}
-	<div class="text-center">
-		<button on:click={more} class="transition px-8 py-2 border-2 border-red-500 font-bold text-red-500 hover:bg-red-500 hover:text-white">
-			Más
-		</button>
-	</div>
-	{/if}
+	<PaginationPosts bind:blogs />
 
 </div>

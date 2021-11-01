@@ -6,62 +6,70 @@ export async function get() {
   try {
 
     let data = [], response, body, $, menu;
-    const url = urls.random()
-    response = await fetch( url );
-    body = await response.text();
-    $ = cheerio.load( body );
+    let jokes = []
+    const jokesUrl = urls.shuffle().slice(0,3)
 
-    if ( /yavendras/g.test(url) ) {
-      // seleccionar una de las paginas
-      let pageTo = $( $('.pagination a').toArray().random() ).attr('href')
-      response = await fetch( `https:${pageTo}` );
+    jokes = await Promise.all( jokesUrl.map( async (url) => {
+
+      response = await fetch( url );
       body = await response.text();
       $ = cheerio.load( body );
 
-      let joke = $('.search-result-item-body .row.fila').toArray().random()
-      $joke = $(joke)
+      if ( /yavendras/g.test(url) ) {
+        // seleccionar una de las paginas
+        let pageTo = $( $('.pagination a').toArray().random() ).attr('href')
+        response = await fetch( `https:${pageTo}` );
+        body = await response.text();
+        $ = cheerio.load( body );
 
-      data = {
-        title: $joke.find('h4').text().trim(),
-        url: 'http:' + $joke.find('.search-result-item-heading a').attr('href'),
-        content: $joke.find('.description').html().trim(),
-      }
-    }
+        let joke = $('.search-result-item-body .row.fila').toArray().random()
+        $joke = $(joke)
 
-    if ( /1000chistes/g.test(url) ) {
-
-      const pageUrl = $( $('#nav-links > a').toArray().random() ).attr('href')
-      const response1000chistes = await fetch(`https://www.1000chistes.com${pageUrl}`)
-      const body1000chistes = await response1000chistes.text()
-      $ = cheerio.load( body1000chistes );
-
-      $joke = $( $('.chiste').toArray().random() )
-      data = {
-        title: $joke.find('h2').text().trim(),
-        url: $joke.find('h2 > a').attr('href'),
-        content: $joke.find('[itemprop="articleBody"]').html(),
+        return {
+                title: $joke.find('h4').text().trim(),
+                url: 'http:' + $joke.find('.search-result-item-heading a').attr('href'),
+                content: $joke.find('.description').html().trim(),
+              }
       }
 
-    }
+      if ( /1000chistes/g.test(url) ) {
 
-    if ( /todo-chistes/g.test(url) ) {
-      console.log($('article.node h2'))
-      data = {
-        title: $('article.node h2').first().text().trim(),
-        url: 'http://www.todo-chistes.com' + $('article.node h2 a').attr('href'),
-        content: $('article.node .field-chistes,article.node .field-chiste').html().trim()
-      }
-    }
+        const pageUrl = $( $('#nav-links > a').toArray().random() ).attr('href')
+        const response1000chistes = await fetch(`https://www.1000chistes.com${pageUrl}`)
+        const body1000chistes = await response1000chistes.text()
+        $ = cheerio.load( body1000chistes );
 
-    if ( /loschistes/g.test(url) ) {
-      data = {
-        url: `http://www.todo-chistes.com/${ $('article header h2 a').attr('href') }`,
-        content: $('article .field-chistes').html().trim(),
+        $joke = $( $('.chiste').toArray().random() )
+        return {
+            title: $joke.find('h2').text().trim(),
+            url: $joke.find('h2 > a').attr('href'),
+            content: $joke.find('[itemprop="articleBody"]').html(),
+          }
+
       }
-    }
+
+      if ( /todo-chistes/g.test(url) ) {
+        return {
+                title: $('article.node h2').first().text().trim(),
+                url: 'http://www.todo-chistes.com' + $('article.node h2 a').attr('href'),
+                content: $('article.node .field-chistes,article.node .field-chiste').html().trim()
+              }
+      }
+
+      if ( /loschistes/g.test(url) ) {
+        return {
+                url: `http://www.todo-chistes.com/${ $('article header h2 a').attr('href') }`,
+                content: $('article .field-chistes').html().trim(),
+              }
+      }
+
+    }))
 
     return {
-      body: {...data},
+      headers: { 
+        'Cache-Control': `s-maxage=1, stale-while-revalidate`,
+      },      
+      body: jokes,
     }
     
   } catch (err) {
