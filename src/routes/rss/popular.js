@@ -17,9 +17,11 @@ export async function get() {
 	const posts = await (await fetch('https://cubablog.net/posts/popular.json')).json()
 
 	posts
-		.forEach( (post) => {
+		.filter((el,idx) => idx <= 2)
+		.forEach( (post, idx) => {
+			const order = idx + 1 
 			feed.item({
-				title: post.title,
+				title: `${order}. post.title`,
 				description: post.description,
 				url: post.url,
 				guid: post.url,
