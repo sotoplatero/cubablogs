@@ -21,7 +21,7 @@ export async function get() {
 		.forEach( (post, idx) => {
 			const order = idx + 1 
 			feed.item({
-				title: `${order}. post.title`,
+				title: `${order}. ${post.title}`,
 				description: post.description,
 				url: post.url,
 				guid: post.url,
