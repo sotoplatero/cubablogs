@@ -22,10 +22,18 @@
 </script>
 <script>
 	export let posts = []
+	let title = '10 Articulos Más Populares de los últimos 7 días'
 </script>
 
+<Meta
+	title="CubaBlog - {title}"
+	description="Listado de los 10 sitios más visitados  "
+	url={`https://cubablog.net/posts/popular`}
+	image=''
+/>
+
 <article class="w-11/12 w-3/5 mx-auto">
-	<h2 class="text-5xl mb-16 leading-snug">10 Articulos Más Populares de los últimos 7 días</h2>
+	<h2 class="text-5xl mb-16 leading-snug">{title}</h2>
 	<div class="space-y-16">
 		{#each posts as post, index}
 			<div class='flex items-center'>
