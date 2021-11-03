@@ -101,7 +101,7 @@
 
 	{#if showPagination}
 	<div class="text-center">
-		<button on:click={more} class="transition px-8 py-2 border-2 border-red-500 font-bold text-red-500 hover:bg-red-500 hover:text-white">
+		<button on:click={more} class="transition rounded-lg px-8 py-2 border-2 border-red-500 font-bold text-red-500 hover:bg-red-500 hover:text-white">
 			Más
 		</button>
 	</div>
