@@ -15,7 +15,7 @@
 
 </script>
 
-<div class='flex items-center mb-1 text-gray-400 leading-tight  {_class}'>
+<div class='flex text-sm items-center mb-1 text-gray-400 leading-tight  {_class}'>
 	<span class="flex-shrink-0 rounded-full shadow overflow-hidden rounded-0 mr-3">
 		<Avatar {blog} class="{sizeAvatar}"/>
 	</span>

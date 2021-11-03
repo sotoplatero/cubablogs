@@ -6,14 +6,14 @@ export async function get() {
 
   try {
     const decoder = new TextDecoder("iso-8859-1");   
-    const url  = 'http://www.insmet.cu/asp/genesis.asp?TB0=PLANTILLAS&TB1=PTM&TB2=/Pronostico/Ptm.txt'
+    const url  = 'http://www.insmet.cu/asp/link.asp?PRONOSTICO'
     const res = await fetch( url )
     const buffer = await res.arrayBuffer()
     const html = decoder.decode(buffer)
     
     const $ = cheerio.load( html );
     const $table = $('.contenidoPagina[valign="top"]')
-
+    console.log($table.find('p[align="justify"]').html())
     const data = {
       url,
       title: $table.find('b').first().text(),
