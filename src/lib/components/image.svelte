@@ -15,6 +15,7 @@
   	}
     img.onerror = () => {
     	img.src = defaultSrc
+    	console.log('error')
     	loading = false
     }
   }

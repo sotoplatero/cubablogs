@@ -31,6 +31,9 @@ export async function get() {
     }
 
     return {
+      headers: { 
+        'Cache-Control': `s-maxage=1, stale-while-revalidate`,
+      },      
       body: {...data},
     }
     

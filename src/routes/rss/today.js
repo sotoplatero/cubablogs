@@ -1,5 +1,6 @@
 import supabase from '$lib/supabase'
 import RSS from 'rss';
+import cheerio from 'cheerio';
 import isToday from '$lib/isToday'
 
 export async function get() {
@@ -18,14 +19,16 @@ export async function get() {
 	      'media': 'http://search.yahoo.com/mrss/'
 	    },		
 	});
+
 	blogs
 		.filter( b => b.post.date.isToday() )
 		.forEach( (blog) => {
 			const post = blog.post
 			const url = `http://cubablog.net/post/${blog.id}/${blog.post.url.replace(/https?:\/\//,'')}`
+			const $ = cheerio.load(post.content)
 			feed.item({
 				title: post.title,
-				description: post.content,
+				description: $.text().split('.').filter((ele,idx)=>idx<=2).join(''),
 				url: post.url,
 				guid: post.url,
 				date: post.date,

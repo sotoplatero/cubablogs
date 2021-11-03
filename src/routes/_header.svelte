@@ -2,7 +2,7 @@
 	import Logo from '$lib/logo.svelte'
 </script>
 <div class="container print:hidden bg-white">
-	<div class="flex items-center py-4">
+	<div class="flex items-center py-4 mb-16">
 		<a href="/" class="mr-auto flex-shrink-0">
 			<h1 class="brand flex items-center justify-center text-3xl text-gray-800 ">
 				<img src="/logo.png" alt="Logo Cubablog" class=" w-8 h-8">	
