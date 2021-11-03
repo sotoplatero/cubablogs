@@ -28,8 +28,8 @@
 
 <!-- svelte-ignore missing-declaration -->
 <Meta
-	title="CubaBlog - {title}"
-	description="Listado de los 10 sitios más visitados"
+	title="CubaBlog - 10 Artículos Más Populares"
+	description="Listado de los 10 árticulos más visitados en los últimos 7 días"
 	url={`https://cubablog.net/posts/popular`}
 />
 
@@ -38,7 +38,7 @@
 	<div class="space-y-16">
 		{#each posts as post, index}
 			<div class='flex items-center'>
-				<div class="mr-3 sm:mr-6 text-7xl font-bold">
+				<div class="flex-shrink-0 mr-3 sm:mr-6 text-7xl font-bold w-20 text-right">
 					{index+1}
 				</div>
 				<div class="flex flex-col flex-col-reverse sm:flex-row  items-center">

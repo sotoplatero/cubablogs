@@ -38,7 +38,7 @@ export async function get({query}) {
 				title: blog.title,
 				url: blog.url,
 				logo: blog.logo,
-				publisher: blog.author || blog.title,
+				publisher: blog.hostname.replace(/^www\./,''),
 			},
 			// related: blog.items
 			// 	.filter( el => el.link.toLowerCase().indexOf(link) === -1 )
