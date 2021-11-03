@@ -16,6 +16,9 @@
 <!-- 			<a href="/posts" class="font-bold transition text-gray-600 hover:text-gray-800">
 				Artículos
 			</a> -->
+			<a href="/posts/popular" class="font-bold transition text-gray-600 visited:text-gray-600 hover:text-gray-800">
+				Popular
+			</a>
 			<a href="/blogs" class="font-bold transition text-gray-600 visited:text-gray-600 hover:text-gray-800">
 				Blogs
 			</a>

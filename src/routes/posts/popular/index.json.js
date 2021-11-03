@@ -33,6 +33,7 @@ export async function get() {
 				description: ogData.ogDescription,
 				image: ogData.ogImage?.url || ogData.twitterImage?.url,
 				blog: x.split('/')[2],
+				hostname: getHostname(url),
 				counter
 			}
 
