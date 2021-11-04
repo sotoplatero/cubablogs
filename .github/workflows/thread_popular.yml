@@ -1,0 +1,13 @@
+name: cron-thread-popular
+on:
+  schedule:
+    - cron: '0 17 * * FRI'
+jobs:
+  cron:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call API Update
+        run: |
+          curl --request POST \
+          --url 'https://cubablog.net/cron/popular' \
+          --header 'Authorization: Bearer ${{ secrets.API_SECRET_KEY }}'
