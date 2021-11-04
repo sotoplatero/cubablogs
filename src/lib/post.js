@@ -15,7 +15,7 @@ let parser = new Parser({
 });
 
 const optionsSanitizeHtml = {
-  	allowedTags: sanitizeHtml.defaults.allowedTags.concat([ 'img' ]),
+  	allowedTags: sanitizeHtml.defaults.allowedTags.concat([ 'img', 'iframe' ]),
   	allowVulnerableTags: true,
 	allowedAttributes: {
 		a: [ 'href', 'name', 'target' ],

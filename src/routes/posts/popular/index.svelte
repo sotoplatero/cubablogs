@@ -51,6 +51,7 @@
 	
 						{#if  post.image}
 							<div class="aspect-w-16 sm:aspect-w-4 aspect-h-9 sm:aspect-h-3 rounded-lg overflow-hidden">
+								
 								<img src="{post.image}" alt="{post.title}" class="w-full h-full object-center object-cover ">
 							</div>
 							

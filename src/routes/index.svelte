@@ -47,12 +47,10 @@
 				<Featured blog={blogs[0]} featured/>
 			</div>
 
-			<div class="flex justify-center">
-				<div class="space-y-6">
-					{#each blogs.slice(1,4) as blog (blog.id)}
-						<FeaturedSmall {blog} />
-					{/each}
-				</div>
+			<div class="w-full space-y-6">
+				{#each blogs.slice(1,4) as blog (blog.id)}
+					<FeaturedSmall {blog} />
+				{/each}
 			</div>
 			
 		</div>

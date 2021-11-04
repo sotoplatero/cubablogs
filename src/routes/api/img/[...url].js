@@ -2,8 +2,10 @@ import cheerio from 'cheerio'
 
 export async function get({params}) {
 
-
-    const res = await fetch(`https://${params.url}`)
+    const url = `https://${params.url}`
+    const res = await fetch(url, {
+        headers: { referer: url }
+    })
 
         console.log(res)
 	if (res.ok) {
