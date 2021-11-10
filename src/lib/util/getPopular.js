@@ -15,7 +15,7 @@ export default async () => {
     })
     
     const urls = (await res.json())
-        .filter( ({ x:url }) => url.split('/')[2] != '146' && /^\/post/.test(url) )
+        .filter( ({ x:url }) => url.split('/')[2] != '146' && /^\/post\/\d+/.test(url) )
         .filter( ( ele, index ) => index < 10 )
 
     return await Promise.all(urls.map( async ({ x, y: counter }) => {
