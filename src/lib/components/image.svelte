@@ -7,7 +7,8 @@
 	let loading = true;	
 	let defaultSrc = 'data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='
 
-	$: src = !!src ? `/img/${width}/${height}/${src.replace(/https?:\/\//,'')}` : defaultSrc
+	$: src = !!src ? src : defaultSrc
+	// $: src = !!src ? `/img/${width}/${height}/${src.replace(/https?:\/\//,'')}` : defaultSrc
 
   function handleImg(img) {
   	img.onload = () => {
