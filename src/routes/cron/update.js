@@ -11,8 +11,7 @@ export async function post() {
 			.select('*')
 			.eq('trashed',false)
 			.order('updated_at', { ascending: true })
-
-		const promisesUpdates = 
+			.limit(5)
 
 	    await Promise.all( 
 	    	blogs.map( async blog => {
@@ -34,16 +33,6 @@ export async function post() {
 					}
 	    		}
 
-	    // 		if (JSON.stringify(post) === '{}'){
-		   //  		console.log(blog.rss)
-	    // 		}
-
-	    // 		if (JSON.stringify(post) !== '{}') {
-					// const { data, error } = await supabase
-					// 	.from('blogs')	
-					// 	.update({post})
-					// 	.eq('id', blog.id) 
-	    // 		}
 
 	    	})
 	    )
