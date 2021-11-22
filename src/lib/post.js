@@ -48,7 +48,7 @@ export default async function (rss, link = null) {
 			? feed.items.find( el => el.link.toLowerCase().indexOf( link.toLowerCase() ) >= 0)
 			: feed.items[0]
 
-		const articleRes = await fetch(`https://crawl.cubablog.net/api/article?url=${encodeURIComponent(item.link)}`)
+		const articleRes = await fetch(`https://cubablog-crawl.vercel.app/api/article?url=${encodeURIComponent(item.link)}`)
 		const article = articleRes.ok ? await articleRes.json() : {}
 		const wpm = 250
 

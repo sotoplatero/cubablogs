@@ -28,7 +28,7 @@ export async function get({query}) {
 
 	return {
 		headers: { 
-			'Cache-Control': `s-maxage=1, stale-while-revalidate`,
+			'Cache-Control': `public, immutable, no-transform, s-maxage=31536000, max-age=31536000`,
 		},		
 		body: { 
 			...post,
@@ -40,15 +40,6 @@ export async function get({query}) {
 				logo: blog.logo,
 				publisher: blog.hostname.replace(/^www\./,''),
 			},
-			// related: blog.items
-			// 	.filter( el => el.link.toLowerCase().indexOf(link) === -1 )
-			// 	.shuffle()
-			// 	.slice(0,2)
-			// 	.map( el => ({
-			// 		title: el.title,
-			// 		link: el.link,
-			// 		url: `/post/${blog.id}/${el.link.replace(/https?:\/\//,'')}`
-			// 	}))
 		}
 	};
 
