@@ -10,7 +10,7 @@ export async function post(request) {
 
 	try {
 
-		const response = await fetch(`https://crawl.cubablog.net/api/site?url=${encodeURIComponent(url)}`)	
+		const response = await fetch(`https://cubablog-crawl.vercel.app/api/site?url=${encodeURIComponent(url)}`)	
 		if (!response.ok) {
 			return { 
 				status: response.status,
