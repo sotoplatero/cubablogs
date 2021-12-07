@@ -9,7 +9,8 @@
 		"format": "prettier --write --plugin-search-dir=. ."
 	},
 	"devDependencies": {
-		"@supabase/supabase-js": "^1.28.0",
+		"@supabase/supabase-js": "^1.28.1",
+		"@sveltejs/adapter-cloudflare": "^1.0.0-next.2",
 		"@sveltejs/adapter-netlify": "^1.0.0-next.35",
 		"@sveltejs/adapter-vercel": "^1.0.0-next.30",
 		"@sveltejs/kit": "^1.0.0-next.196",
@@ -18,7 +19,7 @@
 		"@tailwindcss/typography": "^0.4.1",
 		"autoprefixer": "^10.4.0",
 		"copee": "^1.0.6",
-		"cssnano": "^5.0.10",
+		"cssnano": "^5.0.11",
 		"dayjs": "^1.10.7",
 		"encoding": "^0.1.13",
 		"eslint": "^7.22.0",
@@ -36,7 +37,7 @@
 		"puppeteer-core": "^10.4.0",
 		"rss": "^1.2.2",
 		"sanitize-html": "^2.5.3",
-		"svelte": "^3.44.1",
+		"svelte": "^3.44.2",
 		"svelte-preprocess": "^4.9.8",
 		"tailwindcss": "^2.2.19",
 		"twitter-api-v2": "^1.6.5",
@@ -48,7 +49,7 @@
 		"cheerio": "^1.0.0-rc.10",
 		"js-base64": "^3.7.2",
 		"rss-parser": "^3.12.0",
-		"tldts": "^5.7.52",
-		"typescript": "^4.4.3"
+		"tldts": "^5.7.53",
+		"typescript": "^4.5.2"
 	}
 }

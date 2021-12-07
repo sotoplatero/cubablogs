@@ -11,32 +11,32 @@ const supabase = createClient(supabaseUrl, supabaseKey)
 const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay))
 const channel = dev ? 'admin' : 'public'
 
-const createBlogSubscription  = supabase
-  .from('blogs')
-  .on('INSERT', ({ new: blog }) => {
-    notify(`✨ Nuevo Blog\n\n [${blog.title}](${blog.url})`,channel)
-  })
-  .subscribe()
+// const createBlogSubscription  = supabase
+//   .from('blogs')
+//   .on('INSERT', ({ new: blog }) => {
+//     notify(`✨ Nuevo Blog\n\n [${blog.title}](${blog.url})`,channel)
+//   })
+//   .subscribe()
 
-const updateBlogSubscription = supabase
-  .from('blogs')
-  .on('UPDATE', ({ new: newRecord, old: oldRecord }) => {
+// const updateBlogSubscription = supabase
+//   .from('blogs')
+//   .on('UPDATE', ({ new: newRecord, old: oldRecord }) => {
 
-    if (
-      !isEmpty(newRecord.post) &&
-      has(newRecord, 'post.url') &&
-      newRecord.post.url != oldRecord?.post?.url
-    ) {
+//     if (
+//       !isEmpty(newRecord.post) &&
+//       has(newRecord, 'post.url') &&
+//       newRecord.post.url != oldRecord?.post?.url
+//     ) {
 
-      const {title,url} = newRecord.post
-      const link = `https://cubablog.net/post/${newRecord.id}/${url.replace(/https?:\/\//,'')}`
-      sleep(1000)
-      notify(`✨ Nuevo Artículo\n\n [${title}](${link}) publicado en **${newRecord.hostname}**`, channel)
+//       const {title,url} = newRecord.post
+//       const link = `https://cubablog.net/post/${newRecord.id}/${url.replace(/https?:\/\//,'')}`
+//       sleep(1000)
+//       notify(`✨ Nuevo Artículo\n\n [${title}](${link}) publicado en **${newRecord.hostname}**`, channel)
 
-    }
+//     }
     
-  })
-  .subscribe()
+//   })
+//   .subscribe()
 
 export default supabase
 

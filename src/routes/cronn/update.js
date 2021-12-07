@@ -1,11 +1,10 @@
 import supabase from '$lib/supabase'
 import getPost from '$lib/post'
-import { notify } from '$lib/bot'
-
+// import { notify } from '$lib/bot'
 
 export async function post() {
 
-	try	{
+	// try	{
 		let { data: blogs, error } = await supabase
 			.from('blogs')
 			.select('*')
@@ -18,7 +17,6 @@ export async function post() {
 
 	    		const post = await getPost( blog.rss )
 
-    				// console.log(post?.url + '\n' + blog.post?.url + '\n\n' )
 	    		if ( 
 	    			JSON.stringify(post) !== '{}' &&
 	    			post?.url !== blog.post?.url
@@ -37,11 +35,11 @@ export async function post() {
 	    	})
 	    )
 
-	} catch (err) {
-		console.log(err)
-	}
+	// } catch (err) {
+	// 	console.log(err)
+	// }
 
 	return {
 		body: 'ok'
-	};
+	}
 }
